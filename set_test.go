@@ -43,7 +43,7 @@ func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
 	}
 }
 
-func TestShouldBeSizeZeroAfterAddingAndRemovingItem(t *testing.T) {
+func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
 	s := NewSet()
 	_ = s.Add(5)
 	_ = s.Remove(5)
