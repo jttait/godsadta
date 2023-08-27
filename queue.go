@@ -1,25 +1,26 @@
 package godsa
 
-type Queue struct {
-	array []int
+type Queue[T any] struct {
+	array []T
 }
 
-func NewQueue() *Queue {
-	q := Queue{}
+func NewQueue[T any]() *Queue[T] {
+	q := Queue[T]{}
 	return &q
 }
 
-func (q *Queue) Size() int {
+func (q *Queue[T]) Size() int {
 	return len(q.array)
 }
 
-func (q *Queue) Add(i int) {
+func (q *Queue[T]) Add(i T) {
 	q.array = append(q.array, i)
 }
 
-func (q *Queue) Remove() (int, bool) {
+func (q *Queue[T]) Remove() (T, bool) {
 	if q.Size() == 0 {
-		return 0, false
+		var zeroValue T
+		return zeroValue, false
 	}
 	result := q.array[0]
 	q.array = q.array[1:]
