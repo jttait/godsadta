@@ -31,3 +31,18 @@ func (s *Set) Remove(i int) bool {
 	delete(s.m, i)
 	return true
 }
+
+func (s *Set) Contains(i int) bool {
+	_, ok := s.m[i]
+	return ok
+}
+
+func (s *Set) Equals(t *Set) bool {
+	for key, _ := range s.m {
+		_, ok := t.m[key]
+		if !ok {
+			return false
+		}
+	}
+	return true
+}
