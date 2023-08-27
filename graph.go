@@ -3,19 +3,19 @@ package godsa
 import "fmt"
 
 type Graph struct {
-	adjacencyList map[int]*Set
+	adjacencyList map[int]*Set[int]
 }
 
 func NewGraph() *Graph {
 	g := Graph{}
-	g.adjacencyList = make(map[int]*Set)
+	g.adjacencyList = make(map[int]*Set[int])
 	return &g
 }
 
 func (g *Graph) AddVertex(i int) bool {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		g.adjacencyList[i] = NewSet()
+		g.adjacencyList[i] = NewSet[int]()
 		return true
 	}
 	return false
@@ -34,10 +34,10 @@ func (g *Graph) AddEdge(i, j int) (bool, error) {
 	return result, nil
 }
 
-func (g *Graph) Neighbours(i int) (*Set, error) {
+func (g *Graph) Neighbours(i int) (*Set[int], error) {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		return NewSet(), fmt.Errorf("Vertex %v not in graph.", i)
+		return NewSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
 	}
 	return g.adjacencyList[i], nil
 }

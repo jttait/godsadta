@@ -74,7 +74,7 @@ func TestShouldReturnEmptySetIfNoNeighbours(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(1)
 	result, _ := g.Neighbours(1)
-	want := NewSet()
+	want := NewSet[int]()
 	if !result.Equals(want) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
@@ -86,7 +86,7 @@ func TestShouldReturnSetIfNeighbours(t *testing.T) {
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
 	result, _ := g.Neighbours(1)
-	want := NewSet()
+	want := NewSet[int]()
 	want.Add(2)
 	if !result.Equals(want) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)

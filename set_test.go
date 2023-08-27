@@ -3,7 +3,7 @@ package godsa
 import "testing"
 
 func TestShouldBeSizeZeroForNewlyInstantiatedSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	result := s.Size()
 	want := 0
 	if want != result {
@@ -12,7 +12,7 @@ func TestShouldBeSizeZeroForNewlyInstantiatedSet(t *testing.T) {
 }
 
 func TestShouldBeSizeOneAfterItemIsAddedToNewlyInstantiatedSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	result := s.Size()
 	want := 1
@@ -22,7 +22,7 @@ func TestShouldBeSizeOneAfterItemIsAddedToNewlyInstantiatedSet(t *testing.T) {
 }
 
 func TestShouldBeSizeTwoAfterAddingTwoDifferentItems(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	_ = s.Add(6)
 	result := s.Size()
@@ -33,7 +33,7 @@ func TestShouldBeSizeTwoAfterAddingTwoDifferentItems(t *testing.T) {
 }
 
 func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	_ = s.Add(5)
 	result := s.Size()
@@ -44,7 +44,7 @@ func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
 }
 
 func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	_ = s.Remove(5)
 	result := s.Size()
@@ -55,7 +55,7 @@ func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
 }
 
 func TestShouldBeTrueIfAddingItemThatIsNotAlreadyInSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	ok := s.Add(5)
 	want := true
 	if want != ok {
@@ -64,7 +64,7 @@ func TestShouldBeTrueIfAddingItemThatIsNotAlreadyInSet(t *testing.T) {
 }
 
 func TestShouldBeFalseIfAddingItemThatIsAlreadyInSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	ok := s.Add(5)
 	want := false
@@ -74,7 +74,7 @@ func TestShouldBeFalseIfAddingItemThatIsAlreadyInSet(t *testing.T) {
 }
 
 func TestShouldBeFalseIfRemovingItemThatIsNotInSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	ok := s.Remove(5)
 	want := false
 	if want != ok {
@@ -83,7 +83,7 @@ func TestShouldBeFalseIfRemovingItemThatIsNotInSet(t *testing.T) {
 }
 
 func TestShouldBeTrueIfRemovingItemThatIsInSet(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	ok := s.Remove(5)
 	want := true
@@ -93,7 +93,7 @@ func TestShouldBeTrueIfRemovingItemThatIsInSet(t *testing.T) {
 }
 
 func TestShouldBeTrueIfSetContainsItem(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	_ = s.Add(5)
 	result := s.Contains(5)
 	want := true
@@ -103,7 +103,7 @@ func TestShouldBeTrueIfSetContainsItem(t *testing.T) {
 }
 
 func TestShouldBeFalseIfSetDoesNotContainItem(t *testing.T) {
-	s := NewSet()
+	s := NewSet[int]()
 	result := s.Contains(5)
 	want := false
 	if want != result {
@@ -112,8 +112,8 @@ func TestShouldBeFalseIfSetDoesNotContainItem(t *testing.T) {
 }
 
 func TestShouldBeEqualForTwoEmptySets(t *testing.T) {
-	s := NewSet()
-	u := NewSet()
+	s := NewSet[int]()
+	u := NewSet[int]()
 	result := s.Equals(u)
 	want := true
 	if want != result {
@@ -122,8 +122,8 @@ func TestShouldBeEqualForTwoEmptySets(t *testing.T) {
 }
 
 func TestShouldBeEqualForTwoIdenticalSets(t *testing.T) {
-	s := NewSet()
-	u := NewSet()
+	s := NewSet[int]()
+	u := NewSet[int]()
 	_ = s.Add(5)
 	_ = u.Add(5)
 	result := s.Equals(u)
@@ -134,8 +134,8 @@ func TestShouldBeEqualForTwoIdenticalSets(t *testing.T) {
 }
 
 func TestShouldBeNotEqualForTwoDifferentSets(t *testing.T) {
-	s := NewSet()
-	u := NewSet()
+	s := NewSet[int]()
+	u := NewSet[int]()
 	_ = s.Add(5)
 	_ = u.Add(6)
 	result := s.Equals(u)

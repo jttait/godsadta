@@ -1,20 +1,20 @@
 package godsa
 
-type Set struct {
-	m map[int]struct{}
+type Set[T comparable] struct {
+	m map[T]struct{}
 }
 
-func NewSet() *Set {
-	s := Set{}
-	s.m = make(map[int]struct{})
+func NewSet[T comparable]() *Set[T] {
+	s := Set[T]{}
+	s.m = make(map[T]struct{})
 	return &s
 }
 
-func (s *Set) Size() int {
+func (s *Set[T]) Size() int {
 	return len(s.m)
 }
 
-func (s *Set) Add(i int) bool {
+func (s *Set[T]) Add(i T) bool {
 	_, ok := s.m[i]
 	if ok {
 		return false
@@ -23,7 +23,7 @@ func (s *Set) Add(i int) bool {
 	return true
 }
 
-func (s *Set) Remove(i int) bool {
+func (s *Set[T]) Remove(i T) bool {
 	_, ok := s.m[i]
 	if !ok {
 		return false
@@ -32,12 +32,12 @@ func (s *Set) Remove(i int) bool {
 	return true
 }
 
-func (s *Set) Contains(i int) bool {
+func (s *Set[T]) Contains(i T) bool {
 	_, ok := s.m[i]
 	return ok
 }
 
-func (s *Set) Equals(t *Set) bool {
+func (s *Set[T]) Equals(t *Set[T]) bool {
 	for key, _ := range s.m {
 		_, ok := t.m[key]
 		if !ok {
