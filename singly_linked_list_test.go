@@ -24,39 +24,30 @@ func TestShouldBeNilNextForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
 func TestShouldInsertAfterAtTail(t *testing.T) {
 	n := NewSinglyLinkedListNode(5)
 	n.InsertAfter(6)
+	result := convertLinkedListValsToSlice(n)
+	want := []int{5, 6}
+	if !AreSlicesEqual(result, want) {
+		t.Fatalf("Linked lists are not equal.")
+	}
+}
+
+func convertLinkedListValsToSlice(n *SinglyLinkedListNode) []int {
 	result := []int{}
 	for n != nil {
 		result = append(result, n.Val)
 		n = n.Next
 	}
-	want := []int{5, 6}
-	if len(result) != len(want) {
-		t.Fatalf("Linked lists are not equal.")
-	}
-	for i := 0; i < len(result); i++ {
-		if result[i] != want[i] {
-			t.Fatalf("Linked lists are not equal.")
-		}
-	}
+	return result
 }
 
 func TestShouldInsertAfterInMiddleOfList(t *testing.T) {
 	n := NewSinglyLinkedListNode(5)
 	n.Next = NewSinglyLinkedListNode(7)
 	n.InsertAfter(6)
-	result := []int{}
-	for n != nil {
-		result = append(result, n.Val)
-		n = n.Next
-	}
+	result := convertLinkedListValsToSlice(n)
 	want := []int{5, 6, 7}
-	if len(result) != len(want) {
+	if !AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
-	}
-	for i := 0; i < len(result); i++ {
-		if result[i] != want[i] {
-			t.Fatalf("Linked lists are not equal.")
-		}
 	}
 }
 
@@ -105,19 +96,10 @@ func TestShouldDeleteSinglyLinkedListWithOneNode(t *testing.T) {
 	n := NewSinglyLinkedListNode(5)
 	n.InsertAfter(6)
 	n.DeleteNext()
-	result := []int{}
-	for n != nil {
-		result = append(result, n.Val)
-		n = n.Next
-	}
+	result := convertLinkedListValsToSlice(n)
 	want := []int{5}
-	if len(result) != len(want) {
+	if !AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
-	}
-	for i := 0; i < len(result); i++ {
-		if result[i] != want[i] {
-			t.Fatalf("Linked lists are not equal.")
-		}
 	}
 
 }
