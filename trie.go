@@ -1,29 +1,29 @@
 package godsa
 
-type Trie struct {
-	root TrieNode
+type Trie[T comparable] struct {
+	root TrieNode[T]
 }
 
-type TrieNode struct {
-	children map[byte]*TrieNode
+type TrieNode[T comparable] struct {
+	children map[T]*TrieNode[T]
 	terminal bool
 }
 
-func NewTrie() *Trie {
-	trie := Trie{}
-	trie.root.children = make(map[byte]*TrieNode)
+func NewTrie[T comparable]() *Trie[T] {
+	trie := Trie[T]{}
+	trie.root.children = make(map[T]*TrieNode[T])
 	return &trie
 }
 
-func (trie *Trie) Insert(array []byte) bool {
+func (trie *Trie[T]) Insert(array []T) bool {
 	current := &(trie.root)
 	for _, v := range array {
 		val, ok := current.children[v]
 		if ok {
 			current = val
 		} else {
-			child := TrieNode{}
-			child.children = make(map[byte]*TrieNode)
+			child := TrieNode[T]{}
+			child.children = make(map[T]*TrieNode[T])
 			current.children[v] = &child
 			current = &child
 		}
@@ -35,7 +35,7 @@ func (trie *Trie) Insert(array []byte) bool {
 	return true
 }
 
-func (trie *Trie) Contains(array []byte) bool {
+func (trie *Trie[T]) Contains(array []T) bool {
 	current := &(trie.root)
 	for _, v := range array {
 		_, ok := current.children[v]
@@ -47,7 +47,7 @@ func (trie *Trie) Contains(array []byte) bool {
 	return current.terminal
 }
 
-func (trie *Trie) Remove(array []byte) bool {
+func (trie *Trie[T]) Remove(array []T) bool {
 	current := &(trie.root)
 	for _, v := range array {
 		_, ok := current.children[v]
