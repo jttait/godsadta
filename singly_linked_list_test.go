@@ -100,3 +100,24 @@ func TestShouldTraverseToTailOfSinglyLinkedList(t *testing.T) {
 	}
 
 }
+
+func TestShouldDeleteSinglyLinkedListWithOneNode(t *testing.T) {
+	n := NewSinglyLinkedListNode(5)
+	n.InsertAfter(6)
+	n.DeleteNext()
+	result := []int{}
+	for n != nil {
+		result = append(result, n.Val)
+		n = n.Next
+	}
+	want := []int{5}
+	if len(result) != len(want) {
+		t.Fatalf("Linked lists are not equal.")
+	}
+	for i := 0; i < len(result); i++ {
+		if result[i] != want[i] {
+			t.Fatalf("Linked lists are not equal.")
+		}
+	}
+
+}
