@@ -41,3 +41,7 @@ func (n *SinglyLinkedListNode) TraverseToTail() *SinglyLinkedListNode {
 	}
 	return n
 }
+
+func (n *SinglyLinkedListNode) DeleteNext() {
+	n.Next = n.Next.Next
+}
