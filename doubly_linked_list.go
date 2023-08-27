@@ -1,17 +1,22 @@
 package godsa
 
+// DoublyLinkedListNode is a data structure that contains a value and pointers to the previous and
+// next nodes in the list.
 type DoublyLinkedListNode struct {
 	Val  int
 	Prev *DoublyLinkedListNode
 	Next *DoublyLinkedListNode
 }
 
+// NewDoublyLinkedListNode instantiates a doubly-linked list node and returns a pointer to it.
 func NewDoublyLinkedListNode(i int) *DoublyLinkedListNode {
 	d := DoublyLinkedListNode{}
 	d.Val = i
 	return &d
 }
 
+// InsertAfter inserts a new node after the current one. If there is already a node there then the
+// previous and next pointers of all three nodes will be updated as required.
 func (n *DoublyLinkedListNode) InsertAfter(i int) {
 	if n.Next == nil {
 		insertedNode := NewDoublyLinkedListNode(i)
@@ -26,49 +31,9 @@ func (n *DoublyLinkedListNode) InsertAfter(i int) {
 	n.Next = insertedNode
 }
 
-func (n *DoublyLinkedListNode) TraverseForwardUntilValEquals(i int) *DoublyLinkedListNode {
-	for n.Val != i {
-		n = n.Next
-	}
-	return n
-}
-
-func (n *DoublyLinkedListNode) TraverseForwardUntilNextValEquals(i int) *DoublyLinkedListNode {
-	for n.Next.Val != i {
-		n = n.Next
-	}
-	return n
-}
-
-func (n *DoublyLinkedListNode) TraverseForwardToTail() *DoublyLinkedListNode {
-	for n.Next != nil {
-		n = n.Next
-	}
-	return n
-}
-
-func (n *DoublyLinkedListNode) TraverseBackwardUntilValEquals(i int) *DoublyLinkedListNode {
-	for n.Val != i {
-		n = n.Prev
-	}
-	return n
-}
-
-func (n *DoublyLinkedListNode) TraverseBackwardUntilPrevValEquals(i int) *DoublyLinkedListNode {
-	for n.Prev.Val != i {
-		n = n.Prev
-	}
-	return n
-}
-
-func (n *DoublyLinkedListNode) TraverseBackwardToHead() *DoublyLinkedListNode {
-	for n.Prev != nil {
-		n = n.Prev
-	}
-	return n
-}
-
-func (n *DoublyLinkedListNode) Delete() {
+// Remove removes the current node and updates the pointers of the previous and next nodes as
+// required.
+func (n *DoublyLinkedListNode) Remove() {
 	prev := n.Prev
 	next := n.Next
 	if prev != nil {

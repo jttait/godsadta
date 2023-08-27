@@ -70,22 +70,22 @@ func TestShouldBeErrorWhenAddingEdgeBetweenTwoNonExistingVertices(t *testing.T) 
 	}
 }
 
-func TestShouldReturnEmptySetIfNoNeighbours(t *testing.T) {
+func TestShouldReturnEmptySetIfNoNeighbors(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(1)
-	result, _ := g.Neighbours(1)
+	result, _ := g.Neighbors(1)
 	want := NewSet[int]()
 	if !result.Equals(want) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldReturnSetIfNeighbours(t *testing.T) {
+func TestShouldReturnSetIfNeighbors(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
-	result, _ := g.Neighbours(1)
+	result, _ := g.Neighbors(1)
 	want := NewSet[int]()
 	want.Add(2)
 	if !result.Equals(want) {
@@ -93,21 +93,21 @@ func TestShouldReturnSetIfNeighbours(t *testing.T) {
 	}
 }
 
-func TestShouldReturnErrorIfVertexForNeighboursDoesNotExist(t *testing.T) {
+func TestShouldReturnErrorIfVertexForNeighborsDoesNotExist(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
-	_, err := g.Neighbours(1)
+	_, err := g.Neighbors(1)
 	if err == nil {
 		t.Fatalf("Got no error. Want error.")
 	}
 }
 
-func TestShouldReturnNoErrorIfVertexForNeighboursDoesExist(t *testing.T) {
+func TestShouldReturnNoErrorIfVertexForNeighborsDoesExist(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(1)
 	_, _ = g.AddEdge(1, 2)
-	_, err := g.Neighbours(1)
+	_, err := g.Neighbors(1)
 	if err != nil {
 		t.Fatalf("Got error. Want no error.")
 	}
