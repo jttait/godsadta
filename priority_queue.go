@@ -1,23 +1,25 @@
 package godsa
 
-type PriorityQueue struct {
-	array []int
+import "cmp"
+
+type PriorityQueue[T cmp.Ordered] struct {
+	array []T
 }
 
-func NewPriorityQueue() *PriorityQueue {
-	q := PriorityQueue{}
+func NewPriorityQueue[T cmp.Ordered]() *PriorityQueue[T] {
+	q := PriorityQueue[T]{}
 	return &q
 }
 
-func (q *PriorityQueue) Size() int {
+func (q *PriorityQueue[T]) Size() int {
 	return len(q.array)
 }
 
-func (q *PriorityQueue) Add(i int) {
+func (q *PriorityQueue[T]) Add(i T) {
 	q.array = append(q.array, i)
 }
 
-func (q *PriorityQueue) Remove(j int) bool {
+func (q *PriorityQueue[T]) Remove(j T) bool {
 	for i, v := range q.array {
 		if v == j {
 			q.array[i] = q.array[len(q.array)-1]
@@ -28,9 +30,10 @@ func (q *PriorityQueue) Remove(j int) bool {
 	return false
 }
 
-func (q *PriorityQueue) Poll() (int, bool) {
+func (q *PriorityQueue[T]) Poll() (T, bool) {
 	if q.Size() == 0 {
-		return 0, false
+		var zeroValue T
+		return zeroValue, false
 	}
 	max := q.array[0]
 	maxIndex := 0
@@ -45,9 +48,10 @@ func (q *PriorityQueue) Poll() (int, bool) {
 	return max, true
 }
 
-func (q *PriorityQueue) Peek() (int, bool) {
+func (q *PriorityQueue[T]) Peek() (T, bool) {
 	if q.Size() == 0 {
-		return 0, false
+		var zeroValue T
+		return zeroValue, false
 	}
 	max := q.array[0]
 	for i := 1; i < q.Size(); i++ {

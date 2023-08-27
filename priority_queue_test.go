@@ -3,7 +3,7 @@ package godsa
 import "testing"
 
 func TestShouldBeSizeZeroForNewlyInstantiatedPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	want := 0
 	result := q.Size()
 	if want != result {
@@ -12,7 +12,7 @@ func TestShouldBeSizeZeroForNewlyInstantiatedPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	want := 1
 	result := q.Size()
@@ -22,7 +22,7 @@ func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedPriorityQueue(t *testing
 }
 
 func TestShouldBeSizeTwoWhenAddingTwoItems(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	q.Add(6)
 	want := 2
@@ -33,7 +33,7 @@ func TestShouldBeSizeTwoWhenAddingTwoItems(t *testing.T) {
 }
 
 func TestShouldBeSizeTwoWhenAddingTwoIdenticalItems(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	q.Add(5)
 	want := 2
@@ -44,7 +44,7 @@ func TestShouldBeSizeTwoWhenAddingTwoIdenticalItems(t *testing.T) {
 }
 
 func TestShouldBeSizeZeroAfterAddingAndRemovingItem(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	_ = q.Remove(5)
 	want := 0
@@ -55,7 +55,7 @@ func TestShouldBeSizeZeroAfterAddingAndRemovingItem(t *testing.T) {
 }
 
 func TestShouldBeTrueWhenRemovingItemThatisInPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	ok := q.Remove(5)
 	want := true
@@ -65,7 +65,7 @@ func TestShouldBeTrueWhenRemovingItemThatisInPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenRemovingItemThatIsNotInPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	ok := q.Remove(5)
 	want := false
 	if ok != want {
@@ -74,7 +74,7 @@ func TestShouldBeFalseWhenRemovingItemThatIsNotInPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeHighestPriorityItemWhenPollingPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	q.Add(3)
 	result, _ := q.Poll()
@@ -85,7 +85,7 @@ func TestShouldBeHighestPriorityItemWhenPollingPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeTrueWhenPollingNonEmptyPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	_, ok := q.Poll()
 	want := true
@@ -95,7 +95,7 @@ func TestShouldBeTrueWhenPollingNonEmptyPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenPollingEmptyPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	_, ok := q.Poll()
 	want := false
 	if want != ok {
@@ -104,7 +104,7 @@ func TestShouldBeFalseWhenPollingEmptyPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeHighestPriorityItemWhenPeekingPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	q.Add(3)
 	result, _ := q.Peek()
@@ -115,7 +115,7 @@ func TestShouldBeHighestPriorityItemWhenPeekingPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeTrueWhenPeekingNonEmptyPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	_, ok := q.Peek()
 	want := true
@@ -125,7 +125,7 @@ func TestShouldBeTrueWhenPeekingNonEmptyPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenPeekingEmptyPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	_, ok := q.Peek()
 	want := false
 	if want != ok {
@@ -134,7 +134,7 @@ func TestShouldBeFalseWhenPeekingEmptyPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeSameSizeAfterPeekingNonEmptyPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	_, _ = q.Peek()
 	want := 1
@@ -145,7 +145,7 @@ func TestShouldBeSameSizeAfterPeekingNonEmptyPriorityQueue(t *testing.T) {
 }
 
 func TestShouldBeSizeZeroAfterPollingPriorityQueueOfSizeOne(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue[int]()
 	q.Add(5)
 	_, _ = q.Poll()
 	want := 0
