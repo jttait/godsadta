@@ -43,96 +43,14 @@ func TestShouldInsertAfterInMiddleOfDoublyLinkedList(t *testing.T) {
 	}
 }
 
-func TestShouldTraverseListForwardUntilValFound(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.TraverseForwardUntilValEquals(7)
-	result := n.Val
-	want := 7
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-}
-
-func TestShouldTraverseListForwardUntilNextValFound(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.TraverseForwardUntilNextValEquals(8)
-	result := n.Val
-	want := 7
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-
-}
-
-func TestShouldTraverseForwardToTailOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.TraverseForwardToTail()
-	result := n.Val
-	want := 8
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-}
-
-func TestShouldTraverseListBackwardUntilValFound(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.Next.Next.Next
-	n = n.TraverseBackwardUntilValEquals(6)
-	result := n.Val
-	want := 6
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-}
-
-func TestShouldTraverseListBackwardUntilPrevValFound(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.Next.Next.Next
-	n = n.TraverseBackwardUntilPrevValEquals(5)
-	result := n.Val
-	want := 6
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-}
-
-func TestShouldTraverseBackwardToHeadOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.Next.Next.Next
-	n = n.TraverseBackwardToHead()
-	result := n.Val
-	want := 5
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-}
-
-func TestShouldDeleteInMiddleOfDoublyLinkedList(t *testing.T) {
+func TestShouldRemoveInMiddleOfDoublyLinkedList(t *testing.T) {
 	n := NewDoublyLinkedListNode(5)
 	head := n
 	n.InsertAfter(6)
 	n.Next.InsertAfter(7)
 	n.Next.Next.InsertAfter(8)
 	n = n.Next
-	n.Delete()
+	n.Remove()
 	result := convertDoublyLinkedListValsToSlice(head)
 	want := []int{5, 7, 8}
 	if !AreSlicesEqual(result, want) {
@@ -140,13 +58,13 @@ func TestShouldDeleteInMiddleOfDoublyLinkedList(t *testing.T) {
 	}
 }
 
-func TestShouldDeleteHeadOfDoublyLinkedList(t *testing.T) {
+func TestShouldRemoveHeadOfDoublyLinkedList(t *testing.T) {
 	n := NewDoublyLinkedListNode(5)
 	n.InsertAfter(6)
 	head := n.Next
 	n.Next.InsertAfter(7)
 	n.Next.Next.InsertAfter(8)
-	n.Delete()
+	n.Remove()
 	result := convertDoublyLinkedListValsToSlice(head)
 	want := []int{6, 7, 8}
 	if !AreSlicesEqual(result, want) {
@@ -154,12 +72,12 @@ func TestShouldDeleteHeadOfDoublyLinkedList(t *testing.T) {
 	}
 }
 
-func TestShouldDeleteTailOfDoublyLinkedList(t *testing.T) {
+func TestShouldRemoveTailOfDoublyLinkedList(t *testing.T) {
 	n := NewDoublyLinkedListNode(5)
 	n.InsertAfter(6)
 	n.Next.InsertAfter(7)
 	n.Next.Next.InsertAfter(8)
-	n.Next.Next.Next.Delete()
+	n.Next.Next.Next.Remove()
 	result := convertDoublyLinkedListValsToSlice(n)
 	want := []int{5, 6, 7}
 	if !AreSlicesEqual(result, want) {

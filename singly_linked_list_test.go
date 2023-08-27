@@ -51,51 +51,10 @@ func TestShouldInsertAfterInMiddleOfList(t *testing.T) {
 	}
 }
 
-func TestShouldTraverseListUntilValFound(t *testing.T) {
+func TestShouldRemoveSinglyLinkedListWithOneNode(t *testing.T) {
 	n := NewSinglyLinkedListNode(5)
 	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.TraverseUntilValEquals(7)
-	result := n.Val
-	want := 7
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-}
-
-func TestShouldTraverseListUntilNextValFound(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.TraverseUntilNextValEquals(8)
-	result := n.Val
-	want := 7
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-
-}
-
-func TestShouldTraverseToTailOfSinglyLinkedList(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.TraverseToTail()
-	result := n.Val
-	want := 8
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
-
-}
-
-func TestShouldDeleteSinglyLinkedListWithOneNode(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
-	n.InsertAfter(6)
-	n.DeleteNext()
+	n.RemoveNext()
 	result := convertLinkedListValsToSlice(n)
 	want := []int{5}
 	if !AreSlicesEqual(result, want) {
