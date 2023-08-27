@@ -3,7 +3,7 @@ package godsa
 import "testing"
 
 func TestShouldReturnTrueIfTrieContainsItem(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Contains([]byte{'c', 'a', 't'})
 	want := true
@@ -13,7 +13,7 @@ func TestShouldReturnTrueIfTrieContainsItem(t *testing.T) {
 }
 
 func TestShouldReturnFalseIfTrieDoesNotContainItem(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	result := trie.Contains([]byte{'c', 'a', 't'})
 	want := false
 	if want != result {
@@ -22,7 +22,7 @@ func TestShouldReturnFalseIfTrieDoesNotContainItem(t *testing.T) {
 }
 
 func TestShouldRemoveExistingItemFromTrie(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	_ = trie.Remove([]byte{'c', 'a', 't'})
 	result := trie.Contains([]byte{'c', 'a', 't'})
@@ -33,7 +33,7 @@ func TestShouldRemoveExistingItemFromTrie(t *testing.T) {
 }
 
 func TestShouldReturnFalseWhenRemovingNonExistingItemFromTrie(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	result := trie.Remove([]byte{'c', 'a', 't'})
 	want := false
 	if result != want {
@@ -42,7 +42,7 @@ func TestShouldReturnFalseWhenRemovingNonExistingItemFromTrie(t *testing.T) {
 }
 
 func TestShouldReturnTrueWhenRemovingExistingWordFromTrie(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Remove([]byte{'c', 'a', 't'})
 	want := true
@@ -52,7 +52,7 @@ func TestShouldReturnTrueWhenRemovingExistingWordFromTrie(t *testing.T) {
 }
 
 func TestShouldContainItemAfterAddingRemovingAddingToTrie(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	_ = trie.Remove([]byte{'c', 'a', 't'})
 	_ = trie.Insert([]byte{'c', 'a', 't'})
@@ -64,7 +64,7 @@ func TestShouldContainItemAfterAddingRemovingAddingToTrie(t *testing.T) {
 }
 
 func TestShouldBeTrueWhenInsertingItemNotAlreadyExistingInTrie(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	result := trie.Insert([]byte{'c', 'a', 't'})
 	want := true
 	if want != result {
@@ -73,7 +73,7 @@ func TestShouldBeTrueWhenInsertingItemNotAlreadyExistingInTrie(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenInsertingItemAlreadyExistingInTrie(t *testing.T) {
-	trie := NewTrie()
+	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Insert([]byte{'c', 'a', 't'})
 	want := false
