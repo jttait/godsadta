@@ -1,4 +1,5 @@
-package godsa
+// Package set provides a set struct and associated methods
+package set
 
 // Set is a data structure that stores unique values without ordering.
 type Set[T comparable] struct {

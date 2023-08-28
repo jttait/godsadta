@@ -1,7 +1,9 @@
-package godsa
+package doublylinkedlist
 
 import (
 	"testing"
+
+	"github.com/jttait/godsa/slice"
 )
 
 func TestShouldHaveCorrectValForNewlyInstantiateDoublyLinkedList(t *testing.T) {
@@ -27,7 +29,7 @@ func TestShouldInsertAfterTail(t *testing.T) {
 	d.InsertAfter(6)
 	result := convertDoublyLinkedListValsToSlice(d)
 	want := []int{5, 6}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }
@@ -38,7 +40,7 @@ func TestShouldInsertAfterInMiddleOfDoublyLinkedList(t *testing.T) {
 	n.InsertAfter(6)
 	result := convertDoublyLinkedListValsToSlice(n)
 	want := []int{5, 6, 7}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }
@@ -53,7 +55,7 @@ func TestShouldRemoveInMiddleOfDoublyLinkedList(t *testing.T) {
 	n.Remove()
 	result := convertDoublyLinkedListValsToSlice(head)
 	want := []int{5, 7, 8}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }
@@ -67,7 +69,7 @@ func TestShouldRemoveHeadOfDoublyLinkedList(t *testing.T) {
 	n.Remove()
 	result := convertDoublyLinkedListValsToSlice(head)
 	want := []int{6, 7, 8}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }
@@ -80,7 +82,7 @@ func TestShouldRemoveTailOfDoublyLinkedList(t *testing.T) {
 	n.Next.Next.Next.Remove()
 	result := convertDoublyLinkedListValsToSlice(n)
 	want := []int{5, 6, 7}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }

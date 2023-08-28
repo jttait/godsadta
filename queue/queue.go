@@ -1,4 +1,5 @@
-package godsa
+// Package queue provides the queue data structure and associated methods
+package queue
 
 // Queue is a first-in, first-out data structure.
 type Queue[T any] struct {

@@ -1,4 +1,5 @@
-package godsa
+// Package singlylinkedlist provides the singly-linked list data structure and associated methods
+package singlylinkedlist
 
 // SinglyLinkedListNode is a data structure that contains a value and a pointer to the next node in
 // the list.

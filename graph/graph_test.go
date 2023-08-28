@@ -1,6 +1,10 @@
-package godsa
+package graph
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jttait/godsa/set"
+)
 
 func TestShouldBeTrueWhenAddingNonExistingVertexToGraph(t *testing.T) {
 	g := NewGraph()
@@ -74,7 +78,7 @@ func TestShouldReturnEmptySetIfNoNeighbors(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(1)
 	result, _ := g.Neighbors(1)
-	want := NewSet[int]()
+	want := set.NewSet[int]()
 	if !result.Equals(want) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
@@ -86,8 +90,7 @@ func TestShouldReturnSetIfNeighbors(t *testing.T) {
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
 	result, _ := g.Neighbors(1)
-	want := NewSet[int]()
-	want.Add(2)
+	want := set.NewSet[int](2)
 	if !result.Equals(want) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}

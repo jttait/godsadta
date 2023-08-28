@@ -1,4 +1,5 @@
-package godsa
+// Package doublylinkedlist provides the doubly-linked list data structure and associated methods
+package doublylinkedlist
 
 // DoublyLinkedListNode is a data structure that contains a value and pointers to the previous and
 // next nodes in the list.
