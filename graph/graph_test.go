@@ -25,6 +25,49 @@ func TestShouldBeFalseWhenAddingExistingVertexToGraph(t *testing.T) {
 	}
 }
 
+func TestShouldRemoveVertexFromGraph(t *testing.T) {
+	g := NewGraph()
+	_ = g.AddVertex(1)
+	_ = g.RemoveVertex(1)
+	result := g.ContainsVertex(1)
+	want := false
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldReturnTrueWhenRemovingExistentVertexFromGraph(t *testing.T) {
+	g := NewGraph()
+	_ = g.AddVertex(1)
+	result := g.RemoveVertex(1)
+	want := true
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldReturnFalseWhenRemovingNonExistentVertexFromGraph(t *testing.T) {
+	g := NewGraph()
+	result := g.RemoveVertex(1)
+	want := false
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldRemoveEdgeWhenRemovingVertexFromGraph(t *testing.T) {
+	g := NewGraph()
+	_ = g.AddVertex(1)
+	_ = g.AddVertex(2)
+	_, _ = g.AddEdge(1, 2)
+	_ = g.RemoveVertex(1)
+	result, _ := g.Neighbors(2)
+	want := set.NewSet[int]()
+	if !result.Equals(want) {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
 func TestShouldBeTrueWhenAddingNonExistingEdgeToGraph(t *testing.T) {
 	g := NewGraph()
 	_ = g.AddVertex(1)
@@ -113,5 +156,50 @@ func TestShouldReturnNoErrorIfVertexForNeighborsDoesExist(t *testing.T) {
 	_, err := g.Neighbors(1)
 	if err != nil {
 		t.Fatalf("Got error. Want no error.")
+	}
+}
+
+func TestShouldRemoveEdge(t *testing.T) {
+	g := NewGraph()
+	_ = g.AddVertex(1)
+	_ = g.AddVertex(2)
+	_, _ = g.AddEdge(1, 2)
+	_ = g.RemoveEdge(1, 2)
+	result, _ := g.Neighbors(1)
+	want := set.NewSet[int]()
+	if !result.Equals(want) {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldReturnFalseWhenRemovingNonExistentEdge(t *testing.T) {
+	g := NewGraph()
+	_ = g.AddVertex(1)
+	_ = g.AddVertex(2)
+	result := g.RemoveEdge(1, 2)
+	want := false
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldReturnTrueWhenRemovingExistentEdge(t *testing.T) {
+	g := NewGraph()
+	_ = g.AddVertex(1)
+	_ = g.AddVertex(2)
+	_, _ = g.AddEdge(1, 2)
+	result := g.RemoveEdge(1, 2)
+	want := true
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldReturnFalseWhenRemovingEdgeWithNonExistentVertices(t *testing.T) {
+	g := NewGraph()
+	result := g.RemoveEdge(1, 2)
+	want := false
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
