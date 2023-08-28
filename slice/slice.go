@@ -1,4 +1,5 @@
-package godsa
+// Package slice provides functions associated with the slice data structure
+package slice
 
 func AreSlicesEqual(a []int, b []int) bool {
 	if len(a) != len(b) {

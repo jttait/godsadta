@@ -1,4 +1,5 @@
-package godsa
+// Package priorityqueue provides the priority queue data structure and associated methods
+package priorityqueue
 
 import "cmp"
 

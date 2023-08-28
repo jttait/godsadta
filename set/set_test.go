@@ -1,4 +1,4 @@
-package godsa
+package set
 
 import (
 	"testing"

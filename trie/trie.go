@@ -1,4 +1,5 @@
-package godsa
+// Package trie provides the trie data structure and associated methods
+package trie
 
 // Trie is a data structure for locating keys within a set but the key is broken into individual
 // parts (e.g. a string broken into characters) and the key is access by traversing the trie

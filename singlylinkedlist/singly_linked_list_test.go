@@ -1,7 +1,9 @@
-package godsa
+package singlylinkedlist
 
 import (
 	"testing"
+
+	"github.com/jttait/godsa/slice"
 )
 
 func TestShouldBeCorrectValForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
@@ -26,7 +28,7 @@ func TestShouldInsertAfterAtTail(t *testing.T) {
 	n.InsertAfter(6)
 	result := convertLinkedListValsToSlice(n)
 	want := []int{5, 6}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }
@@ -46,7 +48,7 @@ func TestShouldInsertAfterInMiddleOfList(t *testing.T) {
 	n.InsertAfter(6)
 	result := convertLinkedListValsToSlice(n)
 	want := []int{5, 6, 7}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 }
@@ -57,7 +59,7 @@ func TestShouldRemoveSinglyLinkedListWithOneNode(t *testing.T) {
 	n.RemoveNext()
 	result := convertLinkedListValsToSlice(n)
 	want := []int{5}
-	if !AreSlicesEqual(result, want) {
+	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
 
