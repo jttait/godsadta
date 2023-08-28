@@ -1,4 +1,4 @@
-// Package queue provides the queue data structure and associated methods
+// Package queue provides the queue abstract data type and associated methods
 package queue
 
 // Queue is a first-in, first-out data structure.
