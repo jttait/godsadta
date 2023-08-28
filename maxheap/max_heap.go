@@ -67,3 +67,11 @@ func (m *MaxHeap[T]) Extract() T {
 	}
 	return result
 }
+
+func (m *MaxHeap[T]) Size() int {
+	return len(m.array)
+}
+
+func (m *MaxHeap[T]) Peek() T {
+	return m.array[0]
+}

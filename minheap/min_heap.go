@@ -67,3 +67,11 @@ func (m *MinHeap[T]) Extract() T {
 	}
 	return result
 }
+
+func (m *MinHeap[T]) Size() int {
+	return len(m.array)
+}
+
+func (m *MinHeap[T]) Peek() T {
+	return m.array[0]
+}

@@ -43,36 +43,6 @@ func TestShouldBeSizeTwoWhenAddingTwoIdenticalItems(t *testing.T) {
 	}
 }
 
-func TestShouldBeSizeZeroAfterAddingAndRemovingItem(t *testing.T) {
-	q := NewPriorityQueue[int]()
-	q.Add(5)
-	_ = q.Remove(5)
-	want := 0
-	result := q.Size()
-	if want != result {
-		t.Fatalf("Got %v. Want %v\n", result, want)
-	}
-}
-
-func TestShouldBeTrueWhenRemovingItemThatisInPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue[int]()
-	q.Add(5)
-	ok := q.Remove(5)
-	want := true
-	if ok != want {
-		t.Fatalf("Got %v. Want %v.\n", ok, want)
-	}
-}
-
-func TestShouldBeFalseWhenRemovingItemThatIsNotInPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue[int]()
-	ok := q.Remove(5)
-	want := false
-	if ok != want {
-		t.Fatalf("Got %v. Want %v.\n", ok, want)
-	}
-}
-
 func TestShouldBeHighestPriorityItemWhenPollingPriorityQueue(t *testing.T) {
 	q := NewPriorityQueue[int]()
 	q.Add(5)

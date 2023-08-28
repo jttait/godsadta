@@ -50,3 +50,40 @@ func TestShouldExtractMultipleTimesFromMinHeap(t *testing.T) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
+
+func TestShouldPeekTopItemFromMinHeap(t *testing.T) {
+	m := NewMinHeap[int](5, 15, 10)
+	result := m.Peek()
+	want := 5
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeSameSizeAfterPeekingMinHeap(t *testing.T) {
+	m := NewMinHeap[int](5, 15, 10)
+	_ = m.Peek()
+	result := m.Size()
+	want := 3
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeSizeZeroForNewlyInstantiatedMinHeap(t *testing.T) {
+	m := NewMinHeap[int]()
+	result := m.Size()
+	want := 0
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeSizeTwoForMinHeapWithTwoItems(t *testing.T) {
+	m := NewMinHeap[int](1, 2)
+	result := m.Size()
+	want := 2
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}

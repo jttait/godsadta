@@ -51,3 +51,40 @@ func TestShouldExtractMultipleTimesFromMaxHeap(t *testing.T) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
+
+func TestShouldPeekTopItemFromMaxHeap(t *testing.T) {
+	m := NewMaxHeap[int](5, 15, 10)
+	result := m.Peek()
+	want := 15
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeSameSizeAfterPeekingMaxHeap(t *testing.T) {
+	m := NewMaxHeap[int](5, 15, 10)
+	_ = m.Peek()
+	result := m.Size()
+	want := 3
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeSizeZeroForNewlyInstantiatedMaxHeap(t *testing.T) {
+	m := NewMaxHeap[int]()
+	result := m.Size()
+	want := 0
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeSizeTwoForMaxHeapWithTwoItems(t *testing.T) {
+	m := NewMaxHeap[int](1, 2)
+	result := m.Size()
+	want := 2
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
