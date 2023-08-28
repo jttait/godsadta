@@ -1,7 +1,7 @@
-// Package set provides a set struct and associated methods
+// Package set provides a set abstract data type and associated methods
 package set
 
-// Set is a data structure that stores unique values without ordering.
+// Set is an abstract data type that stores unique values without ordering.
 type Set[T comparable] struct {
 	m map[T]struct{}
 }

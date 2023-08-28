@@ -1,4 +1,4 @@
-// Package stack provides the stack data structure and associated methods
+// Package stack provides the stack abstract data type and associated methods
 package stack
 
 // Stack is a last-in, first-out data structure.
