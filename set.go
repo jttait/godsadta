@@ -6,9 +6,12 @@ type Set[T comparable] struct {
 }
 
 // NewSet instantiates a set and returns a pointer to it.
-func NewSet[T comparable]() *Set[T] {
+func NewSet[T comparable](i ...T) *Set[T] {
 	s := Set[T]{}
 	s.m = make(map[T]struct{})
+	for _, j := range i {
+		s.m[j] = struct{}{}
+	}
 	return &s
 }
 
@@ -52,4 +55,40 @@ func (s *Set[T]) Equals(t *Set[T]) bool {
 		}
 	}
 	return true
+}
+
+func (s *Set[T]) Iter() []T {
+	result := []T{}
+	for k, _ := range s.m {
+		result = append(result, k)
+	}
+	return result
+}
+
+// Union returns a set containing items that are in either set
+func (s *Set[T]) Union(t *Set[T]) *Set[T] {
+	for _, value := range t.Iter() {
+		_ = s.Add(value)
+	}
+	return s
+}
+
+// Intersection returns a set containing only the items that are in both sets.
+func (s *Set[T]) Intersection(t *Set[T]) *Set[T] {
+	result := NewSet[T]()
+	for _, value := range s.Iter() {
+		if t.Contains(value) {
+			result.Add(value)
+		}
+	}
+	return result
+}
+
+// Difference returns a set containing items that are in this set but are not in the set passed in
+// the argument.
+func (s *Set[T]) Difference(t *Set[T]) *Set[T] {
+	for _, value := range t.Iter() {
+		s.Remove(value)
+	}
+	return s
 }
