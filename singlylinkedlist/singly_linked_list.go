@@ -1,34 +1,46 @@
-// Package singlylinkedlist provides the singly-linked list data structure and associated methods
+// Package doublylinkedlist provides the doubly-linked list data structure and associated methods
 package singlylinkedlist
 
-// SinglyLinkedListNode is a data structure that contains a value and a pointer to the next node in
-// the list.
-type SinglyLinkedListNode[T any] struct {
-	Val  T
-	Next *SinglyLinkedListNode[T]
+// Double-ended queue enables inserting and polling from either end
+type SinglyLinkedList[T any] struct {
+	dummyHead *SinglyLinkedListNode[T]
+	size      int
 }
 
-// NewSinglyLinkedListNode instantiates a singly-linked list node and returns a pointer to it.
-func NewSinglyLinkedListNode[T any](i T) *SinglyLinkedListNode[T] {
-	n := SinglyLinkedListNode[T]{}
-	n.Val = i
-	return &n
+// NewDoublyLinkedList instantiates a new doubly-linked list and returns a pointer to it.
+func NewSinglyLinkedList[T any]() *SinglyLinkedList[T] {
+	q := SinglyLinkedList[T]{}
+	var zeroValue T
+	q.dummyHead = NewSinglyLinkedListNode[T](zeroValue)
+	q.size = 0
+	return &q
 }
 
-// InsertAfter inserts a new node after the current one. If there is already a node there then the
-// newly-inserted node will point to this after the insert operation is complete.
-func (n *SinglyLinkedListNode[T]) InsertAfter(i T) {
-	if n.Next == nil {
-		n.Next = NewSinglyLinkedListNode[T](i)
-		return
+// Size returns the number of items in the list.
+func (q *SinglyLinkedList[T]) Size() int {
+	return q.size
+}
+
+// Insert inserts a new item at the front of the list.
+func (q *SinglyLinkedList[T]) Insert(i T) {
+	if q.dummyHead.Next == nil {
+		q.dummyHead.Next = NewSinglyLinkedListNode[T](i)
+	} else {
+		temp := q.dummyHead.Next
+		q.dummyHead.Next = NewSinglyLinkedListNode[T](i)
+		q.dummyHead.Next.Next = temp
 	}
-	temp := n.Next
-	n.Next = NewSinglyLinkedListNode[T](i)
-	n.Next.Next = temp
+	q.size += 1
 }
 
-// RemoveNext will remove the next node from the linked list. The Next pointer for the current node
-// will be updated to point to the one after the removed node.
-func (n *SinglyLinkedListNode[T]) RemoveNext() {
-	n.Next = n.Next.Next
+// Remove removes and returns the item at the front of the singly-linked list.
+func (q *SinglyLinkedList[T]) Remove() (T, bool) {
+	if q.size == 0 || q.dummyHead.Next == nil {
+		var zeroValue T
+		return zeroValue, false
+	}
+	result := q.dummyHead.Next.Val
+	q.dummyHead.Next = q.dummyHead.Next.Next
+	q.size -= 1
+	return result, true
 }
