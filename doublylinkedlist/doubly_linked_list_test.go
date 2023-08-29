@@ -1,88 +1,154 @@
 package doublylinkedlist
 
-import (
-	"testing"
+import "testing"
 
-	"github.com/jttait/godsa/slice"
-)
+func TestShouldBeSizeZeroForNewlyInstantiatedDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
 
-func TestShouldHaveCorrectValForNewlyInstantiateDoublyLinkedList(t *testing.T) {
-	d := NewDoublyLinkedListNode[int](1)
-	result := d.Val
+func TestShouldBeSizeOneAfterInsertingFrontOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(5)
+	result := d.Size()
 	want := 1
 	if result != want {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func convertDoublyLinkedListValsToSlice[T any](n *DoublyLinkedListNode[T]) []T {
-	result := []T{}
-	for n != nil {
-		result = append(result, n.Val)
-		n = n.Next
-	}
-	return result
-}
-
-func TestShouldInsertAfterTail(t *testing.T) {
-	d := NewDoublyLinkedListNode[int](5)
-	d.InsertAfter(6)
-	result := convertDoublyLinkedListValsToSlice(d)
-	want := []int{5, 6}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeSizeOneAfterInsertingLastOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertLast(5)
+	result := d.Size()
+	want := 1
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldInsertAfterInMiddleOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode[int](5)
-	n.Next = NewDoublyLinkedListNode[int](7)
-	n.InsertAfter(6)
-	result := convertDoublyLinkedListValsToSlice(n)
-	want := []int{5, 6, 7}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeSizeZeroAfterInsertingFrontAndRemovingFrontOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(5)
+	_, _ = d.RemoveFront()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldRemoveInMiddleOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode[int](5)
-	head := n
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n = n.Next
-	n.Remove()
-	result := convertDoublyLinkedListValsToSlice(head)
-	want := []int{5, 7, 8}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeSizeZeroAfterInsertingLastAndRemovingLastOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertLast(5)
+	_, _ = d.RemoveLast()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldRemoveHeadOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode[int](5)
-	n.InsertAfter(6)
-	head := n.Next
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n.Remove()
-	result := convertDoublyLinkedListValsToSlice(head)
-	want := []int{6, 7, 8}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeSizeZeroAfterInsertingFrontAndRemovingLastOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(5)
+	_, _ = d.RemoveLast()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldRemoveTailOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode[int](5)
-	n.InsertAfter(6)
-	n.Next.InsertAfter(7)
-	n.Next.Next.InsertAfter(8)
-	n.Next.Next.Next.Remove()
-	result := convertDoublyLinkedListValsToSlice(n)
-	want := []int{5, 6, 7}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeSizeZeroAfterInsertingLastAndRemovingFrontOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertLast(5)
+	_, _ = d.RemoveFront()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldRemoveFrontForMultipleItemsOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(3)
+	d.InsertFront(2)
+	d.InsertFront(1)
+	result, _ := d.RemoveFront()
+	want := 1
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.RemoveFront()
+	want = 2
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.RemoveFront()
+	want = 3
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldRemoveLastForMultipleItemsOfDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(3)
+	d.InsertFront(2)
+	d.InsertFront(1)
+	result, _ := d.RemoveLast()
+	want := 3
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.RemoveLast()
+	want = 2
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.RemoveLast()
+	want = 1
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeTrueWhenRemoveFirstForNonEmptyDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(1)
+	_, ok := d.RemoveFront()
+	if !ok {
+		t.Fatalf("Got false. Want true.")
+	}
+}
+
+func TestShouldBeFalseWhenRemoveFirstForEmptyDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	_, ok := d.RemoveFront()
+	if ok {
+		t.Fatalf("Got true. Want false.")
+	}
+}
+
+func TestShouldBeTrueWhenRemoveLastForNonEmptyDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(1)
+	_, ok := d.RemoveLast()
+	if !ok {
+		t.Fatalf("Got false. Want true.")
+	}
+}
+
+func TestShouldBeFalseWhenRemoveLastForEmptyDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	_, ok := d.RemoveLast()
+	if ok {
+		t.Fatalf("Got true. Want false.")
 	}
 }
