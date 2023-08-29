@@ -32,9 +32,7 @@ func (m *MaxHeap[T]) Insert(i T) {
 	index := len(m.array) - 1
 	parentIndex := findParentIndex(index)
 	for parentIndex >= 0 && m.array[index] > m.array[parentIndex] {
-		temp := m.array[index]
-		m.array[index] = m.array[parentIndex]
-		m.array[parentIndex] = temp
+		swap(index, parentIndex, &m.array)
 		index = parentIndex
 		parentIndex = findParentIndex(index)
 	}
@@ -48,24 +46,27 @@ func (m *MaxHeap[T]) Extract() T {
 	m.array = m.array[:len(m.array)-1]
 
 	index := 0
-	childIndex1 := (index * 2) + 1
-	childIndex2 := (index * 2) + 2
+	childIndex1, childIndex2 := findChildIndices(index)
 	for index < len(m.array) && ((childIndex1 < len(m.array) && m.array[index] < m.array[childIndex1]) || (childIndex2 < len(m.array) && m.array[index] < m.array[childIndex2])) {
 		if m.array[childIndex1] > m.array[childIndex2] {
-			temp := m.array[childIndex1]
-			m.array[childIndex1] = m.array[index]
-			m.array[index] = temp
-			index = childIndex1
+			swap(index, childIndex1, &m.array)
 		} else {
-			temp := m.array[childIndex2]
-			m.array[childIndex2] = m.array[index]
-			m.array[index] = temp
-			index = childIndex1
+			swap(index, childIndex2, &m.array)
 		}
-		childIndex1 = (index * 2) + 1
-		childIndex2 = (index * 2) + 2
+		index = childIndex1
+		childIndex1, childIndex2 = findChildIndices(index)
 	}
 	return result
+}
+
+func swap[T cmp.Ordered](i int, j int, array *[]T) {
+	temp := (*array)[i]
+	(*array)[i] = (*array)[j]
+	(*array)[j] = temp
+}
+
+func findChildIndices(index int) (int, int) {
+	return (index * 2) + 1, (index * 2) + 2
 }
 
 func (m *MaxHeap[T]) Size() int {
