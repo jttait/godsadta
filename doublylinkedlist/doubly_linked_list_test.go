@@ -7,7 +7,7 @@ import (
 )
 
 func TestShouldHaveCorrectValForNewlyInstantiateDoublyLinkedList(t *testing.T) {
-	d := NewDoublyLinkedListNode(1)
+	d := NewDoublyLinkedListNode[int](1)
 	result := d.Val
 	want := 1
 	if result != want {
@@ -15,8 +15,8 @@ func TestShouldHaveCorrectValForNewlyInstantiateDoublyLinkedList(t *testing.T) {
 	}
 }
 
-func convertDoublyLinkedListValsToSlice(n *DoublyLinkedListNode) []int {
-	result := []int{}
+func convertDoublyLinkedListValsToSlice[T any](n *DoublyLinkedListNode[T]) []T {
+	result := []T{}
 	for n != nil {
 		result = append(result, n.Val)
 		n = n.Next
@@ -25,7 +25,7 @@ func convertDoublyLinkedListValsToSlice(n *DoublyLinkedListNode) []int {
 }
 
 func TestShouldInsertAfterTail(t *testing.T) {
-	d := NewDoublyLinkedListNode(5)
+	d := NewDoublyLinkedListNode[int](5)
 	d.InsertAfter(6)
 	result := convertDoublyLinkedListValsToSlice(d)
 	want := []int{5, 6}
@@ -35,8 +35,8 @@ func TestShouldInsertAfterTail(t *testing.T) {
 }
 
 func TestShouldInsertAfterInMiddleOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
-	n.Next = NewDoublyLinkedListNode(7)
+	n := NewDoublyLinkedListNode[int](5)
+	n.Next = NewDoublyLinkedListNode[int](7)
 	n.InsertAfter(6)
 	result := convertDoublyLinkedListValsToSlice(n)
 	want := []int{5, 6, 7}
@@ -46,7 +46,7 @@ func TestShouldInsertAfterInMiddleOfDoublyLinkedList(t *testing.T) {
 }
 
 func TestShouldRemoveInMiddleOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
+	n := NewDoublyLinkedListNode[int](5)
 	head := n
 	n.InsertAfter(6)
 	n.Next.InsertAfter(7)
@@ -61,7 +61,7 @@ func TestShouldRemoveInMiddleOfDoublyLinkedList(t *testing.T) {
 }
 
 func TestShouldRemoveHeadOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
+	n := NewDoublyLinkedListNode[int](5)
 	n.InsertAfter(6)
 	head := n.Next
 	n.Next.InsertAfter(7)
@@ -75,7 +75,7 @@ func TestShouldRemoveHeadOfDoublyLinkedList(t *testing.T) {
 }
 
 func TestShouldRemoveTailOfDoublyLinkedList(t *testing.T) {
-	n := NewDoublyLinkedListNode(5)
+	n := NewDoublyLinkedListNode[int](5)
 	n.InsertAfter(6)
 	n.Next.InsertAfter(7)
 	n.Next.Next.InsertAfter(8)

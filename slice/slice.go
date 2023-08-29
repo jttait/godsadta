@@ -1,7 +1,7 @@
 // Package slice provides functions associated with the slice data structure
 package slice
 
-func AreSlicesEqual(a []int, b []int) bool {
+func AreSlicesEqual[T comparable](a []T, b []T) bool {
 	if len(a) != len(b) {
 		return false
 	}

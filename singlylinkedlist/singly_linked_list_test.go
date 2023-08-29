@@ -7,7 +7,7 @@ import (
 )
 
 func TestShouldBeCorrectValForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
+	n := NewSinglyLinkedListNode[int](5)
 	want := 5
 	result := n.Val
 	if want != result {
@@ -16,7 +16,7 @@ func TestShouldBeCorrectValForNewlyInstantiatedSinglyLinkedListNode(t *testing.T
 }
 
 func TestShouldBeNilNextForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
+	n := NewSinglyLinkedListNode[int](5)
 	result := n.Next
 	if result != nil {
 		t.Fatalf("Want %v. Got %v.\n", nil, result)
@@ -24,7 +24,7 @@ func TestShouldBeNilNextForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
 }
 
 func TestShouldInsertAfterAtTail(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
+	n := NewSinglyLinkedListNode[int](5)
 	n.InsertAfter(6)
 	result := convertLinkedListValsToSlice(n)
 	want := []int{5, 6}
@@ -33,8 +33,18 @@ func TestShouldInsertAfterAtTail(t *testing.T) {
 	}
 }
 
-func convertLinkedListValsToSlice(n *SinglyLinkedListNode) []int {
-	result := []int{}
+func TestShouldInsertStringAfterAtTail(t *testing.T) {
+	n := NewSinglyLinkedListNode[string]("five")
+	n.InsertAfter("six")
+	result := convertLinkedListValsToSlice(n)
+	want := []string{"five", "six"}
+	if !slice.AreSlicesEqual(result, want) {
+		t.Fatalf("Linked lists are not equal.")
+	}
+}
+
+func convertLinkedListValsToSlice[T any](n *SinglyLinkedListNode[T]) []T {
+	result := []T{}
 	for n != nil {
 		result = append(result, n.Val)
 		n = n.Next
@@ -43,7 +53,7 @@ func convertLinkedListValsToSlice(n *SinglyLinkedListNode) []int {
 }
 
 func TestShouldInsertAfterInMiddleOfList(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
+	n := NewSinglyLinkedListNode[int](5)
 	n.Next = NewSinglyLinkedListNode(7)
 	n.InsertAfter(6)
 	result := convertLinkedListValsToSlice(n)
@@ -54,7 +64,7 @@ func TestShouldInsertAfterInMiddleOfList(t *testing.T) {
 }
 
 func TestShouldRemoveSinglyLinkedListWithOneNode(t *testing.T) {
-	n := NewSinglyLinkedListNode(5)
+	n := NewSinglyLinkedListNode[int](5)
 	n.InsertAfter(6)
 	n.RemoveNext()
 	result := convertLinkedListValsToSlice(n)
@@ -62,5 +72,4 @@ func TestShouldRemoveSinglyLinkedListWithOneNode(t *testing.T) {
 	if !slice.AreSlicesEqual(result, want) {
 		t.Fatalf("Linked lists are not equal.")
 	}
-
 }
