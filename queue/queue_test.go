@@ -71,3 +71,29 @@ func TestShouldRemoveStringThatWasAddedEarliest(t *testing.T) {
 		t.Fatalf("Want %v. Got %v\n", want, result)
 	}
 }
+
+func TestShouldRemoveMultipleStringsFromQueue(t *testing.T) {
+	q := NewQueue[string]()
+	q.Add("five")
+	q.Add("six")
+	q.Add("seven")
+	result, _ := q.Remove()
+	want := "five"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+	result, _ = q.Remove()
+	want = "six"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+	result, _ = q.Remove()
+	want = "seven"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+	_, ok := q.Remove()
+	if ok {
+		t.Fatalf("Want false. Got true.")
+	}
+}
