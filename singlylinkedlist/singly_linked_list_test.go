@@ -54,6 +54,33 @@ func TestShouldRemoveMultipleItemsOfSinglyLinkedList(t *testing.T) {
 	}
 }
 
+func TestShouldPeekFromNonEmptySinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.Insert(5)
+	result, _ := d.Peek()
+	want := 5
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}
+
+func TestShouldBeTrueWhenPeekingFromNonEmptySinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.Insert(5)
+	_, ok := d.Peek()
+	if !ok {
+		t.Fatalf("Want true. Got false.")
+	}
+}
+
+func TestShouldBeFalseWhenPeekingFromNonEmptySinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	_, ok := d.Peek()
+	if ok {
+		t.Fatalf("Want false. Got true.")
+	}
+}
+
 func TestShouldBeTrueWhenRemovingFromNonEmptySinglyLinkedList(t *testing.T) {
 	d := NewSinglyLinkedList[int]()
 	d.Insert(1)

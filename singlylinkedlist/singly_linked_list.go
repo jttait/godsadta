@@ -44,3 +44,11 @@ func (q *SinglyLinkedList[T]) Remove() (T, bool) {
 	q.size -= 1
 	return result, true
 }
+
+func (q *SinglyLinkedList[T]) Peek() (T, bool) {
+	if q.size == 0 {
+		var zeroValue T
+		return zeroValue, false
+	}
+	return q.dummyHead.Next.Val, true
+}
