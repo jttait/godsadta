@@ -1,75 +1,72 @@
 package singlylinkedlist
 
-import (
-	"testing"
+import "testing"
 
-	"github.com/jttait/godsa/slice"
-)
-
-func TestShouldBeCorrectValForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
-	n := NewSinglyLinkedListNode[int](5)
-	want := 5
-	result := n.Val
-	if want != result {
-		t.Fatalf("Want %v. Got %v.\n", result, want)
+func TestShouldBeSizeZeroForNewlyInstantiatedSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldBeNilNextForNewlyInstantiatedSinglyLinkedListNode(t *testing.T) {
-	n := NewSinglyLinkedListNode[int](5)
-	result := n.Next
-	if result != nil {
-		t.Fatalf("Want %v. Got %v.\n", nil, result)
+func TestShouldBeSizeOneAfterInsertingIntoSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.Insert(5)
+	result := d.Size()
+	want := 1
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldInsertAfterAtTail(t *testing.T) {
-	n := NewSinglyLinkedListNode[int](5)
-	n.InsertAfter(6)
-	result := convertLinkedListValsToSlice(n)
-	want := []int{5, 6}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeSizeZeroAfterInsertingAndRemovingFromSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.Insert(5)
+	_, _ = d.Remove()
+	result := d.Size()
+	want := 0
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func TestShouldInsertStringAfterAtTail(t *testing.T) {
-	n := NewSinglyLinkedListNode[string]("five")
-	n.InsertAfter("six")
-	result := convertLinkedListValsToSlice(n)
-	want := []string{"five", "six"}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldRemoveMultipleItemsOfSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.Insert(3)
+	d.Insert(2)
+	d.Insert(1)
+	result, _ := d.Remove()
+	want := 1
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.Remove()
+	want = 2
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.Remove()
+	want = 3
+	if result != want {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
 
-func convertLinkedListValsToSlice[T any](n *SinglyLinkedListNode[T]) []T {
-	result := []T{}
-	for n != nil {
-		result = append(result, n.Val)
-		n = n.Next
-	}
-	return result
-}
-
-func TestShouldInsertAfterInMiddleOfList(t *testing.T) {
-	n := NewSinglyLinkedListNode[int](5)
-	n.Next = NewSinglyLinkedListNode(7)
-	n.InsertAfter(6)
-	result := convertLinkedListValsToSlice(n)
-	want := []int{5, 6, 7}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeTrueWhenRemovingFromNonEmptySinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.Insert(1)
+	_, ok := d.Remove()
+	if !ok {
+		t.Fatalf("Got false. Want true.")
 	}
 }
 
-func TestShouldRemoveSinglyLinkedListWithOneNode(t *testing.T) {
-	n := NewSinglyLinkedListNode[int](5)
-	n.InsertAfter(6)
-	n.RemoveNext()
-	result := convertLinkedListValsToSlice(n)
-	want := []int{5}
-	if !slice.AreSlicesEqual(result, want) {
-		t.Fatalf("Linked lists are not equal.")
+func TestShouldBeFalseWhenRemovingFromEmptySinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	_, ok := d.Remove()
+	if ok {
+		t.Fatalf("Got true. Want false.")
 	}
 }
