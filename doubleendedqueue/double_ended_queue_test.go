@@ -41,55 +41,69 @@ func TestShouldBeFalseWhenRemovingFromEmptyDoubleEndedQueue(t *testing.T) {
 }
 
 func TestShouldBeTrueWhenRemovingFromNonEmptyDoubleEndedQueue(t *testing.T) {
+	q := createDoubleEndedQueueOfIntegers()
 	want := true
-	q := NewDoubleEndedQueue[int]()
-	q.InsertFront(5)
 	_, ok := q.RemoveFront()
 	if want != ok {
 		t.Fatalf("Want %v. Got %v\n", want, ok)
 	}
 }
 
-func TestShouldRemoveIntegerThatWasAddedEarliest(t *testing.T) {
-	want := 5
+func TestShouldRemoveFrontFromDoubleEndedQueueOfIntergers(t *testing.T) {
+	q := createDoubleEndedQueueOfIntegers()
+	want := 1
+	result, _ := q.RemoveFront()
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+}
+
+func TestShouldRemoveLastFromDoubleEndedQueueOfStrings(t *testing.T) {
+	q := createDoubleEndedQueueOfStrings()
+	result, _ := q.RemoveLast()
+	want := "five"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+	result, _ = q.RemoveLast()
+	want = "four"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+
+}
+
+func TestShouldRemoveFrontFromDoubleEndedQueueOfStrings(t *testing.T) {
+	q := createDoubleEndedQueueOfStrings()
+	result, _ := q.RemoveFront()
+	want := "one"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+	result, _ = q.RemoveFront()
+	want = "two"
+	if want != result {
+		t.Fatalf("Want %v. Got %v\n", want, result)
+	}
+
+}
+
+func createDoubleEndedQueueOfIntegers() *DoubleEndedQueue[int] {
 	q := NewDoubleEndedQueue[int]()
 	q.InsertFront(5)
-	q.InsertFront(6)
-	result, _ := q.RemoveFront()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	q.InsertFront(4)
+	q.InsertFront(3)
+	q.InsertFront(2)
+	q.InsertFront(1)
+	return q
 }
 
-func TestShouldRemoveStringThatWasAddedEarliest(t *testing.T) {
-	want := "five"
+func createDoubleEndedQueueOfStrings() *DoubleEndedQueue[string] {
 	q := NewDoubleEndedQueue[string]()
 	q.InsertFront("five")
-	q.InsertFront("six")
-	result, _ := q.RemoveFront()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
-}
-
-func TestShouldRemoveStringThatWasAddedLatestWhenRemovingLast(t *testing.T) {
-	q := NewDoubleEndedQueue[string]()
-	q.InsertFront("five")
-	q.InsertFront("six")
-	result, _ := q.RemoveLast()
-	want := "six"
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
-}
-
-func TestShouldRemoveStringThatWasAddedLatestToEndWhenRemovingFirst(t *testing.T) {
-	q := NewDoubleEndedQueue[string]()
-	q.InsertLast("six")
-	q.InsertLast("five")
-	result, _ := q.RemoveFirst()
-	want := "six"
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	q.InsertFront("four")
+	q.InsertFront("three")
+	q.InsertFront("two")
+	q.InsertFront("one")
+	return q
 }
