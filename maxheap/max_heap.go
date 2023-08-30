@@ -19,22 +19,15 @@ func NewMaxHeap[T cmp.Ordered](i ...T) *MaxHeap[T] {
 	return &m
 }
 
-func findParentIndex(index int) int {
-	if index%2 == 0 {
-		return (index - 2) / 2
-	}
-	return (index - 1) / 2
-}
-
 // Insert inserts the item into the max heap.
 func (m *MaxHeap[T]) Insert(i T) {
 	m.array = append(m.array, i)
 	index := len(m.array) - 1
-	parentIndex := findParentIndex(index)
+	parentIndex := (index - 1) / 2
 	for parentIndex >= 0 && m.array[index] > m.array[parentIndex] {
 		swap(index, parentIndex, &m.array)
 		index = parentIndex
-		parentIndex = findParentIndex(index)
+		parentIndex = (index - 1) / 2
 	}
 }
 

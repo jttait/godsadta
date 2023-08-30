@@ -22,12 +22,12 @@ func (q *Queue[T]) Size() int {
 	return q.list.Size()
 }
 
-// Add inserts a new item at the end of the queue.
+// Add inserts a new item at the end of the queue. Time complexity is O(1).
 func (q *Queue[T]) Insert(i T) {
 	q.list.InsertLast(i)
 }
 
-// Remove removes and returns the item at the head of the queue.
+// Remove removes and returns the item at the head of the queue. Time complexity is O(1).
 func (q *Queue[T]) Remove() (T, bool) {
 	return q.list.RemoveFront()
 }
