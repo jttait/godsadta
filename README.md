@@ -4,12 +4,14 @@ Data structures and algorithms implemented in Go.
 
 ## LinkedList[T any]
 
-Time complexity:
+Time:
 
-| Implementation   | InsertFront  | InsertLast   | RemoveFront  | RemoveLast   | PeekFront    | PeekLast     |
-| ---------------- | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
-| SinglyLinkedList | O(1) to O(1) | O(n) to O(n) | O(1) to O(1) | O(n) to O(n) | O(1) to O(1) | O(n) to O(n) |
-| DoublyLinkedList | O(1) to O(1) | O(1) to O(1) | O(1) to O(1) | O(1) to O(1) | O(1) to O(1) | O(1) to O(1) |
+| Implementation   | InsertFront | InsertLast | RemoveFront | RemoveLast | PeekFront  | PeekLast   | Size       |
+| ---------------- | ----------- | ---------- | ----------- | ---------- | ---------- | ---------- | ---------- |
+| SinglyLinkedList | O(1), O(1)  | O(n), O(n) | O(1), O(1)  | O(n), O(n) | O(1), O(1) | O(n), O(n) | O(n), O(n) |
+| DoublyLinkedList | O(1), O(1)  | O(1), O(1) | O(1), O(1)  | O(1), O(1) | O(1), O(1) | O(1), O(1) | O(n), O(n) |
+
+Space:
 
 ## MinHeap[T cmp.Ordered]
 
