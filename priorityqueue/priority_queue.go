@@ -16,6 +16,7 @@ type PriorityQueue[T cmp.Ordered] struct {
 // NewPriorityQueue instantiates a priority queue and returns a pointer to it.
 func NewPriorityQueue[T cmp.Ordered]() *PriorityQueue[T] {
 	q := PriorityQueue[T]{}
+	q.maxheap = maxheap.NewMaxHeapArray[T]()
 	return &q
 }
 
@@ -33,11 +34,7 @@ func (q *PriorityQueue[T]) Add(i T) {
 // priority queue was empty. In cases where the priority queue was empty then the zero value of the
 // type will be returned but this is meaningless.
 func (q *PriorityQueue[T]) Poll() (T, bool) {
-	if q.Size() == 0 {
-		var zeroValue T
-		return zeroValue, false
-	}
-	return q.maxheap.Extract(), true
+	return q.maxheap.Extract()
 }
 
 // Peek returns the highest-priority item in the priority queue but, unlike poll, does not remove it.
@@ -45,9 +42,5 @@ func (q *PriorityQueue[T]) Poll() (T, bool) {
 // cases where the priority queue was empty, the zero value for the type will be returned but this is
 // meaningless.
 func (q *PriorityQueue[T]) Peek() (T, bool) {
-	if q.Size() == 0 {
-		var zeroValue T
-		return zeroValue, false
-	}
-	return q.maxheap.Peek(), true
+	return q.maxheap.Peek()
 }

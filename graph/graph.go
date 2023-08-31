@@ -9,13 +9,13 @@ import (
 
 // Graph is a data structure comprising vertices and edges connecting these vertices.
 type Graph struct {
-	adjacencyList map[int]*set.Set[int]
+	adjacencyList map[int]set.Set[int]
 }
 
 // NewGraph instantiates a graph and returns a pointer to it.
 func NewGraph() *Graph {
 	g := Graph{}
-	g.adjacencyList = make(map[int]*set.Set[int])
+	g.adjacencyList = make(map[int]set.Set[int])
 	return &g
 }
 
@@ -25,7 +25,7 @@ func NewGraph() *Graph {
 func (g *Graph) AddVertex(i int) bool {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		g.adjacencyList[i] = set.NewSet[int]()
+		g.adjacencyList[i] = set.NewMapSet[int]()
 		return true
 	}
 	return false
@@ -55,7 +55,7 @@ func (g *Graph) AddEdge(i, j int) (bool, error) {
 	if !ok {
 		return false, fmt.Errorf("Vertex %v not in graph.", j)
 	}
-	result := g.adjacencyList[i].Add(j)
+	result := g.adjacencyList[i].Insert(j)
 	return result, nil
 }
 
@@ -76,10 +76,10 @@ func (g *Graph) RemoveEdge(i, j int) bool {
 
 // Neighbors returns a set of nodes that are connected to the current node by an edge. It returns an
 // error if the vertex given does not exist in the graph.
-func (g *Graph) Neighbors(i int) (*set.Set[int], error) {
+func (g *Graph) Neighbors(i int) (set.Set[int], error) {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		return set.NewSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
+		return set.NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
 	}
 	return g.adjacencyList[i], nil
 }

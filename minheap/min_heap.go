@@ -20,9 +20,6 @@ func NewMinHeap[T cmp.Ordered](i ...T) *MinHeap[T] {
 }
 
 func findParentIndex(index int) int {
-	if index%2 == 0 {
-		return (index - 2) / 2
-	}
 	return (index - 1) / 2
 }
 
