@@ -1,11 +1,9 @@
 package set
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestShouldBeSizeZeroForNewlyInstantiatedSet(t *testing.T) {
-	s := NewSet[int]()
+	s := NewMapSet[int]()
 	result := s.Size()
 	want := 0
 	if want != result {
@@ -14,8 +12,8 @@ func TestShouldBeSizeZeroForNewlyInstantiatedSet(t *testing.T) {
 }
 
 func TestShouldBeSizeOneAfterItemIsAddedToNewlyInstantiatedSet(t *testing.T) {
-	s := NewSet[int]()
-	_ = s.Add(5)
+	s := NewMapSet[int]()
+	_ = s.Insert(5)
 	result := s.Size()
 	want := 1
 	if want != result {
@@ -24,9 +22,9 @@ func TestShouldBeSizeOneAfterItemIsAddedToNewlyInstantiatedSet(t *testing.T) {
 }
 
 func TestShouldBeSizeTwoAfterAddingTwoDifferentItems(t *testing.T) {
-	s := NewSet[int]()
-	_ = s.Add(5)
-	_ = s.Add(6)
+	s := NewMapSet[int]()
+	_ = s.Insert(5)
+	_ = s.Insert(6)
 	result := s.Size()
 	want := 2
 	if want != result {
@@ -35,9 +33,9 @@ func TestShouldBeSizeTwoAfterAddingTwoDifferentItems(t *testing.T) {
 }
 
 func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
-	s := NewSet[int]()
-	_ = s.Add(5)
-	_ = s.Add(5)
+	s := NewMapSet[int]()
+	_ = s.Insert(5)
+	_ = s.Insert(5)
 	result := s.Size()
 	want := 1
 	if want != result {
@@ -46,8 +44,8 @@ func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
 }
 
 func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
-	s := NewSet[int]()
-	_ = s.Add(5)
+	s := NewMapSet[int]()
+	_ = s.Insert(5)
 	_ = s.Remove(5)
 	result := s.Size()
 	want := 0
@@ -57,8 +55,8 @@ func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
 }
 
 func TestShouldBeTrueIfAddingItemThatIsNotAlreadyInSet(t *testing.T) {
-	s := NewSet[int]()
-	ok := s.Add(5)
+	s := NewMapSet[int]()
+	ok := s.Insert(5)
 	want := true
 	if want != ok {
 		t.Fatalf("Want %v. Got %v\n", want, ok)
@@ -66,8 +64,8 @@ func TestShouldBeTrueIfAddingItemThatIsNotAlreadyInSet(t *testing.T) {
 }
 
 func TestShouldBeFalseIfAddingItemThatIsAlreadyInSet(t *testing.T) {
-	s := NewSet[int](5)
-	ok := s.Add(5)
+	s := NewMapSet[int](5)
+	ok := s.Insert(5)
 	want := false
 	if want != ok {
 		t.Fatalf("Want %v. Got %v\n", want, ok)
@@ -75,7 +73,7 @@ func TestShouldBeFalseIfAddingItemThatIsAlreadyInSet(t *testing.T) {
 }
 
 func TestShouldBeFalseIfRemovingItemThatIsNotInSet(t *testing.T) {
-	s := NewSet[int]()
+	s := NewMapSet[int]()
 	ok := s.Remove(5)
 	want := false
 	if want != ok {
@@ -84,7 +82,7 @@ func TestShouldBeFalseIfRemovingItemThatIsNotInSet(t *testing.T) {
 }
 
 func TestShouldBeTrueIfRemovingItemThatIsInSet(t *testing.T) {
-	s := NewSet[int](5)
+	s := NewMapSet[int](5)
 	ok := s.Remove(5)
 	want := true
 	if want != ok {
@@ -93,7 +91,7 @@ func TestShouldBeTrueIfRemovingItemThatIsInSet(t *testing.T) {
 }
 
 func TestShouldBeTrueIfSetContainsItem(t *testing.T) {
-	s := NewSet[int](5)
+	s := NewMapSet[int](5)
 	result := s.Contains(5)
 	want := true
 	if want != result {
@@ -102,7 +100,7 @@ func TestShouldBeTrueIfSetContainsItem(t *testing.T) {
 }
 
 func TestShouldBeFalseIfSetDoesNotContainItem(t *testing.T) {
-	s := NewSet[int]()
+	s := NewMapSet[int]()
 	result := s.Contains(5)
 	want := false
 	if want != result {
@@ -111,8 +109,8 @@ func TestShouldBeFalseIfSetDoesNotContainItem(t *testing.T) {
 }
 
 func TestShouldBeEqualForTwoEmptySets(t *testing.T) {
-	s := NewSet[int]()
-	u := NewSet[int]()
+	s := NewMapSet[int]()
+	u := NewMapSet[int]()
 	result := s.Equals(u)
 	want := true
 	if want != result {
@@ -121,8 +119,8 @@ func TestShouldBeEqualForTwoEmptySets(t *testing.T) {
 }
 
 func TestShouldBeEqualForTwoIdenticalSets(t *testing.T) {
-	s := NewSet[int](5)
-	u := NewSet[int](5)
+	s := NewMapSet[int](5)
+	u := NewMapSet[int](5)
 	result := s.Equals(u)
 	want := true
 	if want != result {
@@ -131,8 +129,8 @@ func TestShouldBeEqualForTwoIdenticalSets(t *testing.T) {
 }
 
 func TestShouldBeNotEqualForTwoDifferentSets(t *testing.T) {
-	s := NewSet[int](5)
-	u := NewSet[int](6)
+	s := NewMapSet[int](5)
+	u := NewMapSet[int](6)
 	result := s.Equals(u)
 	want := false
 	if want != result {
@@ -141,32 +139,31 @@ func TestShouldBeNotEqualForTwoDifferentSets(t *testing.T) {
 }
 
 func TestShouldContainAllItemsFromBothSetsAfterUnion(t *testing.T) {
-	s := NewSet[int](1, 2)
-	u := NewSet[int](3, 4)
+	s := NewMapSet[int](1, 2)
+	u := NewMapSet[int](3, 4)
 	result := s.Union(u)
-	want := NewSet[int](1, 2, 3, 4)
+	want := NewMapSet[int](1, 2, 3, 4)
 	if !result.Equals(want) {
 		t.Fatalf("Union does not contain all items.")
 	}
 }
 
 func TestShouldContainOnlyItemsThatAreInBothSetsAfterIntersection(t *testing.T) {
-	s := NewSet[int](1, 2, 3, 4, 5)
-	u := NewSet[int](4, 5, 6, 7, 8)
+	s := NewMapSet[int](1, 2, 3, 4, 5)
+	u := NewMapSet[int](4, 5, 6, 7, 8)
 	result := s.Intersection(u)
-	want := NewSet[int](4, 5)
+	want := NewMapSet[int](4, 5)
 	if !result.Equals(want) {
 		t.Fatalf("Intersection does not only contain items in both sets.")
 	}
 }
 
 func TestShouldContainOnlyItemsThatAreInFirstSetButNotSecondAfterDifference(t *testing.T) {
-	s := NewSet[int](1, 2, 3, 4, 5)
-	u := NewSet[int](4, 5, 6, 7, 8)
+	s := NewMapSet[int](1, 2, 3, 4, 5)
+	u := NewMapSet[int](4, 5, 6, 7, 8)
 	result := s.Difference(u)
-	want := NewSet[int](1, 2, 3)
+	want := NewMapSet[int](1, 2, 3)
 	if !result.Equals(want) {
 		t.Fatalf("Difference does not only contain items in first set but not second.")
 	}
-
 }
