@@ -2,17 +2,17 @@
 // methods
 package doubleendedqueue
 
-import "github.com/jttait/godsa/doublylinkedlist"
+import "github.com/jttait/godsa/linkedlist"
 
 // Double-ended queue enables inserting and polling from either end
 type DoubleEndedQueue[T any] struct {
-	list *doublylinkedlist.DoublyLinkedList[T]
+	list *linkedlist.DoublyLinkedList[T]
 }
 
 // NewDoubleEndedQueue instantiates a new double-ended queue and returns a pointer to it.
 func NewDoubleEndedQueue[T any]() *DoubleEndedQueue[T] {
 	q := DoubleEndedQueue[T]{}
-	q.list = doublylinkedlist.NewDoublyLinkedList[T]()
+	q.list = linkedlist.NewDoublyLinkedList[T]()
 	return &q
 }
 
