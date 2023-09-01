@@ -97,3 +97,45 @@ func TestShouldBeFalseWhenRemovingFromEmptySinglyLinkedList(t *testing.T) {
 		t.Fatalf("Got true. Want false.")
 	}
 }
+
+func TestShouldBeFalseWhenGettingFromEmptySinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	_, ok := d.Get(0)
+	if ok {
+		t.Fatalf("Got true. Want false.")
+	}
+}
+
+func TestShouldBeFalseWhenGettingFromIndexOutsideSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.InsertFront(5)
+	_, ok := d.Get(1)
+	if ok {
+		t.Fatalf("Got true. Want false.")
+	}
+}
+
+func TestShouldBeTrueWhenGettingFromIndexInsideSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.InsertFront(5)
+	_, ok := d.Get(0)
+	if !ok {
+		t.Fatalf("Got false. Want true.")
+	}
+}
+
+func TestShouldGetFromIndexInSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int]()
+	d.InsertFront(5)
+	d.InsertFront(4)
+	result, _ := d.Get(0)
+	want := 4
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.Get(1)
+	want = 5
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}

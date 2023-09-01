@@ -103,3 +103,21 @@ func (q *SinglyLinkedList[T]) PeekLast() (T, bool) {
 	}
 	return current.Val, true
 }
+
+func (d *SinglyLinkedList[T]) Get(index int) (T, bool) {
+	if d.dummyHead.Next == nil {
+		var zeroValue T
+		return zeroValue, false
+	}
+	current := d.dummyHead.Next
+	currentIndex := 0
+	for currentIndex < index {
+		currentIndex += 1
+		current = current.Next
+	}
+	if current == nil {
+		var zeroValue T
+		return zeroValue, false
+	}
+	return current.Val, true
+}

@@ -152,3 +152,46 @@ func TestShouldBeFalseWhenRemoveLastForEmptyDoublyLinkedList(t *testing.T) {
 		t.Fatalf("Got true. Want false.")
 	}
 }
+
+func TestShouldBeFalseWhenGettingFromEmptyDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	_, ok := d.Get(0)
+	if ok {
+		t.Fatalf("Got true. Want false.")
+	}
+}
+
+func TestShouldBeFalseWhenGettingFromIndexOutsideDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(5)
+	_, ok := d.Get(1)
+	if ok {
+		t.Fatalf("Got true. Want false.")
+	}
+}
+
+func TestShouldBeTrueWhenGettingFromIndexInsideDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(5)
+	_, ok := d.Get(0)
+	if !ok {
+		t.Fatalf("Got false. Want true.")
+	}
+}
+
+func TestShouldGetFromIndexInDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int]()
+	d.InsertFront(5)
+	d.InsertFront(4)
+	result, _ := d.Get(0)
+	want := 4
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = d.Get(1)
+	want = 5
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+
+}
