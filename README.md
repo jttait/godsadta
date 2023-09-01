@@ -66,7 +66,14 @@ Time:
 | Pop            | O(1)            |
 | Peek           | O(1)            |
 
+## Queue[T any]
+
+| Implementation | QueueLinkedList |
+| -------------- | --------------- |
+| Size           | O(n)            |
+| Insert         | O(1)            |
+| Remove         | O(1)            |
+
 - Double-ended queue
 - Graph
 - Priority queue
-- Queue
