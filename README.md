@@ -57,8 +57,16 @@ Time:
 | Insert         | O(n)      | O(n)           |
 | Get            | O(1)      | O(n)           |
 
+## Stack[T any]
+
+| Implementation | LinkedListStack |
+| -------------- | --------------- |
+| Size           | O(n)            |
+| Push           | O(1)            |
+| Pop            | O(1)            |
+| Peek           | O(1)            |
+
 - Double-ended queue
 - Graph
 - Priority queue
 - Queue
-- Stack
