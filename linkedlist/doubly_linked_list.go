@@ -20,7 +20,6 @@ func NewDoublyLinkedListNode[T any](i T) *DoublyLinkedListNode[T] {
 type DoublyLinkedList[T any] struct {
 	dummyHead *DoublyLinkedListNode[T]
 	dummyTail *DoublyLinkedListNode[T]
-	size      int
 }
 
 // NewDoublyLinkedList instantiates a new doubly-linked list and returns a pointer to it.
@@ -31,13 +30,18 @@ func NewDoublyLinkedList[T any]() *DoublyLinkedList[T] {
 	q.dummyTail = NewDoublyLinkedListNode[T](zeroValue)
 	q.dummyHead.Next = q.dummyTail
 	q.dummyTail.Prev = q.dummyHead
-	q.size = 0
 	return &q
 }
 
 // Size returns the number of items in the list.
 func (q *DoublyLinkedList[T]) Size() int {
-	return q.size
+	result := 0
+	current := q.dummyHead.Next
+	for current != q.dummyTail {
+		result += 1
+		current = current.Next
+	}
+	return result
 }
 
 // InsertFront inserts a new item at the front of the list.
@@ -49,8 +53,6 @@ func (q *DoublyLinkedList[T]) InsertFront(i T) {
 	insertedNode.Next = currentHead
 	currentHead.Prev = insertedNode
 	q.dummyHead.Next = insertedNode
-
-	q.size += 1
 }
 
 // InsertLast inserts a new item at the end of the list.
@@ -62,13 +64,11 @@ func (q *DoublyLinkedList[T]) InsertLast(i T) {
 	insertedNode.Prev = currentTail
 	currentTail.Next = insertedNode
 	q.dummyTail.Prev = insertedNode
-
-	q.size += 1
 }
 
 // RemoveFront removes and returns the item at the front of the doubly-linked list.
 func (q *DoublyLinkedList[T]) RemoveFront() (T, bool) {
-	if q.size == 0 {
+	if q.dummyHead.Next == q.dummyTail {
 		var zeroValue T
 		return zeroValue, false
 	}
@@ -77,13 +77,12 @@ func (q *DoublyLinkedList[T]) RemoveFront() (T, bool) {
 	newHead := head.Next
 	q.dummyHead.Next = newHead
 	newHead.Prev = q.dummyHead
-	q.size -= 1
 	return result, true
 }
 
 // RemoveLast removes and returns the item at the end of the doubly-linked list.
 func (q *DoublyLinkedList[T]) RemoveLast() (T, bool) {
-	if q.size == 0 {
+	if q.dummyHead.Next == q.dummyTail {
 		var zeroValue T
 		return zeroValue, false
 	}
@@ -92,6 +91,23 @@ func (q *DoublyLinkedList[T]) RemoveLast() (T, bool) {
 	newTail := tail.Prev
 	q.dummyTail.Prev = newTail
 	newTail.Next = q.dummyTail
-	q.size -= 1
 	return result, true
+}
+
+func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
+	if d.dummyHead.Next == d.dummyTail {
+		var zeroValue T
+		return zeroValue, false
+	}
+	current := d.dummyHead.Next
+	currentIndex := 0
+	for currentIndex < index {
+		currentIndex += 1
+		current = current.Next
+	}
+	if current == d.dummyTail {
+		var zeroValue T
+		return zeroValue, false
+	}
+	return current.Val, true
 }

@@ -8,4 +8,5 @@ type LinkedList[T any] interface {
 	RemoveLast() (T, bool)
 	PeekFront() (T, bool)
 	PeekLast() (T, bool)
+	Get(int) (T, bool)
 }
