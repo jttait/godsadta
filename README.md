@@ -44,6 +44,19 @@ Time:
 | Intersection   | O(n)   |
 | Difference     | O(m.n) |
 
+## List[T any]
+
+Time:
+
+| Implementation | ArrayList | LinkedListList |             
+| -------------- | --------- | -------------- |
+| Size           | O(1)      | O(n)           |
+| Prepend        | O(n)      | O(1)           |
+| Append         | O(1),O(n) | O(1)           |
+| Remove         | O(n)      | O(n)           |
+| Insert         | O(n)      | O(n)           |
+| Get            | O(1)      | O(n)           |
+
 - Double-ended queue
 - Graph
 - Priority queue
