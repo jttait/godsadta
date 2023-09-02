@@ -20,6 +20,11 @@ Space:
 
 ## MinHeap[T cmp.Ordered]
 
+| Implementation | MinHeapArray |
+| -------------- | ------------ |
+| Insert         |
+| Extract        |
+
 ## MaxHeap[T cmp.Ordered]
 
 ## Trie
