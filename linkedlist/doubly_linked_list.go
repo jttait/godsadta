@@ -69,6 +69,25 @@ func (q *DoublyLinkedList[T]) InsertLast(i T) {
 	q.dummyTail.Prev = insertedNode
 }
 
+// Insert inserts a new item at the given index of the list. It returns a Boolean if the index is
+// true if the index was within the bounds of the list and it was possible to insert the item.
+func (l *DoublyLinkedList[T]) Insert(index int, item T) bool {
+	current := l.dummyHead.Next
+	currentIndex := 0
+	for current != l.dummyTail {
+		if currentIndex == index {
+			newNode := NewDoublyLinkedListNode[T](current.Val)
+			newNode.Next = current.Next
+			current.Next = newNode
+			current.Val = item
+			return true
+		}
+		index += 1
+		current = current.Next
+	}
+	return false
+}
+
 func (q *DoublyLinkedList[T]) PeekFront() (T, bool) {
 	if q.dummyHead.Next == q.dummyTail {
 		var zeroValue T
@@ -117,12 +136,18 @@ func (q *DoublyLinkedList[T]) RemoveLast() (T, bool) {
 	return result, true
 }
 
-func (l *DoublyLinkedList[T]) Insert(index int, item T) bool {
-	return true
-}
-
 func (l *DoublyLinkedList[T]) Remove(index int) bool {
-	return true
+	current := l.dummyHead.Next
+	currentIndex := 0
+	for current != l.dummyTail {
+		if currentIndex == index {
+			current.Prev.Next = current.Next
+		}
+		index += 1
+		current = current.Next
+		return true
+	}
+	return false
 }
 
 func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {

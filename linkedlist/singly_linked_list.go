@@ -66,11 +66,36 @@ func (l *SinglyLinkedList[T]) InsertLast(i T) {
 // Insert inserts a new item at the given index of the list. It returns a Boolean if the index is
 // true if the index was within the bounds of the list and it was possible to insert the item.
 func (l *SinglyLinkedList[T]) Insert(index int, item T) bool {
-	return true
+	current := l.dummyHead.Next
+	currentIndex := 0
+	for current != nil {
+		if currentIndex == index {
+			newNode := NewSinglyLinkedListNode[T](current.Val)
+			newNode.Next = current.Next
+			current.Val = item
+			current.Next = newNode
+			return true
+		}
+		index += 1
+		current = current.Next
+	}
+	return false
 }
 
 func (l *SinglyLinkedList[T]) Remove(index int) bool {
-	return true
+	previous := l.dummyHead
+	current := l.dummyHead.Next
+	currentIndex := 0
+	for current != nil {
+		if currentIndex == index {
+			previous.Next = current.Next
+		}
+		index += 1
+		current = current.Next
+		previous = previous.Next
+		return true
+	}
+	return false
 }
 
 // RemoveFront removes and returns the item at the front of the singly-linked list.

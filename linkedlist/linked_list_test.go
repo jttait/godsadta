@@ -127,7 +127,7 @@ func TestShouldBeFalseWhenPeekingFromNonEmptyLinkedList(t *testing.T) {
 	}
 }
 
-func TestShouldBeTrueWhenRemovingFromNonEmptyLinkedList(t *testing.T) {
+func TestShouldBeTrueWhenRemovingFrontFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		_, ok := ll.RemoveFront()
@@ -137,7 +137,7 @@ func TestShouldBeTrueWhenRemovingFromNonEmptyLinkedList(t *testing.T) {
 	}
 }
 
-func TestShouldBeFalseWhenRemovingFromEmptyLinkedList(t *testing.T) {
+func TestShouldBeFalseWhenRemovingFrontFromEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		_, ok := ll.RemoveFront()
 		if ok {
@@ -188,6 +188,69 @@ func TestShouldGetFromIndexInLinkedList(t *testing.T) {
 		want = 5
 		if want != result {
 			t.Fatalf("Got %v. Want %v.\n", result, want)
+		}
+	}
+}
+
+func TestShouldInsertIntoLinkedList(t *testing.T) {
+	for _, ll := range getImplementations() {
+		ll.InsertFront(5)
+		_ = ll.Insert(0, 6)
+		result, _ := ll.Get(0)
+		want := 6
+		if want != result {
+			t.Fatalf("Got %v. Want %v. LL Type: %T\n", result, want, ll)
+		}
+	}
+}
+
+func TestShouldRemoveFromLinkedList(t *testing.T) {
+	for _, ll := range getImplementations() {
+		ll.InsertLast(5)
+		ll.InsertLast(6)
+		_ = ll.Remove(0)
+		result, _ := ll.Get(0)
+		want := 6
+		if want != result {
+			t.Fatalf("Got %v. Want %v. LL Type: %T\n", result, want, ll)
+		}
+	}
+}
+
+func TestShouldBeTrueWhenRemovingFromLinkedList(t *testing.T) {
+	for _, ll := range getImplementations() {
+		ll.InsertFront(5)
+		ok := ll.Remove(0)
+		if !ok {
+			t.Fatalf("Got false. Want true. LL Type: %T\n", ll)
+		}
+	}
+}
+
+func TestShouldBeFalseWhenRemovingFromEmptyLinkedList(t *testing.T) {
+	for _, ll := range getImplementations() {
+		ok := ll.Remove(0)
+		if ok {
+			t.Fatalf("Got true. Want false. LL Type: %T\n", ll)
+		}
+	}
+}
+
+func TestShouldBeTrueWhenInsertingIntoLinkedList(t *testing.T) {
+	for _, ll := range getImplementations() {
+		ll.InsertFront(5)
+		ok := ll.Insert(0, 6)
+		if !ok {
+			t.Fatalf("Got false. Want true. LL Type: %T\n", ll)
+		}
+	}
+}
+
+func TestShouldBeFalseWhenInsertingIntoEmptyLinkedList(t *testing.T) {
+	for _, ll := range getImplementations() {
+		ok := ll.Insert(0, 6)
+		if ok {
+			t.Fatalf("Got true. Want false. LL Type: %T\n", ll)
 		}
 	}
 }
