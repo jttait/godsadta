@@ -142,7 +142,7 @@ func TestShouldGetFromIndexInSinglyLinkedList(t *testing.T) {
 
 func TestShouldApplyMapToSinglyLinkedList(t *testing.T) {
 	d := NewSinglyLinkedList[int](1, 2)
-	d.Map(func(i int) int { return 2 * i })
+	d = d.Map(func(i int) int { return 2 * i })
 	result, _ := d.Get(0)
 	want := 2
 	if want != result {
