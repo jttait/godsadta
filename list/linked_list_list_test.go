@@ -227,3 +227,22 @@ func TestShouldApplyMapToLinkedListList(t *testing.T) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
+
+func TestShouldApplyFilterToLinkedListList(t *testing.T) {
+	l := NewLinkedListList[int]()
+	l.Append(1)
+	l.Append(2)
+	l.Append(3)
+	l.Append(4)
+	l = l.Filter(func(i int) bool { return i%2 == 0 })
+	result, _ := l.Get(0)
+	want := 2
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+	result, _ = l.Get(1)
+	want = 4
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}

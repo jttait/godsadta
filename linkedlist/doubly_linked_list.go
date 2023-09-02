@@ -125,3 +125,15 @@ func (d *DoublyLinkedList[T]) Map(f func(T) T) {
 		current = current.Next
 	}
 }
+
+func (d *DoublyLinkedList[T]) Filter(f func(T) bool) *DoublyLinkedList[T] {
+	result := NewDoublyLinkedList[T]()
+	current := d.dummyHead.Next
+	for current != nil {
+		if f(current.Val) {
+			result.InsertLast(current.Val)
+		}
+		current = current.Next
+	}
+	return result
+}

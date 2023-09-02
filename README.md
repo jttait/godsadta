@@ -56,6 +56,8 @@ Time:
 | Remove         | O(n)      | O(n)           |
 | Insert         | O(n)      | O(n)           |
 | Get            | O(1)      | O(n)           |
+| Map            | O(n)      | O(n)           |
+| Filter         | O(n)      | O(n)           |
 
 ## Stack[T any]
 

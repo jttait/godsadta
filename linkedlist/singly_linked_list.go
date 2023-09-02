@@ -135,3 +135,15 @@ func (d *SinglyLinkedList[T]) Map(f func(T) T) {
 		current = current.Next
 	}
 }
+
+func (d *SinglyLinkedList[T]) Filter(f func(T) bool) LinkedList[T] {
+	result := NewSinglyLinkedList[T]()
+	current := d.dummyHead.Next
+	for current != nil {
+		if f(current.Val) {
+			result.InsertLast(current.Val)
+		}
+		current = current.Next
+	}
+	return result
+}
