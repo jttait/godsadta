@@ -193,5 +193,14 @@ func TestShouldGetFromIndexInDoublyLinkedList(t *testing.T) {
 	if want != result {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
+}
 
+func TestShouldApplyMapToDoublyLinkedList(t *testing.T) {
+	d := NewDoublyLinkedList[int](1, 2)
+	d.Map(func(i int) int { return 2 * i })
+	result, _ := d.Get(0)
+	want := 2
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
 }

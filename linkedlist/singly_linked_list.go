@@ -19,10 +19,13 @@ type SinglyLinkedList[T any] struct {
 }
 
 // NewSinglyLinkedList instantiates a new singly-linked list and returns a pointer to it.
-func NewSinglyLinkedList[T any]() *SinglyLinkedList[T] {
+func NewSinglyLinkedList[T any](items ...T) *SinglyLinkedList[T] {
 	q := SinglyLinkedList[T]{}
 	var zeroValue T
 	q.dummyHead = NewSinglyLinkedListNode[T](zeroValue)
+	for _, i := range items {
+		q.InsertLast(i)
+	}
 	return &q
 }
 
@@ -120,4 +123,15 @@ func (d *SinglyLinkedList[T]) Get(index int) (T, bool) {
 		return zeroValue, false
 	}
 	return current.Val, true
+}
+
+func (d *SinglyLinkedList[T]) Map(f func(T) T) {
+	if d.dummyHead.Next == nil {
+		return
+	}
+	current := d.dummyHead.Next
+	for current != nil {
+		current.Val = f(current.Val)
+		current = current.Next
+	}
 }

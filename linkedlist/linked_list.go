@@ -9,4 +9,5 @@ type LinkedList[T any] interface {
 	PeekFront() (T, bool)
 	PeekLast() (T, bool)
 	Get(int) (T, bool)
+	Map(f func(T) T)
 }

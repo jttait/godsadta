@@ -139,3 +139,13 @@ func TestShouldGetFromIndexInSinglyLinkedList(t *testing.T) {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
 }
+
+func TestShouldApplyMapToSinglyLinkedList(t *testing.T) {
+	d := NewSinglyLinkedList[int](1, 2)
+	d.Map(func(i int) int { return 2 * i })
+	result, _ := d.Get(0)
+	want := 2
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}

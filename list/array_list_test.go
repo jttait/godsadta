@@ -216,3 +216,14 @@ func TestShouldBeFalseWhenInsertingIntoIndexOutsideArrayList(t *testing.T) {
 		t.Fatalf("Got true. Want false.")
 	}
 }
+
+func TestShouldApplyMapToArrayList(t *testing.T) {
+	l := NewArrayList[int]()
+	l.Append(1)
+	l.Map(func(i int) int { return i * 2 })
+	result, _ := l.Get(0)
+	want := 2
+	if want != result {
+		t.Fatalf("Got %v. Want %v.\n", result, want)
+	}
+}

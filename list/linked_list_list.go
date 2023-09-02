@@ -23,3 +23,7 @@ func (l *LinkedListList[T]) Append(i T) {
 func (l *LinkedListList[T]) Get(index int) (T, bool) {
 	return l.list.Get(index)
 }
+
+func (l *LinkedListList[T]) Map(f func(T) T) {
+	l.list.Map(f)
+}
