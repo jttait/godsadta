@@ -70,7 +70,7 @@ func (q *DoublyLinkedList[T]) InsertLast(i T) {
 }
 
 func (q *DoublyLinkedList[T]) PeekFront() (T, bool) {
-	if q.dummyHead.Next == nil {
+	if q.dummyHead.Next == q.dummyTail {
 		var zeroValue T
 		return zeroValue, false
 	}
@@ -78,12 +78,12 @@ func (q *DoublyLinkedList[T]) PeekFront() (T, bool) {
 }
 
 func (q *DoublyLinkedList[T]) PeekLast() (T, bool) {
-	if q.dummyHead.Next == nil {
+	if q.dummyHead.Next == q.dummyTail {
 		var zeroValue T
 		return zeroValue, false
 	}
 	current := q.dummyHead
-	for current.Next != nil {
+	for current.Next != q.dummyTail {
 		current = current.Next
 	}
 	return current.Val, true
@@ -117,6 +117,14 @@ func (q *DoublyLinkedList[T]) RemoveLast() (T, bool) {
 	return result, true
 }
 
+func (l *DoublyLinkedList[T]) Insert(index int, item T) bool {
+	return true
+}
+
+func (l *DoublyLinkedList[T]) Remove(index int) bool {
+	return true
+}
+
 func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
 	if d.dummyHead.Next == d.dummyTail {
 		var zeroValue T
@@ -135,7 +143,7 @@ func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
 	return current.Val, true
 }
 
-func (d *DoublyLinkedList[T]) Map(f func(T) T) *DoublyLinkedList[T] {
+func (d *DoublyLinkedList[T]) Map(f func(T) T) LinkedList[T] {
 	result := NewDoublyLinkedList[T]()
 	current := d.dummyHead.Next
 	for current != nil {
@@ -145,7 +153,7 @@ func (d *DoublyLinkedList[T]) Map(f func(T) T) *DoublyLinkedList[T] {
 	return result
 }
 
-func (d *DoublyLinkedList[T]) Filter(f func(T) bool) *DoublyLinkedList[T] {
+func (d *DoublyLinkedList[T]) Filter(f func(T) bool) LinkedList[T] {
 	result := NewDoublyLinkedList[T]()
 	current := d.dummyHead.Next
 	for current != nil {
