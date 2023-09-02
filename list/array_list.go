@@ -57,3 +57,9 @@ func (l *ArrayList[T]) Insert(index int, i T) bool {
 	l.array = append(l.array, temp)
 	return true
 }
+
+func (l *ArrayList[T]) Map(f func(T) T) {
+	for i := 0; i < len(l.array); i++ {
+		l.array[i] = f(l.array[i])
+	}
+}

@@ -23,13 +23,16 @@ type DoublyLinkedList[T any] struct {
 }
 
 // NewDoublyLinkedList instantiates a new doubly-linked list and returns a pointer to it.
-func NewDoublyLinkedList[T any]() *DoublyLinkedList[T] {
+func NewDoublyLinkedList[T any](items ...T) *DoublyLinkedList[T] {
 	q := DoublyLinkedList[T]{}
 	var zeroValue T
 	q.dummyHead = NewDoublyLinkedListNode[T](zeroValue)
 	q.dummyTail = NewDoublyLinkedListNode[T](zeroValue)
 	q.dummyHead.Next = q.dummyTail
 	q.dummyTail.Prev = q.dummyHead
+	for _, i := range items {
+		q.InsertLast(i)
+	}
 	return &q
 }
 
@@ -110,4 +113,15 @@ func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
 		return zeroValue, false
 	}
 	return current.Val, true
+}
+
+func (d *DoublyLinkedList[T]) Map(f func(T) T) {
+	if d.dummyHead.Next == nil {
+		return
+	}
+	current := d.dummyHead.Next
+	for current != nil {
+		current.Val = f(current.Val)
+		current = current.Next
+	}
 }
