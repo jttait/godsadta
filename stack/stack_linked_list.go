@@ -5,7 +5,7 @@ import "github.com/jttait/godsa/linkedlist"
 
 // Stack is a last-in, first-out data structure.
 type StackLinkedList[T any] struct {
-	list *linkedlist.SinglyLinkedList[T]
+	list linkedlist.LinkedList[T]
 }
 
 // NewStack instantiates a new stack and returns a pointer to it.

@@ -20,22 +20,22 @@ type SinglyLinkedList[T any] struct {
 
 // NewSinglyLinkedList instantiates a new singly-linked list and returns a pointer to it.
 func NewSinglyLinkedList[T any](items ...T) *SinglyLinkedList[T] {
-	q := SinglyLinkedList[T]{}
+	l := SinglyLinkedList[T]{}
 	var zeroValue T
-	q.dummyHead = NewSinglyLinkedListNode[T](zeroValue)
+	l.dummyHead = NewSinglyLinkedListNode[T](zeroValue)
 	for _, i := range items {
-		q.InsertLast(i)
+		l.InsertLast(i)
 	}
-	return &q
+	return &l
 }
 
 // Size returns the number of items in the list.
-func (q *SinglyLinkedList[T]) Size() int {
-	if q.dummyHead.Next == nil {
+func (l *SinglyLinkedList[T]) Size() int {
+	if l.dummyHead.Next == nil {
 		return 0
 	}
 	result := 0
-	current := q.dummyHead
+	current := l.dummyHead
 	for current.Next != nil {
 		current = current.Next
 		result += 1
@@ -44,43 +44,78 @@ func (q *SinglyLinkedList[T]) Size() int {
 }
 
 // InsertFront inserts a new item at the front of the list.
-func (q *SinglyLinkedList[T]) InsertFront(i T) {
-	if q.dummyHead.Next == nil {
-		q.dummyHead.Next = NewSinglyLinkedListNode[T](i)
+func (l *SinglyLinkedList[T]) InsertFront(i T) {
+	if l.dummyHead.Next == nil {
+		l.dummyHead.Next = NewSinglyLinkedListNode[T](i)
 	} else {
-		temp := q.dummyHead.Next
-		q.dummyHead.Next = NewSinglyLinkedListNode[T](i)
-		q.dummyHead.Next.Next = temp
+		temp := l.dummyHead.Next
+		l.dummyHead.Next = NewSinglyLinkedListNode[T](i)
+		l.dummyHead.Next.Next = temp
 	}
 }
 
 // InsertLast inserts a new item at the end of the list.
-func (q *SinglyLinkedList[T]) InsertLast(i T) {
-	current := q.dummyHead
+func (l *SinglyLinkedList[T]) InsertLast(i T) {
+	current := l.dummyHead
 	for current.Next != nil {
 		current = current.Next
 	}
 	current.Next = NewSinglyLinkedListNode[T](i)
 }
 
+// Insert inserts a new item at the given index of the list. It returns a Boolean if the index is
+// true if the index was within the bounds of the list and it was possible to insert the item.
+func (l *SinglyLinkedList[T]) Insert(index int, item T) bool {
+	current := l.dummyHead.Next
+	currentIndex := 0
+	for current != nil {
+		if currentIndex == index {
+			newNode := NewSinglyLinkedListNode[T](current.Val)
+			newNode.Next = current.Next
+			current.Val = item
+			current.Next = newNode
+			return true
+		}
+		index += 1
+		current = current.Next
+	}
+	return false
+}
+
+func (l *SinglyLinkedList[T]) Remove(index int) bool {
+	previous := l.dummyHead
+	current := l.dummyHead.Next
+	currentIndex := 0
+	for current != nil {
+		if currentIndex == index {
+			previous.Next = current.Next
+		}
+		index += 1
+		current = current.Next
+		previous = previous.Next
+		return true
+	}
+	return false
+}
+
 // RemoveFront removes and returns the item at the front of the singly-linked list.
-func (q *SinglyLinkedList[T]) RemoveFront() (T, bool) {
-	if q.dummyHead.Next == nil {
+func (l *SinglyLinkedList[T]) RemoveFront() (T, bool) {
+	if l.dummyHead.Next == nil {
 		var zeroValue T
 		return zeroValue, false
 	}
-	result := q.dummyHead.Next.Val
-	q.dummyHead.Next = q.dummyHead.Next.Next
+	result := l.dummyHead.Next.Val
+	l.dummyHead.Next = l.dummyHead.Next.Next
 	return result, true
 }
 
 // RemoveLast removes and returns the item at the end of the list.
-func (q *SinglyLinkedList[T]) RemoveLast() (T, bool) {
-	if q.dummyHead.Next == nil {
+func (l *SinglyLinkedList[T]) RemoveLast() (T, bool) {
+	if l.dummyHead.Next == nil {
 		var zeroValue T
 		return zeroValue, false
 	}
-	current := q.dummyHead
+	current := l.dummyHead
 	for current.Next.Next != nil {
 		current = current.Next
 	}
@@ -90,21 +125,21 @@ func (q *SinglyLinkedList[T]) RemoveLast() (T, bool) {
 }
 
 // PeekFront returns the item at the front of the list.
-func (q *SinglyLinkedList[T]) PeekFront() (T, bool) {
-	if q.dummyHead.Next == nil {
+func (l *SinglyLinkedList[T]) PeekFront() (T, bool) {
+	if l.dummyHead.Next == nil {
 		var zeroValue T
 		return zeroValue, false
 	}
-	return q.dummyHead.Next.Val, true
+	return l.dummyHead.Next.Val, true
 }
 
 // PeekLast returns the item at the end of the list.
-func (q *SinglyLinkedList[T]) PeekLast() (T, bool) {
-	if q.dummyHead.Next == nil {
+func (l *SinglyLinkedList[T]) PeekLast() (T, bool) {
+	if l.dummyHead.Next == nil {
 		var zeroValue T
 		return zeroValue, false
 	}
-	current := q.dummyHead
+	current := l.dummyHead
 	for current.Next != nil {
 		current = current.Next
 	}
@@ -112,12 +147,12 @@ func (q *SinglyLinkedList[T]) PeekLast() (T, bool) {
 }
 
 // Get returns the item at a given index of the list.
-func (d *SinglyLinkedList[T]) Get(index int) (T, bool) {
-	if d.dummyHead.Next == nil {
+func (l *SinglyLinkedList[T]) Get(index int) (T, bool) {
+	if l.dummyHead.Next == nil {
 		var zeroValue T
 		return zeroValue, false
 	}
-	current := d.dummyHead.Next
+	current := l.dummyHead.Next
 	currentIndex := 0
 	for currentIndex < index {
 		currentIndex += 1
@@ -131,9 +166,9 @@ func (d *SinglyLinkedList[T]) Get(index int) (T, bool) {
 }
 
 // Map applies a given function to each item in the list.
-func (d *SinglyLinkedList[T]) Map(f func(T) T) *SinglyLinkedList[T] {
+func (l *SinglyLinkedList[T]) Map(f func(T) T) LinkedList[T] {
 	result := NewSinglyLinkedList[T]()
-	current := d.dummyHead.Next
+	current := l.dummyHead.Next
 	for current != nil {
 		result.InsertLast(f(current.Val))
 		current = current.Next
@@ -143,9 +178,9 @@ func (d *SinglyLinkedList[T]) Map(f func(T) T) *SinglyLinkedList[T] {
 
 // Filter applies a given predicate function to each item in the list and returns a linked list of
 // all items for which the predicate is true.
-func (d *SinglyLinkedList[T]) Filter(f func(T) bool) *SinglyLinkedList[T] {
+func (l *SinglyLinkedList[T]) Filter(f func(T) bool) LinkedList[T] {
 	result := NewSinglyLinkedList[T]()
-	current := d.dummyHead.Next
+	current := l.dummyHead.Next
 	for current != nil {
 		if f(current.Val) {
 			result.InsertLast(current.Val)
