@@ -220,7 +220,7 @@ func TestShouldBeFalseWhenInsertingIntoIndexOutsideLinkedListList(t *testing.T) 
 func TestShouldApplyMapToLinkedListList(t *testing.T) {
 	l := NewLinkedListList[int]()
 	l.Append(1)
-	l.Map(func(i int) int { return i * 2 })
+	l = l.Map(func(i int) int { return i * 2 })
 	result, _ := l.Get(0)
 	want := 2
 	if want != result {

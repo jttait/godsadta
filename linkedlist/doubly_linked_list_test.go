@@ -197,7 +197,7 @@ func TestShouldGetFromIndexInDoublyLinkedList(t *testing.T) {
 
 func TestShouldApplyMapToDoublyLinkedList(t *testing.T) {
 	d := NewDoublyLinkedList[int](1, 2)
-	d.Map(func(i int) int { return 2 * i })
+	d = d.Map(func(i int) int { return 2 * i })
 	result, _ := d.Get(0)
 	want := 2
 	if want != result {

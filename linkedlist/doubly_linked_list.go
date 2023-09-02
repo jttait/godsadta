@@ -69,6 +69,26 @@ func (q *DoublyLinkedList[T]) InsertLast(i T) {
 	q.dummyTail.Prev = insertedNode
 }
 
+func (q *DoublyLinkedList[T]) PeekFront() (T, bool) {
+	if q.dummyHead.Next == nil {
+		var zeroValue T
+		return zeroValue, false
+	}
+	return q.dummyHead.Next.Val, true
+}
+
+func (q *DoublyLinkedList[T]) PeekLast() (T, bool) {
+	if q.dummyHead.Next == nil {
+		var zeroValue T
+		return zeroValue, false
+	}
+	current := q.dummyHead
+	for current.Next != nil {
+		current = current.Next
+	}
+	return current.Val, true
+}
+
 // RemoveFront removes and returns the item at the front of the doubly-linked list.
 func (q *DoublyLinkedList[T]) RemoveFront() (T, bool) {
 	if q.dummyHead.Next == q.dummyTail {
@@ -115,15 +135,14 @@ func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
 	return current.Val, true
 }
 
-func (d *DoublyLinkedList[T]) Map(f func(T) T) {
-	if d.dummyHead.Next == nil {
-		return
-	}
+func (d *DoublyLinkedList[T]) Map(f func(T) T) *DoublyLinkedList[T] {
+	result := NewDoublyLinkedList[T]()
 	current := d.dummyHead.Next
 	for current != nil {
-		current.Val = f(current.Val)
+		result.InsertLast(f(current.Val))
 		current = current.Next
 	}
+	return result
 }
 
 func (d *DoublyLinkedList[T]) Filter(f func(T) bool) *DoublyLinkedList[T] {

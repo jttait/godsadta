@@ -43,7 +43,7 @@ func (q *SinglyLinkedList[T]) Size() int {
 	return result
 }
 
-// Insert inserts a new item at the front of the list.
+// InsertFront inserts a new item at the front of the list.
 func (q *SinglyLinkedList[T]) InsertFront(i T) {
 	if q.dummyHead.Next == nil {
 		q.dummyHead.Next = NewSinglyLinkedListNode[T](i)
@@ -54,6 +54,7 @@ func (q *SinglyLinkedList[T]) InsertFront(i T) {
 	}
 }
 
+// InsertLast inserts a new item at the end of the list.
 func (q *SinglyLinkedList[T]) InsertLast(i T) {
 	current := q.dummyHead
 	for current.Next != nil {
@@ -62,7 +63,7 @@ func (q *SinglyLinkedList[T]) InsertLast(i T) {
 	current.Next = NewSinglyLinkedListNode[T](i)
 }
 
-// Remove removes and returns the item at the front of the singly-linked list.
+// RemoveFront removes and returns the item at the front of the singly-linked list.
 func (q *SinglyLinkedList[T]) RemoveFront() (T, bool) {
 	if q.dummyHead.Next == nil {
 		var zeroValue T
@@ -73,6 +74,7 @@ func (q *SinglyLinkedList[T]) RemoveFront() (T, bool) {
 	return result, true
 }
 
+// RemoveLast removes and returns the item at the end of the list.
 func (q *SinglyLinkedList[T]) RemoveLast() (T, bool) {
 	if q.dummyHead.Next == nil {
 		var zeroValue T
@@ -87,6 +89,7 @@ func (q *SinglyLinkedList[T]) RemoveLast() (T, bool) {
 	return result, true
 }
 
+// PeekFront returns the item at the front of the list.
 func (q *SinglyLinkedList[T]) PeekFront() (T, bool) {
 	if q.dummyHead.Next == nil {
 		var zeroValue T
@@ -95,6 +98,7 @@ func (q *SinglyLinkedList[T]) PeekFront() (T, bool) {
 	return q.dummyHead.Next.Val, true
 }
 
+// PeekLast returns the item at the end of the list.
 func (q *SinglyLinkedList[T]) PeekLast() (T, bool) {
 	if q.dummyHead.Next == nil {
 		var zeroValue T
@@ -107,6 +111,7 @@ func (q *SinglyLinkedList[T]) PeekLast() (T, bool) {
 	return current.Val, true
 }
 
+// Get returns the item at a given index of the list.
 func (d *SinglyLinkedList[T]) Get(index int) (T, bool) {
 	if d.dummyHead.Next == nil {
 		var zeroValue T
@@ -125,18 +130,20 @@ func (d *SinglyLinkedList[T]) Get(index int) (T, bool) {
 	return current.Val, true
 }
 
-func (d *SinglyLinkedList[T]) Map(f func(T) T) {
-	if d.dummyHead.Next == nil {
-		return
-	}
+// Map applies a given function to each item in the list.
+func (d *SinglyLinkedList[T]) Map(f func(T) T) *SinglyLinkedList[T] {
+	result := NewSinglyLinkedList[T]()
 	current := d.dummyHead.Next
 	for current != nil {
-		current.Val = f(current.Val)
+		result.InsertLast(f(current.Val))
 		current = current.Next
 	}
+	return result
 }
 
-func (d *SinglyLinkedList[T]) Filter(f func(T) bool) LinkedList[T] {
+// Filter applies a given predicate function to each item in the list and returns a linked list of
+// all items for which the predicate is true.
+func (d *SinglyLinkedList[T]) Filter(f func(T) bool) *SinglyLinkedList[T] {
 	result := NewSinglyLinkedList[T]()
 	current := d.dummyHead.Next
 	for current != nil {
