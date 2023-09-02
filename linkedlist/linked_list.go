@@ -10,4 +10,5 @@ type LinkedList[T any] interface {
 	PeekLast() (T, bool)
 	Get(int) (T, bool)
 	Map(f func(T) T)
+	Filter(f func(T) bool) LinkedList[T]
 }

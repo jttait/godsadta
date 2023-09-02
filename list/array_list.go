@@ -63,3 +63,13 @@ func (l *ArrayList[T]) Map(f func(T) T) {
 		l.array[i] = f(l.array[i])
 	}
 }
+
+func (l *ArrayList[T]) Filter(f func(T) bool) *ArrayList[T] {
+	result := NewArrayList[T]()
+	for i := 0; i < len(l.array); i++ {
+		if f(l.array[i]) {
+			result.Append(l.array[i])
+		}
+	}
+	return result
+}

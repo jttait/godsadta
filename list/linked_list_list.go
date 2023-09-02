@@ -27,3 +27,8 @@ func (l *LinkedListList[T]) Get(index int) (T, bool) {
 func (l *LinkedListList[T]) Map(f func(T) T) {
 	l.list.Map(f)
 }
+
+func (l *LinkedListList[T]) Filter(f func(T) bool) *LinkedListList[T] {
+	l.list = l.list.Filter(f)
+	return l
+}
