@@ -2,18 +2,18 @@ package doubleendedqueue
 
 import "testing"
 
-func TestShouldBeSizeZeroForNewlyInstantiatedDoubleEndedQueue(t *testing.T) {
+func TestShouldBeSizeZeroForNewlyInstantiatedDoubleEndedQueueLinkedList(t *testing.T) {
 	want := 0
-	q := NewDoubleEndedQueue[int]()
+	q := NewDoubleEndedQueueLinkedList[int]()
 	result := q.Size()
 	if want != result {
 		t.Fatalf("Want %v. Got %v\n", want, result)
 	}
 }
 
-func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedDoubleEndedQueue(t *testing.T) {
+func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedDoubleEndedQueueLinkedList(t *testing.T) {
 	want := 1
-	q := NewDoubleEndedQueue[int]()
+	q := NewDoubleEndedQueueLinkedList[int]()
 	q.InsertFront(5)
 	result := q.Size()
 	if want != result {
@@ -21,9 +21,9 @@ func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedDoubleEndedQueue(t *test
 	}
 }
 
-func TestShouldRemoveItemFromDoubleEndedQueueOfSizeOne(t *testing.T) {
+func TestShouldRemoveItemFromDoubleEndedQueueLinkedListOfSizeOne(t *testing.T) {
 	want := 5
-	q := NewDoubleEndedQueue[int]()
+	q := NewDoubleEndedQueueLinkedList[int]()
 	q.InsertFront(5)
 	result, _ := q.RemoveFront()
 	if want != result {
@@ -31,16 +31,16 @@ func TestShouldRemoveItemFromDoubleEndedQueueOfSizeOne(t *testing.T) {
 	}
 }
 
-func TestShouldBeFalseWhenRemovingFromEmptyDoubleEndedQueue(t *testing.T) {
+func TestShouldBeFalseWhenRemovingFromEmptyDoubleEndedQueueLinkedList(t *testing.T) {
 	want := false
-	q := NewDoubleEndedQueue[int]()
+	q := NewDoubleEndedQueueLinkedList[int]()
 	_, ok := q.RemoveFront()
 	if want != ok {
 		t.Fatalf("Want %v. Got %v\n", want, ok)
 	}
 }
 
-func TestShouldBeTrueWhenRemovingFromNonEmptyDoubleEndedQueue(t *testing.T) {
+func TestShouldBeTrueWhenRemovingFromNonEmptyDoubleEndedQueueLinkedList(t *testing.T) {
 	q := createDoubleEndedQueueOfIntegers()
 	want := true
 	_, ok := q.RemoveFront()
@@ -49,7 +49,7 @@ func TestShouldBeTrueWhenRemovingFromNonEmptyDoubleEndedQueue(t *testing.T) {
 	}
 }
 
-func TestShouldRemoveFrontFromDoubleEndedQueueOfIntergers(t *testing.T) {
+func TestShouldRemoveFrontFromDoubleEndedQueueLinkedListOfIntergers(t *testing.T) {
 	q := createDoubleEndedQueueOfIntegers()
 	want := 1
 	result, _ := q.RemoveFront()
@@ -58,7 +58,7 @@ func TestShouldRemoveFrontFromDoubleEndedQueueOfIntergers(t *testing.T) {
 	}
 }
 
-func TestShouldRemoveLastFromDoubleEndedQueueOfStrings(t *testing.T) {
+func TestShouldRemoveLastFromDoubleEndedQueueLinkedListOfStrings(t *testing.T) {
 	q := createDoubleEndedQueueOfStrings()
 	result, _ := q.RemoveLast()
 	want := "five"
@@ -73,7 +73,7 @@ func TestShouldRemoveLastFromDoubleEndedQueueOfStrings(t *testing.T) {
 
 }
 
-func TestShouldRemoveFrontFromDoubleEndedQueueOfStrings(t *testing.T) {
+func TestShouldRemoveFrontFromDoubleEndedQueueLinkedListOfStrings(t *testing.T) {
 	q := createDoubleEndedQueueOfStrings()
 	result, _ := q.RemoveFront()
 	want := "one"
@@ -88,8 +88,8 @@ func TestShouldRemoveFrontFromDoubleEndedQueueOfStrings(t *testing.T) {
 
 }
 
-func createDoubleEndedQueueOfIntegers() *DoubleEndedQueue[int] {
-	q := NewDoubleEndedQueue[int]()
+func createDoubleEndedQueueOfIntegers() *DoubleEndedQueueLinkedList[int] {
+	q := NewDoubleEndedQueueLinkedList[int]()
 	q.InsertFront(5)
 	q.InsertFront(4)
 	q.InsertFront(3)
@@ -98,8 +98,8 @@ func createDoubleEndedQueueOfIntegers() *DoubleEndedQueue[int] {
 	return q
 }
 
-func createDoubleEndedQueueOfStrings() *DoubleEndedQueue[string] {
-	q := NewDoubleEndedQueue[string]()
+func createDoubleEndedQueueOfStrings() *DoubleEndedQueueLinkedList[string] {
+	q := NewDoubleEndedQueueLinkedList[string]()
 	q.InsertFront("five")
 	q.InsertFront("four")
 	q.InsertFront("three")

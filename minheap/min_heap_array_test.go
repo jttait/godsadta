@@ -2,20 +2,20 @@ package minheap
 
 import "testing"
 
-func TestShouldInstantiateMinHeap(t *testing.T) {
-	m := NewMinHeap[int]()
+func TestShouldInstantiateMinHeapArray(t *testing.T) {
+	m := NewMinHeapArray[int]()
 	if m == nil {
 		t.Fatalf("Should not be nil.")
 	}
 }
 
-func TestShouldInsertItemToMinHeap(t *testing.T) {
-	m := NewMinHeap[int]()
+func TestShouldInsertItemToMinHeapArray(t *testing.T) {
+	m := NewMinHeapArray[int]()
 	m.Insert(5)
 }
 
-func TestShouldExtractFromMinHeapWithOneItem(t *testing.T) {
-	m := NewMinHeap[int](5)
+func TestShouldExtractFromMinHeapArrayWithOneItem(t *testing.T) {
+	m := NewMinHeapArray[int](5)
 	result := m.Extract()
 	want := 5
 	if want != result {
@@ -23,8 +23,8 @@ func TestShouldExtractFromMinHeapWithOneItem(t *testing.T) {
 	}
 }
 
-func TestShouldExtractFromMinHeapWithTwoItems(t *testing.T) {
-	m := NewMinHeap[int](5, 15, 10)
+func TestShouldExtractFromMinHeapArrayWithTwoItems(t *testing.T) {
+	m := NewMinHeapArray[int](5, 15, 10)
 	result := m.Extract()
 	want := 5
 	if want != result {
@@ -32,8 +32,8 @@ func TestShouldExtractFromMinHeapWithTwoItems(t *testing.T) {
 	}
 }
 
-func TestShouldExtractMultipleTimesFromMinHeap(t *testing.T) {
-	m := NewMinHeap[int](78, 39, 24, 98, 72, 77, 71, 68, 53, 41, 60, 54, 92, 36, 75, 47, 33, 80, 9, 61)
+func TestShouldExtractMultipleTimesFromMinHeapArray(t *testing.T) {
+	m := NewMinHeapArray[int](78, 39, 24, 98, 72, 77, 71, 68, 53, 41, 60, 54, 92, 36, 75, 47, 33, 80, 9, 61)
 	result := m.Extract()
 	want := 9
 	if want != result {
@@ -51,8 +51,8 @@ func TestShouldExtractMultipleTimesFromMinHeap(t *testing.T) {
 	}
 }
 
-func TestShouldPeekTopItemFromMinHeap(t *testing.T) {
-	m := NewMinHeap[int](5, 15, 10)
+func TestShouldPeekTopItemFromMinHeapArray(t *testing.T) {
+	m := NewMinHeapArray[int](5, 15, 10)
 	result := m.Peek()
 	want := 5
 	if want != result {
@@ -60,8 +60,8 @@ func TestShouldPeekTopItemFromMinHeap(t *testing.T) {
 	}
 }
 
-func TestShouldBeSameSizeAfterPeekingMinHeap(t *testing.T) {
-	m := NewMinHeap[int](5, 15, 10)
+func TestShouldBeSameSizeAfterPeekingMinHeapArray(t *testing.T) {
+	m := NewMinHeapArray[int](5, 15, 10)
 	_ = m.Peek()
 	result := m.Size()
 	want := 3
@@ -70,8 +70,8 @@ func TestShouldBeSameSizeAfterPeekingMinHeap(t *testing.T) {
 	}
 }
 
-func TestShouldBeSizeZeroForNewlyInstantiatedMinHeap(t *testing.T) {
-	m := NewMinHeap[int]()
+func TestShouldBeSizeZeroForNewlyInstantiatedMinHeapArray(t *testing.T) {
+	m := NewMinHeapArray[int]()
 	result := m.Size()
 	want := 0
 	if want != result {
@@ -79,8 +79,8 @@ func TestShouldBeSizeZeroForNewlyInstantiatedMinHeap(t *testing.T) {
 	}
 }
 
-func TestShouldBeSizeTwoForMinHeapWithTwoItems(t *testing.T) {
-	m := NewMinHeap[int](1, 2)
+func TestShouldBeSizeTwoForMinHeapArrayWithTwoItems(t *testing.T) {
+	m := NewMinHeapArray[int](1, 2)
 	result := m.Size()
 	want := 2
 	if want != result {
