@@ -1,9 +1,9 @@
-package list
+package immutablelist
 
 import "testing"
 
 func TestShouldInstantiateArrayListOfSizeZero(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewImmutableArrayList[int]()
 	result := l.Size()
 	want := 0
 	if want != result {
@@ -12,10 +12,10 @@ func TestShouldInstantiateArrayListOfSizeZero(t *testing.T) {
 }
 
 func TestShouldAppendMultipleItemsToArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
-	l.Append(6)
-	l.Append(7)
+	l := NewImmutableArrayList[int]()
+	l = l.Append(5)
+	l = l.Append(6)
+	l = l.Append(7)
 	result, _ := l.Get(0)
 	want := 5
 	if want != result {
@@ -34,20 +34,20 @@ func TestShouldAppendMultipleItemsToArrayList(t *testing.T) {
 }
 
 func TestShouldIncreaseSizeWhenAppendingToArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewImmutableArrayList[int]()
+	l = l.Append(5)
 	result := l.Size()
 	want := 1
 	if want != result {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
-	l.Append(6)
+	l = l.Append(6)
 	result = l.Size()
 	want = 2
 	if want != result {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
-	l.Append(7)
+	l = l.Append(7)
 	result = l.Size()
 	want = 3
 	if want != result {
@@ -56,10 +56,10 @@ func TestShouldIncreaseSizeWhenAppendingToArrayList(t *testing.T) {
 }
 
 func TestShouldPrependMultipleItemsToArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Prepend(5)
-	l.Prepend(6)
-	l.Prepend(7)
+	l := NewImmutableArrayList[int]()
+	l = l.Prepend(5)
+	l = l.Prepend(6)
+	l = l.Prepend(7)
 	result, _ := l.Get(0)
 	want := 7
 	if want != result {
@@ -78,20 +78,20 @@ func TestShouldPrependMultipleItemsToArrayList(t *testing.T) {
 }
 
 func TestShouldIncreaseSizeWhenPrependingToArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Prepend(5)
+	l := NewImmutableArrayList[int]()
+	l = l.Prepend(5)
 	result := l.Size()
 	want := 1
 	if want != result {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
-	l.Prepend(6)
+	l = l.Prepend(6)
 	result = l.Size()
 	want = 2
 	if want != result {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
-	l.Prepend(7)
+	l = l.Prepend(7)
 	result = l.Size()
 	want = 3
 	if want != result {
@@ -100,7 +100,7 @@ func TestShouldIncreaseSizeWhenPrependingToArrayList(t *testing.T) {
 }
 
 func TestShouldBeFalseIfGetOnEmptyArray(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewImmutableArrayList[int]()
 	_, ok := l.Get(0)
 	if ok {
 		t.Fatalf("Got true. Want false.")
@@ -108,8 +108,7 @@ func TestShouldBeFalseIfGetOnEmptyArray(t *testing.T) {
 }
 
 func TestShouldBeTrueIfGetIndexIsWithinArray(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewImmutableArrayList[int](5)
 	_, ok := l.Get(0)
 	if !ok {
 		t.Fatalf("Got false. Want true.")
@@ -117,8 +116,7 @@ func TestShouldBeTrueIfGetIndexIsWithinArray(t *testing.T) {
 }
 
 func TestShouldBeFalseIfGetIndexIsOutsideArray(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewImmutableArrayList[int](5)
 	_, ok := l.Get(1)
 	if ok {
 		t.Fatalf("Got true. Want false.")
@@ -126,17 +124,14 @@ func TestShouldBeFalseIfGetIndexIsOutsideArray(t *testing.T) {
 }
 
 func TestShouldRemoveItemAtIndex(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	l.Append(2)
-	l.Append(3)
-	_ = l.Remove(1)
+	l := NewImmutableArrayList[int](1, 2, 3)
+	l, _ = l.Remove(1)
 	result, _ := l.Get(1)
 	want := 3
 	if want != result {
 		t.Fatalf("Got %v. Want %v.\n", result, want)
 	}
-	_ = l.Remove(1)
+	l, _ = l.Remove(1)
 	_, ok := l.Get(1)
 	if ok {
 		t.Fatalf("Got true. Want false.")
@@ -144,35 +139,32 @@ func TestShouldRemoveItemAtIndex(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenRemovingFromEmptyArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	ok := l.Remove(0)
+	l := NewImmutableArrayList[int]()
+	_, ok := l.Remove(0)
 	if ok {
 		t.Fatalf("Got true. Want false.")
 	}
 }
 
 func TestShouldBeFalseWhenRemovingFromIndexOutsideArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
-	ok := l.Remove(1)
+	l := NewImmutableArrayList[int](5)
+	l, ok := l.Remove(1)
 	if ok {
 		t.Fatalf("Got true. Want false.")
 	}
 }
 
 func TestShouldBeTrueWhenRemovingFromIndexInsideArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
-	ok := l.Remove(0)
+	l := NewImmutableArrayList[int](5)
+	l, ok := l.Remove(0)
 	if !ok {
 		t.Fatalf("Got false. Want true.")
 	}
 }
 
 func TestShouldInsertItemAtIndex(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	_ = l.Insert(0, 2)
+	l := NewImmutableArrayList[int](1)
+	l, _ = l.Insert(0, 2)
 	result, _ := l.Get(0)
 	want := 2
 	if want != result {
@@ -181,9 +173,8 @@ func TestShouldInsertItemAtIndex(t *testing.T) {
 }
 
 func TestShouldShiftTheItemCurrentlyAtTheIndexToRight(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	_ = l.Insert(0, 2)
+	l := NewImmutableArrayList[int](1)
+	l, _ = l.Insert(0, 2)
 	result, _ := l.Get(1)
 	want := 1
 	if want != result {
@@ -192,35 +183,32 @@ func TestShouldShiftTheItemCurrentlyAtTheIndexToRight(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenInsertingIntoEmptyArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	ok := l.Insert(0, 1)
+	l := NewImmutableArrayList[int]()
+	l, ok := l.Insert(0, 1)
 	if ok {
 		t.Fatalf("Got true. Want false.")
 	}
 }
 
 func TestShouldBeTrueWhenInsertingIntoArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	ok := l.Insert(0, 2)
+	l := NewImmutableArrayList[int](1)
+	l, ok := l.Insert(0, 2)
 	if !ok {
 		t.Fatalf("Got false. Want true.")
 	}
 }
 
 func TestShouldBeFalseWhenInsertingIntoIndexOutsideArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	ok := l.Insert(1, 2)
+	l := NewImmutableArrayList[int](1)
+	l, ok := l.Insert(1, 2)
 	if ok {
 		t.Fatalf("Got true. Want false.")
 	}
 }
 
 func TestShouldApplyMapToArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	l.Map(func(i int) int { return i * 2 })
+	l := NewImmutableArrayList[int](1)
+	l = l.Map(func(i int) int { return i * 2 })
 	result, _ := l.Get(0)
 	want := 2
 	if want != result {
@@ -229,12 +217,8 @@ func TestShouldApplyMapToArrayList(t *testing.T) {
 }
 
 func TestShouldApplyFilterToArrayList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	l.Append(2)
-	l.Append(3)
-	l.Append(4)
-	l.Filter(func(i int) bool { return i%2 == 0 })
+	l := NewImmutableArrayList[int](1, 2, 3, 4)
+	l = l.Filter(func(i int) bool { return i%2 == 0 })
 	result, _ := l.Get(0)
 	want := 2
 	if want != result {

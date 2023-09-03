@@ -40,14 +40,12 @@ func (l *LinkedListList[T]) Get(index int) (T, bool) {
 }
 
 // Map applies the given function to each item in the list.
-func (l *LinkedListList[T]) Map(f func(T) T) *LinkedListList[T] {
+func (l *LinkedListList[T]) Map(f func(T) T) {
 	l.list = l.list.Map(f)
-	return l
 }
 
 // Filter applies the given predicate function to each item in the list and returns a list
 // containing all items for which the predicate was true.
-func (l *LinkedListList[T]) Filter(f func(T) bool) *LinkedListList[T] {
+func (l *LinkedListList[T]) Filter(f func(T) bool) {
 	l.list = l.list.Filter(f)
-	return l
 }
