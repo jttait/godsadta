@@ -1,24 +1,22 @@
 package set
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jttait/godsa/assert"
+)
 
 func TestShouldBeSizeZeroForNewlyInstantiatedSet(t *testing.T) {
 	s := NewMapSet[int]()
 	result := s.Size()
-	want := 0
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 0, t)
 }
 
 func TestShouldBeSizeOneAfterItemIsAddedToNewlyInstantiatedSet(t *testing.T) {
 	s := NewMapSet[int]()
 	_ = s.Insert(5)
 	result := s.Size()
-	want := 1
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 1, t)
 }
 
 func TestShouldBeSizeTwoAfterAddingTwoDifferentItems(t *testing.T) {
@@ -26,10 +24,7 @@ func TestShouldBeSizeTwoAfterAddingTwoDifferentItems(t *testing.T) {
 	_ = s.Insert(5)
 	_ = s.Insert(6)
 	result := s.Size()
-	want := 2
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 2, t)
 }
 
 func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
@@ -37,10 +32,7 @@ func TestShouldBeSizeOneAfterAddingTwoSameItems(t *testing.T) {
 	_ = s.Insert(5)
 	_ = s.Insert(5)
 	result := s.Size()
-	want := 1
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 1, t)
 }
 
 func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
@@ -48,94 +40,64 @@ func TestShouldBeSizeZeroAfterAddingAndRemovingItemFromSet(t *testing.T) {
 	_ = s.Insert(5)
 	_ = s.Remove(5)
 	result := s.Size()
-	want := 0
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 0, t)
 }
 
 func TestShouldBeTrueIfAddingItemThatIsNotAlreadyInSet(t *testing.T) {
 	s := NewMapSet[int]()
 	ok := s.Insert(5)
-	want := true
-	if want != ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assert.AssertTrue(ok, t)
 }
 
 func TestShouldBeFalseIfAddingItemThatIsAlreadyInSet(t *testing.T) {
 	s := NewMapSet[int](5)
 	ok := s.Insert(5)
-	want := false
-	if want != ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeFalseIfRemovingItemThatIsNotInSet(t *testing.T) {
 	s := NewMapSet[int]()
 	ok := s.Remove(5)
-	want := false
-	if want != ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeTrueIfRemovingItemThatIsInSet(t *testing.T) {
 	s := NewMapSet[int](5)
 	ok := s.Remove(5)
-	want := true
-	if want != ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assert.AssertTrue(ok, t)
 }
 
 func TestShouldBeTrueIfSetContainsItem(t *testing.T) {
 	s := NewMapSet[int](5)
 	result := s.Contains(5)
-	want := true
-	if want != result {
-		t.Fatalf("Want %v. Got %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeFalseIfSetDoesNotContainItem(t *testing.T) {
 	s := NewMapSet[int]()
 	result := s.Contains(5)
-	want := false
-	if want != result {
-		t.Fatalf("Want %v. Got %v.\n", result, want)
-	}
+	assert.AssertFalse(result, t)
 }
 
 func TestShouldBeEqualForTwoEmptySets(t *testing.T) {
 	s := NewMapSet[int]()
 	u := NewMapSet[int]()
 	result := s.Equals(u)
-	want := true
-	if want != result {
-		t.Fatalf("Want %v. Got %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeEqualForTwoIdenticalSets(t *testing.T) {
 	s := NewMapSet[int](5)
 	u := NewMapSet[int](5)
 	result := s.Equals(u)
-	want := true
-	if want != result {
-		t.Fatalf("Want %v. Got %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeNotEqualForTwoDifferentSets(t *testing.T) {
 	s := NewMapSet[int](5)
 	u := NewMapSet[int](6)
 	result := s.Equals(u)
-	want := false
-	if want != result {
-		t.Fatalf("Want %v. Got %v.\n", result, want)
-	}
+	assert.AssertFalse(result, t)
 }
 
 func TestShouldContainAllItemsFromBothSetsAfterUnion(t *testing.T) {
