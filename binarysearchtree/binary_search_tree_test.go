@@ -1,4 +1,4 @@
-package binarytree
+package binarysearchtree
 
 import "testing"
 

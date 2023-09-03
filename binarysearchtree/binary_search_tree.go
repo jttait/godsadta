@@ -1,5 +1,5 @@
 // Package binarysearchtree provides the binary search tree data structure and associated methods
-package binarytree
+package binarysearchtree
 
 import "cmp"
 
