@@ -6,8 +6,8 @@ type ArrayList[T any] struct {
 }
 
 // NewArrayList instantiates an ArrayList and returns a pointer to it.
-func NewArrayList[T any]() *ArrayList[T] {
-	l := ArrayList[T]{}
+func NewArrayList[T any](values ...T) *ArrayList[T] {
+	l := ArrayList[T]{values}
 	return &l
 }
 
