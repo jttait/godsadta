@@ -72,22 +72,26 @@ func (l *ArrayList[T]) Insert(index int, i T) bool {
 }
 
 // Map applies the given function to all items in the ArrayList.
-func (l *ArrayList[T]) Map(f func(T) T) *ArrayList[T] {
-	result := NewArrayList[T]()
-	for _, v := range l.array {
-		result.Append(f(v))
+func (l *ArrayList[T]) Map(f func(T) T) {
+	for i, v := range l.array {
+		l.array[i] = f(v)
 	}
-	return result
 }
 
 // Filter applies the given predicate function to all items in the ArrayList and returns a new
 // ArrayList that only contains items for which the predicate was true.
-func (l *ArrayList[T]) Filter(f func(T) bool) *ArrayList[T] {
-	result := NewArrayList[T]()
-	for _, v := range l.array {
-		if f(v) {
-			result.Append(v)
+func (l *ArrayList[T]) Filter(f func(T) bool) {
+	originalIndex := 0
+	newIndex := 0
+	originalLength := len(l.array)
+	newLength := 0
+	for originalIndex < originalLength {
+		if f(l.array[originalIndex]) {
+			l.array[newIndex] = l.array[originalIndex]
+			newIndex += 1
+			newLength += 1
 		}
+		originalIndex += 1
 	}
-	return result
+	l.array = l.array[:newLength]
 }
