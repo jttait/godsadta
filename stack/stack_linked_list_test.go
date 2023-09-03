@@ -3,74 +3,67 @@ package stack
 import "testing"
 
 func TestShouldBeSizeZeroForNewlyInstantiatedStackLinkedList(t *testing.T) {
-	want := 0
 	stack := NewStackLinkedList[int]()
 	result := stack.Size()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assertEqual(result, 0, t)
 }
 
 func TestShouldBeSizeOneForItemPushedToNewlyInstantiatedStackLinkedList(t *testing.T) {
-	want := 1
 	stack := NewStackLinkedList[int]()
 	stack.Push(5)
 	result := stack.Size()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assertEqual(result, 1, t)
 }
 
 func TestShouldPopLatestPushedIntegerFromStackLinkedList(t *testing.T) {
-	want := 5
 	stack := NewStackLinkedList[int]()
 	stack.Push(5)
 	result, ok := stack.Pop()
-	if !ok {
-		t.Fatalf("Was false")
-	}
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assertTrue(ok, t)
+	assertEqual(result, 5, t)
 }
 
 func TestShouldPopLatestPushedStringFromStackLinkedList(t *testing.T) {
-	want := "five"
 	stack := NewStackLinkedList[string]()
 	stack.Push("five")
 	result, ok := stack.Pop()
-	if !ok {
-		t.Fatalf("Was false")
-	}
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assertTrue(ok, t)
+	assertEqual(result, "five", t)
 }
 
 func TestShouldReturnFalseWhenPoppingEmptyStackLinkedList(t *testing.T) {
-	want := false
 	stack := NewStackLinkedList[int]()
 	_, ok := stack.Pop()
-	if ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assertFalse(ok, t)
 }
 
 func TestShouldReturnLatestItemWhenPeekingStackLinkedList(t *testing.T) {
-	want := 5
 	stack := NewStackLinkedList[int]()
 	stack.Push(5)
 	result, _ := stack.Peek()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assertEqual(result, 5, t)
 }
 
 func TestShouldReturnFalseWhenPeekingEmptyStackLinkedList(t *testing.T) {
-	want := false
 	stack := NewStackLinkedList[int]()
 	_, ok := stack.Peek()
-	if ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
+	assertFalse(ok, t)
+}
+
+func assertTrue(i bool, t *testing.T) {
+	if !i {
+		t.Fatalf("Got false. Want true.")
+	}
+}
+
+func assertFalse(i bool, t *testing.T) {
+	if i {
+		t.Fatalf("Got true. Want false.")
+	}
+}
+
+func assertEqual[T comparable](got T, want T, t *testing.T) {
+	if got != want {
+		t.Fatalf("Got %v. Want %v.\n", got, want)
 	}
 }
