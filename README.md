@@ -44,7 +44,13 @@ Space:
 | Remove         | O(n) |
 | Contains       | O(n) |
 
-- Binary tree
+## BinarySearchTree[T cmp.Ordered]
+
+| Implementation | BinarySearchTree |
+| -------------- | ---------------- |
+| Insert         | O(log n), O(n)   |
+| Remove         | O(log n), O(n)   |
+| Contains       | O(log n), O(n)   |
 
 # Abstract data types
 
