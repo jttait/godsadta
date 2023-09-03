@@ -24,10 +24,25 @@ Space:
 | -------------- | ------------ |
 | Insert         |
 | Extract        |
+| Size           |
+| Peek           |
 
 ## MaxHeap[T cmp.Ordered]
 
+| Implementation | MaxHeapArray |
+| -------------- | ------------ |
+| Insert         |
+| Extract        |
+| Size           |
+| Peek           |
+
 ## Trie
+
+| Implementation | Trie |
+| -------------- | ---- |
+| Insert         | O(n) |
+| Remove         | O(n) |
+| Contains       | O(n) |
 
 - Binary tree
 
@@ -91,5 +106,23 @@ Time:
 | RemoveFront    | O(1)                       |
 | RemoveLast     | O(1)                       |
 
-- Graph
-- Priority queue
+## PriorityQueue[T cmp.Ordered]
+
+| Implementation | PriorityQueueMaxHeap |
+| -------------- | -------------------- |
+| Size           |
+| Add            |
+| Poll           |
+| Peek           |
+
+## Graph
+
+| Implementation | Graph |
+| -------------- | ----- |
+| AddVertex      |
+| RemoveVertex   |
+| AddEdge        |
+| RemoveEdge     |
+| Neighbors      |
+| ContainsVertex |
+
