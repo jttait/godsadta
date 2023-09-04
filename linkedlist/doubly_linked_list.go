@@ -123,16 +123,16 @@ func (q *DoublyLinkedList[T]) RemoveFront() (T, bool) {
 }
 
 // RemoveLast removes and returns the item at the end of the doubly-linked list.
-func (q *DoublyLinkedList[T]) RemoveLast() (T, bool) {
-	if q.dummyHead.Next == q.dummyTail {
+func (l *DoublyLinkedList[T]) RemoveLast() (T, bool) {
+	if l.dummyHead.Next == l.dummyTail {
 		var zeroValue T
 		return zeroValue, false
 	}
-	result := q.dummyTail.Prev.Val
-	tail := q.dummyTail.Prev
+	result := l.dummyTail.Prev.Val
+	tail := l.dummyTail.Prev
 	newTail := tail.Prev
-	q.dummyTail.Prev = newTail
-	newTail.Next = q.dummyTail
+	l.dummyTail.Prev = newTail
+	newTail.Next = l.dummyTail
 	return result, true
 }
 
@@ -142,10 +142,10 @@ func (l *DoublyLinkedList[T]) Remove(index int) bool {
 	for current != l.dummyTail {
 		if currentIndex == index {
 			current.Prev.Next = current.Next
+			return true
 		}
-		index += 1
+		currentIndex += 1
 		current = current.Next
-		return true
 	}
 	return false
 }

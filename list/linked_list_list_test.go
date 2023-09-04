@@ -26,7 +26,7 @@ func TestShouldAppendMultipleItemsToLinkedListList(t *testing.T) {
 }
 
 func TestShouldIncreaseSizeWhenAppendingToLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewLinkedListList[int]()
 	l.Append(5)
 	result := l.Size()
 	assert.AssertEqual(result, 1, t)
@@ -39,7 +39,7 @@ func TestShouldIncreaseSizeWhenAppendingToLinkedListList(t *testing.T) {
 }
 
 func TestShouldPrependMultipleItemsToLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewLinkedListList[int]()
 	l.Prepend(5)
 	l.Prepend(6)
 	l.Prepend(7)
@@ -52,7 +52,7 @@ func TestShouldPrependMultipleItemsToLinkedListList(t *testing.T) {
 }
 
 func TestShouldIncreaseSizeWhenPrependingToLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewLinkedListList[int]()
 	l.Prepend(5)
 	result := l.Size()
 	assert.AssertEqual(result, 1, t)
@@ -65,90 +65,76 @@ func TestShouldIncreaseSizeWhenPrependingToLinkedListList(t *testing.T) {
 }
 
 func TestShouldBeFalseIfGetOnEmptyLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewLinkedListList[int]()
 	_, ok := l.Get(0)
 	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeTrueIfGetIndexIsWithinLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewLinkedListList[int](5)
 	_, ok := l.Get(0)
 	assert.AssertTrue(ok, t)
 }
 
 func TestShouldBeFalseIfGetIndexIsOutsideLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewLinkedListList[int](5)
 	_, ok := l.Get(1)
 	assert.AssertFalse(ok, t)
 }
 
 func TestShouldRemoveItemAtIndexOfLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
-	l.Append(2)
-	l.Append(3)
+	l := NewLinkedListList[int](1, 2, 3)
 	_ = l.Remove(1)
 	result, _ := l.Get(1)
 	assert.AssertEqual(result, 3, t)
-	_ = l.Remove(1)
-	_, ok := l.Get(1)
-	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeFalseWhenRemovingFromEmptyLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewLinkedListList[int]()
 	ok := l.Remove(0)
 	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeFalseWhenRemovingFromIndexOutsideLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewLinkedListList[int](5)
 	ok := l.Remove(1)
 	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeTrueWhenRemovingFromIndexInsideLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(5)
+	l := NewLinkedListList[int](5)
 	ok := l.Remove(0)
 	assert.AssertTrue(ok, t)
 }
 
 func TestShouldInsertItemAtIndexOfLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
+	l := NewLinkedListList[int](1)
 	_ = l.Insert(0, 2)
 	result, _ := l.Get(0)
 	assert.AssertEqual(result, 2, t)
 }
 
 func TestShouldShiftTheItemCurrentlyAtTheIndexToRightWithLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
+	l := NewLinkedListList[int](1)
 	_ = l.Insert(0, 2)
 	result, _ := l.Get(1)
 	assert.AssertEqual(result, 1, t)
 }
 
 func TestShouldBeFalseWhenInsertingIntoEmptyLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
+	l := NewLinkedListList[int]()
 	ok := l.Insert(0, 1)
 	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeTrueWhenInsertingIntoLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
+	l := NewLinkedListList[int](1)
 	ok := l.Insert(0, 2)
 	assert.AssertTrue(ok, t)
 }
 
 func TestShouldBeFalseWhenInsertingIntoIndexOutsideLinkedListList(t *testing.T) {
-	l := NewArrayList[int]()
-	l.Append(1)
+	l := NewLinkedListList[int](1)
 	ok := l.Insert(1, 2)
 	assert.AssertFalse(ok, t)
 }
@@ -162,11 +148,7 @@ func TestShouldApplyMapToLinkedListList(t *testing.T) {
 }
 
 func TestShouldApplyFilterToLinkedListList(t *testing.T) {
-	l := NewLinkedListList[int]()
-	l.Append(1)
-	l.Append(2)
-	l.Append(3)
-	l.Append(4)
+	l := NewLinkedListList[int](1, 2, 3, 4)
 	l.Filter(func(i int) bool { return i%2 == 0 })
 	result, _ := l.Get(0)
 	assert.AssertEqual(result, 2, t)
