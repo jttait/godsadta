@@ -1,109 +1,59 @@
 package doubleendedqueue
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jttait/godsa/assert"
+)
 
 func TestShouldBeSizeZeroForNewlyInstantiatedDoubleEndedQueueLinkedList(t *testing.T) {
-	want := 0
 	q := NewDoubleEndedQueueLinkedList[int]()
 	result := q.Size()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 0, t)
 }
 
 func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedDoubleEndedQueueLinkedList(t *testing.T) {
-	want := 1
-	q := NewDoubleEndedQueueLinkedList[int]()
-	q.InsertFront(5)
+	q := NewDoubleEndedQueueLinkedList[int](5)
 	result := q.Size()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 1, t)
 }
 
 func TestShouldRemoveItemFromDoubleEndedQueueLinkedListOfSizeOne(t *testing.T) {
-	want := 5
-	q := NewDoubleEndedQueueLinkedList[int]()
-	q.InsertFront(5)
+	q := NewDoubleEndedQueueLinkedList[int](5)
 	result, _ := q.RemoveFront()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 5, t)
 }
 
 func TestShouldBeFalseWhenRemovingFromEmptyDoubleEndedQueueLinkedList(t *testing.T) {
-	want := false
 	q := NewDoubleEndedQueueLinkedList[int]()
 	_, ok := q.RemoveFront()
-	if want != ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeTrueWhenRemovingFromNonEmptyDoubleEndedQueueLinkedList(t *testing.T) {
-	q := createDoubleEndedQueueOfIntegers()
-	want := true
+	q := NewDoubleEndedQueueLinkedList[int](1, 2, 3, 4, 5)
 	_, ok := q.RemoveFront()
-	if want != ok {
-		t.Fatalf("Want %v. Got %v\n", want, ok)
-	}
+	assert.AssertTrue(ok, t)
 }
 
 func TestShouldRemoveFrontFromDoubleEndedQueueLinkedListOfIntergers(t *testing.T) {
-	q := createDoubleEndedQueueOfIntegers()
-	want := 1
+	q := NewDoubleEndedQueueLinkedList[int](1, 2, 3, 4, 5)
 	result, _ := q.RemoveFront()
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, 1, t)
 }
 
 func TestShouldRemoveLastFromDoubleEndedQueueLinkedListOfStrings(t *testing.T) {
-	q := createDoubleEndedQueueOfStrings()
+	q := NewDoubleEndedQueueLinkedList[string]("one", "two", "three", "four", "five")
 	result, _ := q.RemoveLast()
-	want := "five"
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, "five", t)
 	result, _ = q.RemoveLast()
-	want = "four"
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
-
+	assert.AssertEqual(result, "four", t)
 }
 
 func TestShouldRemoveFrontFromDoubleEndedQueueLinkedListOfStrings(t *testing.T) {
-	q := createDoubleEndedQueueOfStrings()
+	q := NewDoubleEndedQueueLinkedList[string]("one", "two", "three", "four", "five")
 	result, _ := q.RemoveFront()
-	want := "one"
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
+	assert.AssertEqual(result, "one", t)
 	result, _ = q.RemoveFront()
-	want = "two"
-	if want != result {
-		t.Fatalf("Want %v. Got %v\n", want, result)
-	}
-
-}
-
-func createDoubleEndedQueueOfIntegers() *DoubleEndedQueueLinkedList[int] {
-	q := NewDoubleEndedQueueLinkedList[int]()
-	q.InsertFront(5)
-	q.InsertFront(4)
-	q.InsertFront(3)
-	q.InsertFront(2)
-	q.InsertFront(1)
-	return q
-}
-
-func createDoubleEndedQueueOfStrings() *DoubleEndedQueueLinkedList[string] {
-	q := NewDoubleEndedQueueLinkedList[string]()
-	q.InsertFront("five")
-	q.InsertFront("four")
-	q.InsertFront("three")
-	q.InsertFront("two")
-	q.InsertFront("one")
-	return q
+	assert.AssertEqual(result, "two", t)
 }
