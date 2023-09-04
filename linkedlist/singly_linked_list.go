@@ -124,6 +124,15 @@ func (l *SinglyLinkedList[T]) RemoveLast() (T, bool) {
 	return result, true
 }
 
+func (l *SinglyLinkedList[T]) Equal(m LinkedList[T]) bool {
+	for l != nil && m != nil {
+		if l != m {
+			return false
+		}
+	}
+	return l == m
+}
+
 // PeekFront returns the item at the front of the list.
 func (l *SinglyLinkedList[T]) PeekFront() (T, bool) {
 	if l.dummyHead.Next == nil {

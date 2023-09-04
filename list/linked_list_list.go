@@ -1,6 +1,8 @@
 package list
 
-import "github.com/jttait/godsa/linkedlist"
+import (
+	"github.com/jttait/godsa/linkedlist"
+)
 
 type LinkedListList[T any] struct {
 	list linkedlist.LinkedList[T]
@@ -28,6 +30,10 @@ func (l *LinkedListList[T]) Append(i T) {
 // Prepend adds the given item at the start of the list.
 func (l *LinkedListList[T]) Prepend(i T) {
 	l.list.InsertFront(i)
+}
+
+func (l *LinkedListList[T]) Equal(m *LinkedListList[T]) bool {
+	return l.list.Equal(m.list)
 }
 
 // Remove removes the item at the given index of the list. It also returns a Boolean that is true

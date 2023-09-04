@@ -1,6 +1,8 @@
 // Package doublylinkedlist provides the doubly-linked list data structure and associated methods
 package linkedlist
 
+import "reflect"
+
 // DoublyLinkedListNode is a data structure that contains a value and pointers to the previous and
 // next nodes in the list.
 type DoublyLinkedListNode[T any] struct {
@@ -166,6 +168,20 @@ func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
 		return zeroValue, false
 	}
 	return current.Val, true
+}
+
+func (d *DoublyLinkedList[T]) Equal(f LinkedList[T]) bool {
+	e := f.(*DoublyLinkedList[T])
+	dCurrent := d.dummyHead.Next
+	eCurrent := e.dummyHead.Next
+	for dCurrent != d.dummyTail && eCurrent != e.dummyTail {
+		if !reflect.DeepEqual(dCurrent.Val, eCurrent.Val) {
+			return false
+		}
+		dCurrent = dCurrent.Next
+		eCurrent = eCurrent.Next
+	}
+	return reflect.DeepEqual(dCurrent.Val, eCurrent.Val)
 }
 
 func (d *DoublyLinkedList[T]) Map(f func(T) T) LinkedList[T] {

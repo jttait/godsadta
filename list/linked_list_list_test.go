@@ -17,25 +17,8 @@ func TestShouldAppendMultipleItemsToLinkedListList(t *testing.T) {
 	l.Append(5)
 	l.Append(6)
 	l.Append(7)
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 5, t)
-	result, _ = l.Get(1)
-	assert.AssertEqual(result, 6, t)
-	result, _ = l.Get(2)
-	assert.AssertEqual(result, 7, t)
-}
-
-func TestShouldIncreaseSizeWhenAppendingToLinkedListList(t *testing.T) {
-	l := NewLinkedListList[int]()
-	l.Append(5)
-	result := l.Size()
-	assert.AssertEqual(result, 1, t)
-	l.Append(6)
-	result = l.Size()
-	assert.AssertEqual(result, 2, t)
-	l.Append(7)
-	result = l.Size()
-	assert.AssertEqual(result, 3, t)
+	want := NewLinkedListList[int](5, 6, 7)
+	assert.AssertTrue(l.Equal(want), t)
 }
 
 func TestShouldPrependMultipleItemsToLinkedListList(t *testing.T) {
@@ -43,25 +26,8 @@ func TestShouldPrependMultipleItemsToLinkedListList(t *testing.T) {
 	l.Prepend(5)
 	l.Prepend(6)
 	l.Prepend(7)
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 7, t)
-	result, _ = l.Get(1)
-	assert.AssertEqual(result, 6, t)
-	result, _ = l.Get(2)
-	assert.AssertEqual(result, 5, t)
-}
-
-func TestShouldIncreaseSizeWhenPrependingToLinkedListList(t *testing.T) {
-	l := NewLinkedListList[int]()
-	l.Prepend(5)
-	result := l.Size()
-	assert.AssertEqual(result, 1, t)
-	l.Prepend(6)
-	result = l.Size()
-	assert.AssertEqual(result, 2, t)
-	l.Prepend(7)
-	result = l.Size()
-	assert.AssertEqual(result, 3, t)
+	want := NewLinkedListList[int](7, 6, 5)
+	assert.AssertTrue(l.Equal(want), t)
 }
 
 func TestShouldBeFalseIfGetOnEmptyLinkedListList(t *testing.T) {
@@ -140,18 +106,29 @@ func TestShouldBeFalseWhenInsertingIntoIndexOutsideLinkedListList(t *testing.T) 
 }
 
 func TestShouldApplyMapToLinkedListList(t *testing.T) {
-	l := NewLinkedListList[int]()
-	l.Append(1)
+	l := NewLinkedListList[int](1, 2, 3)
 	l.Map(func(i int) int { return i * 2 })
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 2, t)
+	want := NewLinkedListList[int](2, 4, 6)
+	assert.AssertTrue(l.Equal(want), t)
 }
 
 func TestShouldApplyFilterToLinkedListList(t *testing.T) {
 	l := NewLinkedListList[int](1, 2, 3, 4)
 	l.Filter(func(i int) bool { return i%2 == 0 })
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 2, t)
-	result, _ = l.Get(1)
-	assert.AssertEqual(result, 4, t)
+	want := NewLinkedListList[int](2, 4)
+	assert.AssertTrue(l.Equal(want), t)
+}
+
+func TestShouldBeTrueForEqualOnTwoIdenticalLists(t *testing.T) {
+	a := NewLinkedListList[int](1, 2, 3)
+	b := NewLinkedListList[int](1, 2, 3)
+	result := a.Equal(b)
+	assert.AssertTrue(result, t)
+}
+
+func TestShouldBeFalseForEqualOnTwoDifferentLists(t *testing.T) {
+	a := NewLinkedListList[int](1, 2, 3)
+	b := NewLinkedListList[int](1, 2, 4)
+	result := a.Equal(b)
+	assert.AssertFalse(result, t)
 }
