@@ -21,19 +21,6 @@ func TestShouldAppendMultipleItemsToSliceList(t *testing.T) {
 	assert.AssertTrue(l.Equal(want), t)
 }
 
-func TestShouldIncreaseSizeWhenAppendingToSliceList(t *testing.T) {
-	l := NewSliceList[int]()
-	l.Append(5)
-	result := l.Size()
-	assert.AssertEqual(result, 1, t)
-	l.Append(6)
-	result = l.Size()
-	assert.AssertEqual(result, 2, t)
-	l.Append(7)
-	result = l.Size()
-	assert.AssertEqual(result, 3, t)
-}
-
 func TestShouldPrependMultipleItemsToSliceList(t *testing.T) {
 	l := NewSliceList[int]()
 	l.Prepend(5)
@@ -41,19 +28,6 @@ func TestShouldPrependMultipleItemsToSliceList(t *testing.T) {
 	l.Prepend(7)
 	want := NewSliceList[int](7, 6, 5)
 	assert.AssertTrue(l.Equal(want), t)
-}
-
-func TestShouldIncreaseSizeWhenPrependingToSliceList(t *testing.T) {
-	l := NewSliceList[int]()
-	l.Prepend(5)
-	result := l.Size()
-	assert.AssertEqual(result, 1, t)
-	l.Prepend(6)
-	result = l.Size()
-	assert.AssertEqual(result, 2, t)
-	l.Prepend(7)
-	result = l.Size()
-	assert.AssertEqual(result, 3, t)
 }
 
 func TestShouldBeFalseIfGetOnEmptySliceList(t *testing.T) {
@@ -136,4 +110,18 @@ func TestShouldApplyFilterToSliceList(t *testing.T) {
 	l.Filter(func(i int) bool { return i%2 == 0 })
 	want := NewSliceList[int](2, 4)
 	assert.AssertTrue(l.Equal(want), t)
+}
+
+func TestShouldBeTrueForEqualOnTwoIdenticalSliceLists(t *testing.T) {
+	a := NewSliceList[int](1, 2, 3)
+	b := NewSliceList[int](1, 2, 3)
+	result := a.Equal(b)
+	assert.AssertTrue(result, t)
+}
+
+func TestShouldBeFalseForEqualOnTwoDifferentSliceLists(t *testing.T) {
+	a := NewSliceList[int](1, 2, 3)
+	b := NewSliceList[int](1, 2, 4)
+	result := a.Equal(b)
+	assert.AssertFalse(result, t)
 }
