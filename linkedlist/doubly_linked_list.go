@@ -1,6 +1,8 @@
 // Package doublylinkedlist provides the doubly-linked list data structure and associated methods
 package linkedlist
 
+import "reflect"
+
 // DoublyLinkedListNode is a data structure that contains a value and pointers to the previous and
 // next nodes in the list.
 type DoublyLinkedListNode[T any] struct {
@@ -123,16 +125,16 @@ func (q *DoublyLinkedList[T]) RemoveFront() (T, bool) {
 }
 
 // RemoveLast removes and returns the item at the end of the doubly-linked list.
-func (q *DoublyLinkedList[T]) RemoveLast() (T, bool) {
-	if q.dummyHead.Next == q.dummyTail {
+func (l *DoublyLinkedList[T]) RemoveLast() (T, bool) {
+	if l.dummyHead.Next == l.dummyTail {
 		var zeroValue T
 		return zeroValue, false
 	}
-	result := q.dummyTail.Prev.Val
-	tail := q.dummyTail.Prev
+	result := l.dummyTail.Prev.Val
+	tail := l.dummyTail.Prev
 	newTail := tail.Prev
-	q.dummyTail.Prev = newTail
-	newTail.Next = q.dummyTail
+	l.dummyTail.Prev = newTail
+	newTail.Next = l.dummyTail
 	return result, true
 }
 
@@ -142,10 +144,10 @@ func (l *DoublyLinkedList[T]) Remove(index int) bool {
 	for current != l.dummyTail {
 		if currentIndex == index {
 			current.Prev.Next = current.Next
+			return true
 		}
-		index += 1
+		currentIndex += 1
 		current = current.Next
-		return true
 	}
 	return false
 }
@@ -166,6 +168,20 @@ func (d *DoublyLinkedList[T]) Get(index int) (T, bool) {
 		return zeroValue, false
 	}
 	return current.Val, true
+}
+
+func (d *DoublyLinkedList[T]) Equal(f LinkedList[T]) bool {
+	e := f.(*DoublyLinkedList[T])
+	dCurrent := d.dummyHead.Next
+	eCurrent := e.dummyHead.Next
+	for dCurrent != d.dummyTail && eCurrent != e.dummyTail {
+		if !reflect.DeepEqual(dCurrent.Val, eCurrent.Val) {
+			return false
+		}
+		dCurrent = dCurrent.Next
+		eCurrent = eCurrent.Next
+	}
+	return reflect.DeepEqual(dCurrent.Val, eCurrent.Val)
 }
 
 func (d *DoublyLinkedList[T]) Map(f func(T) T) LinkedList[T] {

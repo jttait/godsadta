@@ -2,6 +2,8 @@ package linkedlist
 
 import (
 	"testing"
+
+	"github.com/jttait/godsa/assert"
 )
 
 func getImplementations() []LinkedList[int] {
@@ -14,10 +16,7 @@ func getImplementations() []LinkedList[int] {
 func TestShouldBeSizeZeroForNewlyInstantiatedLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		result := ll.Size()
-		want := 0
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 0, t)
 	}
 }
 
@@ -25,10 +24,7 @@ func TestShouldBeSizeOneAfterInsertingIntoLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertFront(5)
 		result := ll.Size()
-		want := 1
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 1, t)
 	}
 }
 
@@ -37,10 +33,7 @@ func TestShouldBeSizeZeroAfterInsertingAndRemovingFromLinkedList(t *testing.T) {
 		ll.InsertFront(5)
 		_, _ = ll.RemoveFront()
 		result := ll.Size()
-		want := 0
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 0, t)
 	}
 }
 
@@ -50,20 +43,11 @@ func TestShouldRemoveMultipleItemsOfLinkedList(t *testing.T) {
 		ll.InsertLast(2)
 		ll.InsertLast(3)
 		result, _ := ll.RemoveFront()
-		want := 1
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 1, t)
 		result, _ = ll.RemoveFront()
-		want = 2
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 2, t)
 		result, _ = ll.RemoveFront()
-		want = 3
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 3, t)
 	}
 }
 
@@ -71,10 +55,7 @@ func TestShouldPeekFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		result, _ := ll.PeekFront()
-		want := 5
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 5, t)
 	}
 }
 
@@ -82,10 +63,7 @@ func TestShouldPeekLastFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		result, _ := ll.PeekLast()
-		want := 5
-		if result != want {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 5, t)
 	}
 }
 
@@ -93,18 +71,14 @@ func TestShouldBeTrueWhenPeekingLastFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		_, ok := ll.PeekFront()
-		if !ok {
-			t.Fatalf("Want true. Got false.")
-		}
+		assert.AssertTrue(ok, t)
 	}
 }
 
 func TestShouldBeFalseWhenPeekingLastFromEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		_, ok := ll.PeekLast()
-		if ok {
-			t.Fatalf("Want false. Got true. LL type: %T", ll)
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
@@ -112,18 +86,14 @@ func TestShouldBeTrueWhenPeekingFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		_, ok := ll.PeekFront()
-		if !ok {
-			t.Fatalf("Want true. Got false.")
-		}
+		assert.AssertTrue(ok, t)
 	}
 }
 
 func TestShouldBeFalseWhenPeekingFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		_, ok := ll.PeekFront()
-		if ok {
-			t.Fatalf("Want false. Got true. LL type: %T", ll)
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
@@ -131,27 +101,21 @@ func TestShouldBeTrueWhenRemovingFrontFromNonEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		_, ok := ll.RemoveFront()
-		if !ok {
-			t.Fatalf("Got false. Want true.")
-		}
+		assert.AssertTrue(ok, t)
 	}
 }
 
 func TestShouldBeFalseWhenRemovingFrontFromEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		_, ok := ll.RemoveFront()
-		if ok {
-			t.Fatalf("Got true. Want false.")
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
 func TestShouldBeFalseWhenGettingFromEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		_, ok := ll.Get(0)
-		if ok {
-			t.Fatalf("Got true. Want false.")
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
@@ -159,9 +123,7 @@ func TestShouldBeFalseWhenGettingFromIndexOutsideLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		_, ok := ll.Get(1)
-		if ok {
-			t.Fatalf("Got true. Want false.")
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
@@ -169,9 +131,7 @@ func TestShouldBeTrueWhenGettingFromIndexInsideLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertLast(5)
 		_, ok := ll.Get(0)
-		if !ok {
-			t.Fatalf("Got false. Want true.")
-		}
+		assert.AssertTrue(ok, t)
 	}
 }
 
@@ -180,15 +140,9 @@ func TestShouldGetFromIndexInLinkedList(t *testing.T) {
 		ll.InsertLast(4)
 		ll.InsertLast(5)
 		result, _ := ll.Get(0)
-		want := 4
-		if want != result {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 4, t)
 		result, _ = ll.Get(1)
-		want = 5
-		if want != result {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 5, t)
 	}
 }
 
@@ -197,10 +151,7 @@ func TestShouldInsertIntoLinkedList(t *testing.T) {
 		ll.InsertFront(5)
 		_ = ll.Insert(0, 6)
 		result, _ := ll.Get(0)
-		want := 6
-		if want != result {
-			t.Fatalf("Got %v. Want %v. LL Type: %T\n", result, want, ll)
-		}
+		assert.AssertEqual(result, 6, t)
 	}
 }
 
@@ -210,10 +161,7 @@ func TestShouldRemoveFromLinkedList(t *testing.T) {
 		ll.InsertLast(6)
 		_ = ll.Remove(0)
 		result, _ := ll.Get(0)
-		want := 6
-		if want != result {
-			t.Fatalf("Got %v. Want %v. LL Type: %T\n", result, want, ll)
-		}
+		assert.AssertEqual(result, 6, t)
 	}
 }
 
@@ -221,18 +169,14 @@ func TestShouldBeTrueWhenRemovingFromLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertFront(5)
 		ok := ll.Remove(0)
-		if !ok {
-			t.Fatalf("Got false. Want true. LL Type: %T\n", ll)
-		}
+		assert.AssertTrue(ok, t)
 	}
 }
 
 func TestShouldBeFalseWhenRemovingFromEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ok := ll.Remove(0)
-		if ok {
-			t.Fatalf("Got true. Want false. LL Type: %T\n", ll)
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
@@ -240,18 +184,14 @@ func TestShouldBeTrueWhenInsertingIntoLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ll.InsertFront(5)
 		ok := ll.Insert(0, 6)
-		if !ok {
-			t.Fatalf("Got false. Want true. LL Type: %T\n", ll)
-		}
+		assert.AssertTrue(ok, t)
 	}
 }
 
 func TestShouldBeFalseWhenInsertingIntoEmptyLinkedList(t *testing.T) {
 	for _, ll := range getImplementations() {
 		ok := ll.Insert(0, 6)
-		if ok {
-			t.Fatalf("Got true. Want false. LL Type: %T\n", ll)
-		}
+		assert.AssertFalse(ok, t)
 	}
 }
 
@@ -261,9 +201,6 @@ func TestShouldApplyMapToLinkedList(t *testing.T) {
 		ll.InsertLast(2)
 		ll = ll.Map(func(i int) int { return 2 * i })
 		result, _ := ll.Get(0)
-		want := 2
-		if want != result {
-			t.Fatalf("Got %v. Want %v.\n", result, want)
-		}
+		assert.AssertEqual(result, 2, t)
 	}
 }
