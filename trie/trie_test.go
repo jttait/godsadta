@@ -1,24 +1,22 @@
 package trie
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jttait/godsa/assert"
+)
 
 func TestShouldReturnTrueIfTrieContainsItem(t *testing.T) {
 	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Contains([]byte{'c', 'a', 't'})
-	want := true
-	if result != want {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldReturnFalseIfTrieDoesNotContainItem(t *testing.T) {
 	trie := NewTrie[byte]()
 	result := trie.Contains([]byte{'c', 'a', 't'})
-	want := false
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertFalse(result, t)
 }
 
 func TestShouldRemoveExistingItemFromTrie(t *testing.T) {
@@ -26,29 +24,20 @@ func TestShouldRemoveExistingItemFromTrie(t *testing.T) {
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	_ = trie.Remove([]byte{'c', 'a', 't'})
 	result := trie.Contains([]byte{'c', 'a', 't'})
-	want := false
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertFalse(result, t)
 }
 
 func TestShouldReturnFalseWhenRemovingNonExistingItemFromTrie(t *testing.T) {
 	trie := NewTrie[byte]()
 	result := trie.Remove([]byte{'c', 'a', 't'})
-	want := false
-	if result != want {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertFalse(result, t)
 }
 
 func TestShouldReturnTrueWhenRemovingExistingWordFromTrie(t *testing.T) {
 	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Remove([]byte{'c', 'a', 't'})
-	want := true
-	if result != want {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldContainItemAfterAddingRemovingAddingToTrie(t *testing.T) {
@@ -57,27 +46,18 @@ func TestShouldContainItemAfterAddingRemovingAddingToTrie(t *testing.T) {
 	_ = trie.Remove([]byte{'c', 'a', 't'})
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Contains([]byte{'c', 'a', 't'})
-	want := true
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeTrueWhenInsertingItemNotAlreadyExistingInTrie(t *testing.T) {
 	trie := NewTrie[byte]()
 	result := trie.Insert([]byte{'c', 'a', 't'})
-	want := true
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeFalseWhenInsertingItemAlreadyExistingInTrie(t *testing.T) {
 	trie := NewTrie[byte]()
 	_ = trie.Insert([]byte{'c', 'a', 't'})
 	result := trie.Insert([]byte{'c', 'a', 't'})
-	want := false
-	if want != result {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertFalse(result, t)
 }

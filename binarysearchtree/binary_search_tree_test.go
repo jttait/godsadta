@@ -1,6 +1,10 @@
 package binarysearchtree
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jttait/godsa/assert"
+)
 
 func TestShouldInstantiateBinarySearchTreeWithNilRootNode(t *testing.T) {
 	b := NewBinarySearchTree[int]()
@@ -13,10 +17,7 @@ func TestShouldInsertIntoEmptyBinarySearchTree(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	_ = b.Insert(5)
 	result := b.Root.Val
-	want := 5
-	if result != want {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertEqual(result, 5, t)
 }
 
 func TestShouldInsertIntoNonEmptyBinarySearchTree(t *testing.T) {
@@ -24,28 +25,21 @@ func TestShouldInsertIntoNonEmptyBinarySearchTree(t *testing.T) {
 	_ = b.Insert(5)
 	_ = b.Insert(10)
 	result := b.Root.Right.Val
-	want := 10
-	if result != want {
-		t.Fatalf("Got %v. Want %v.\n", result, want)
-	}
+	assert.AssertEqual(result, 10, t)
 }
 
 func TestShouldTrueWhenInsertingItemThatIsNotAlreadyInBinarySearchTree(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	_ = b.Insert(5)
 	ok := b.Insert(10)
-	if !ok {
-		t.Fatalf("Got false. Want true.\n")
-	}
+	assert.AssertTrue(ok, t)
 }
 
 func TestShouldFalseWhenInsertingItemThatIsAlreadyInBinarySearchTree(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	_ = b.Insert(5)
 	ok := b.Insert(5)
-	if ok {
-		t.Fatalf("Got true. Want false.\n")
-	}
+	assert.AssertFalse(ok, t)
 }
 
 func TestShouldRemoveItemFromBinarySearchTreeOfOneNode(t *testing.T) {
@@ -72,33 +66,25 @@ func TestShouldRemoveItemFromBinarySearchTreeOfThreeNodes(t *testing.T) {
 func TestShouldBeTrueWhenInsertingIntoEmptyBinarySearchTree(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	ok := b.Insert(5)
-	if !ok {
-		t.Fatalf("Want true. Got false.")
-	}
+	assert.AssertTrue(ok, t)
 }
 
 func TestShouldBeFalseWhenInsertingItemThatAlreadyExistsInBinarySearchTree(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	_ = b.Insert(5)
 	ok := b.Insert(5)
-	if ok {
-		t.Fatalf("Want false. Got true.")
-	}
+	assert.AssertFalse(ok, t)
 }
 
 func TestShouldBeFalseForContainsOnEmptyBinarySearchTree(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	result := b.Contains(5)
-	if result {
-		t.Fatalf("Want false. Got true.")
-	}
+	assert.AssertFalse(result, t)
 }
 
 func TestShouldBeTrueForContainsOnBinarySearchTreeThatContainsItem(t *testing.T) {
 	b := NewBinarySearchTree[int]()
 	_ = b.Insert(5)
 	result := b.Contains(5)
-	if !result {
-		t.Fatalf("Want true. Got false.")
-	}
+	assert.AssertTrue(result, t)
 }
