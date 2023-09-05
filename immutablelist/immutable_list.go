@@ -1,3 +1,4 @@
+// Package immutable list contains an immutable list abstract data type and associated methods.
 package immutablelist
 
 type ImmutableList[T any] interface {
@@ -9,4 +10,5 @@ type ImmutableList[T any] interface {
 	Get(index int) T
 	Map(func(T) T) ImmutableList[T]
 	Filter(func(T) bool) ImmutableList[T]
+	Equal(ImmutableList[T]) bool
 }

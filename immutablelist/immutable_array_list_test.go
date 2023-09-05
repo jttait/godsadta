@@ -17,25 +17,9 @@ func TestShouldAppendMultipleItemsToArrayList(t *testing.T) {
 	l = l.Append(5)
 	l = l.Append(6)
 	l = l.Append(7)
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 5, t)
-	result, _ = l.Get(1)
-	assert.AssertEqual(result, 6, t)
-	result, _ = l.Get(2)
-	assert.AssertEqual(result, 7, t)
-}
-
-func TestShouldIncreaseSizeWhenAppendingToArrayList(t *testing.T) {
-	l := NewImmutableArrayList[int]()
-	l = l.Append(5)
-	result := l.Size()
-	assert.AssertEqual(result, 1, t)
-	l = l.Append(6)
-	result = l.Size()
-	assert.AssertEqual(result, 2, t)
-	l = l.Append(7)
-	result = l.Size()
-	assert.AssertEqual(result, 3, t)
+	want := NewImmutableArrayList[int](5, 6, 7)
+	result := l.Equal(want)
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldPrependMultipleItemsToArrayList(t *testing.T) {
@@ -43,25 +27,9 @@ func TestShouldPrependMultipleItemsToArrayList(t *testing.T) {
 	l = l.Prepend(5)
 	l = l.Prepend(6)
 	l = l.Prepend(7)
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 7, t)
-	result, _ = l.Get(1)
-	assert.AssertEqual(result, 6, t)
-	result, _ = l.Get(2)
-	assert.AssertEqual(result, 5, t)
-}
-
-func TestShouldIncreaseSizeWhenPrependingToArrayList(t *testing.T) {
-	l := NewImmutableArrayList[int]()
-	l = l.Prepend(5)
-	result := l.Size()
-	assert.AssertEqual(result, 1, t)
-	l = l.Prepend(6)
-	result = l.Size()
-	assert.AssertEqual(result, 2, t)
-	l = l.Prepend(7)
-	result = l.Size()
-	assert.AssertEqual(result, 3, t)
+	want := NewImmutableArrayList[int](7, 6, 5)
+	result := l.Equal(want)
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeFalseIfGetOnEmptyArray(t *testing.T) {
@@ -85,11 +53,9 @@ func TestShouldBeFalseIfGetIndexIsOutsideArray(t *testing.T) {
 func TestShouldRemoveItemAtIndex(t *testing.T) {
 	l := NewImmutableArrayList[int](1, 2, 3)
 	l, _ = l.Remove(1)
-	result, _ := l.Get(1)
-	assert.AssertEqual(result, 3, t)
-	l, _ = l.Remove(1)
-	_, ok := l.Get(1)
-	assert.AssertFalse(ok, t)
+	want := NewImmutableArrayList[int](1, 3)
+	result := l.Equal(want)
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeFalseWhenRemovingFromEmptyArrayList(t *testing.T) {
@@ -113,15 +79,10 @@ func TestShouldBeTrueWhenRemovingFromIndexInsideArrayList(t *testing.T) {
 func TestShouldInsertItemAtIndex(t *testing.T) {
 	l := NewImmutableArrayList[int](1)
 	l, _ = l.Insert(0, 2)
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 2, t)
-}
-
-func TestShouldShiftTheItemCurrentlyAtTheIndexToRight(t *testing.T) {
-	l := NewImmutableArrayList[int](1)
-	l, _ = l.Insert(0, 2)
-	result, _ := l.Get(1)
-	assert.AssertEqual(result, 1, t)
+	l, _ = l.Insert(1, 3)
+	want := NewImmutableArrayList[int](2, 3, 1)
+	result := l.Equal(want)
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeFalseWhenInsertingIntoEmptyArrayList(t *testing.T) {
@@ -143,17 +104,31 @@ func TestShouldBeFalseWhenInsertingIntoIndexOutsideArrayList(t *testing.T) {
 }
 
 func TestShouldApplyMapToArrayList(t *testing.T) {
-	l := NewImmutableArrayList[int](1)
+	l := NewImmutableArrayList[int](1, 2, 3)
 	l = l.Map(func(i int) int { return i * 2 })
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 2, t)
+	want := NewImmutableArrayList[int](2, 4, 6)
+	result := l.Equal(want)
+	assert.AssertTrue(result, t)
 }
 
 func TestShouldApplyFilterToArrayList(t *testing.T) {
 	l := NewImmutableArrayList[int](1, 2, 3, 4)
 	l = l.Filter(func(i int) bool { return i%2 == 0 })
-	result, _ := l.Get(0)
-	assert.AssertEqual(result, 2, t)
-	result, _ = l.Get(1)
-	assert.AssertEqual(result, 4, t)
+	want := NewImmutableArrayList[int](2, 4)
+	result := l.Equal(want)
+	assert.AssertTrue(result, t)
+}
+
+func TestShouldBeTrueForIdenticalImmutableArrayLists(t *testing.T) {
+	a := NewImmutableArrayList[int](1, 2, 3, 4)
+	b := NewImmutableArrayList[int](1, 2, 3, 4)
+	result := a.Equal(b)
+	assert.AssertTrue(result, t)
+}
+
+func TestShouldBeFalseForDifferentImmutableArrayLists(t *testing.T) {
+	a := NewImmutableArrayList[int](1, 2, 3, 4)
+	b := NewImmutableArrayList[int](1, 2, 3, 5)
+	result := a.Equal(b)
+	assert.AssertFalse(result, t)
 }
