@@ -1,5 +1,7 @@
 package immutablelist
 
+import "reflect"
+
 // ImmutableArrayList implements the ImmutableList interface using a Go array.
 type ImmutableArrayList[T any] struct {
 	array []T
@@ -17,22 +19,24 @@ func (l *ImmutableArrayList[T]) Size() int {
 }
 
 // Append adds the given item to the end of the ImmutableArrayList.
-func (l *ImmutableArrayList[T]) Append(i T) *ImmutableArrayList[T] {
-	r := NewImmutableArrayList[T]()
+func (l *ImmutableArrayList[T]) Append(val T) *ImmutableArrayList[T] {
+	slice := []T{}
 	for _, v := range l.array {
-		r.array = append(r.array, v)
+		slice = append(slice, v)
 	}
-	r.array = append(r.array, i)
+	slice = append(slice, val)
+	r := NewImmutableArrayList[T](slice...)
 	return r
 }
 
 // Prepend adds the given item to the start of the ImmutableArrayList.
-func (l *ImmutableArrayList[T]) Prepend(i T) *ImmutableArrayList[T] {
-	r := NewImmutableArrayList[T]()
-	r.array = append(r.array, i)
+func (l *ImmutableArrayList[T]) Prepend(val T) *ImmutableArrayList[T] {
+	slice := []T{}
+	slice = append(slice, val)
 	for _, v := range l.array {
-		r.array = append(r.array, v)
+		slice = append(slice, v)
 	}
+	r := NewImmutableArrayList[T](slice...)
 	return r
 }
 
@@ -52,12 +56,13 @@ func (l *ImmutableArrayList[T]) Remove(index int) (*ImmutableArrayList[T], bool)
 	if index >= len(l.array) {
 		return l, false
 	}
-	r := NewImmutableArrayList[T]()
+	slice := []T{}
 	for i, v := range l.array {
 		if i != index {
-			r.array = append(r.array, v)
+			slice = append(slice, v)
 		}
 	}
+	r := NewImmutableArrayList[T](slice...)
 	return r, true
 }
 
@@ -69,33 +74,48 @@ func (l *ImmutableArrayList[T]) Insert(index int, value T) (*ImmutableArrayList[
 	if index < 0 || index >= l.Size() {
 		return l, false
 	}
-	r := NewImmutableArrayList[T]()
+	slice := []T{}
 	for i, v := range l.array {
 		if i == index {
-			r.array = append(r.array, value)
+			slice = append(slice, value)
 		}
-		r.array = append(r.array, v)
+		slice = append(slice, v)
 	}
+	r := NewImmutableArrayList[T](slice...)
 	return r, true
 }
 
 // Map applies the given function to all items in the ImmutableArrayList.
 func (l *ImmutableArrayList[T]) Map(f func(T) T) *ImmutableArrayList[T] {
-	r := NewImmutableArrayList[T]()
+	slice := []T{}
 	for _, v := range l.array {
-		r.array = append(r.array, f(v))
+		slice = append(slice, f(v))
 	}
+	r := NewImmutableArrayList[T](slice...)
 	return r
 }
 
 // Filter applies the given predicate function to all items in the ImmutableArrayList and returns a
 // new ImmutableArrayList that only contains items for which the predicate was true.
 func (l *ImmutableArrayList[T]) Filter(f func(T) bool) *ImmutableArrayList[T] {
-	r := NewImmutableArrayList[T]()
+	slice := []T{}
 	for _, v := range l.array {
 		if f(v) {
-			r.array = append(r.array, v)
+			slice = append(slice, v)
 		}
 	}
+	r := NewImmutableArrayList[T](slice...)
 	return r
+}
+
+func (l *ImmutableArrayList[T]) Equal(b *ImmutableArrayList[T]) bool {
+	if l.Size() != b.Size() {
+		return false
+	}
+	for i := range l.array {
+		if !reflect.DeepEqual(l.array[i], b.array[i]) {
+			return false
+		}
+	}
+	return true
 }
