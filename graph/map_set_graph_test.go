@@ -8,20 +8,20 @@ import (
 )
 
 func TestShouldBeTrueWhenAddingNonExistingVertexToGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	result := g.AddVertex(1)
 	assert.AssertTrue(result, t)
 }
 
 func TestShouldBeFalseWhenAddingExistingVertexToGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	result := g.AddVertex(1)
 	assert.AssertFalse(result, t)
 }
 
 func TestShouldRemoveVertexFromGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.RemoveVertex(1)
 	result := g.ContainsVertex(1)
@@ -29,20 +29,20 @@ func TestShouldRemoveVertexFromGraph(t *testing.T) {
 }
 
 func TestShouldReturnTrueWhenRemovingExistentVertexFromGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	result := g.RemoveVertex(1)
 	assert.AssertTrue(result, t)
 }
 
 func TestShouldReturnFalseWhenRemovingNonExistentVertexFromGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	result := g.RemoveVertex(1)
 	assert.AssertFalse(result, t)
 }
 
 func TestShouldRemoveEdgeWhenRemovingVertexFromGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
@@ -53,7 +53,7 @@ func TestShouldRemoveEdgeWhenRemovingVertexFromGraph(t *testing.T) {
 }
 
 func TestShouldBeTrueWhenAddingNonExistingEdgeToGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	result, _ := g.AddEdge(1, 2)
@@ -61,7 +61,7 @@ func TestShouldBeTrueWhenAddingNonExistingEdgeToGraph(t *testing.T) {
 }
 
 func TestShouldBeFalseWhenAddingExistingEdgeToGraph(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
@@ -70,7 +70,7 @@ func TestShouldBeFalseWhenAddingExistingEdgeToGraph(t *testing.T) {
 }
 
 func TestShouldBeErrorWhenAddingEdgeBetweenNonExistingSourceVertex(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(2)
 	_, err := g.AddEdge(1, 2)
 	if err == nil {
@@ -79,7 +79,7 @@ func TestShouldBeErrorWhenAddingEdgeBetweenNonExistingSourceVertex(t *testing.T)
 }
 
 func TestShouldBeErrorWhenAddingEdgeBetweenNonExistingDestinationVertex(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_, err := g.AddEdge(1, 2)
 	if err == nil {
@@ -88,7 +88,7 @@ func TestShouldBeErrorWhenAddingEdgeBetweenNonExistingDestinationVertex(t *testi
 }
 
 func TestShouldBeErrorWhenAddingEdgeBetweenTwoNonExistingVertices(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_, err := g.AddEdge(1, 2)
 	if err == nil {
 		t.Fatalf("Want error. Got no error.")
@@ -96,7 +96,7 @@ func TestShouldBeErrorWhenAddingEdgeBetweenTwoNonExistingVertices(t *testing.T) 
 }
 
 func TestShouldReturnEmptySetIfNoNeighbors(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	result, _ := g.Neighbors(1)
 	result, _ = result.(*set.MapSet[int])
@@ -105,7 +105,7 @@ func TestShouldReturnEmptySetIfNoNeighbors(t *testing.T) {
 }
 
 func TestShouldReturnSetIfNeighbors(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
@@ -115,7 +115,7 @@ func TestShouldReturnSetIfNeighbors(t *testing.T) {
 }
 
 func TestShouldReturnErrorIfVertexForNeighborsDoesNotExist(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
 	_, err := g.Neighbors(1)
@@ -125,7 +125,7 @@ func TestShouldReturnErrorIfVertexForNeighborsDoesNotExist(t *testing.T) {
 }
 
 func TestShouldReturnNoErrorIfVertexForNeighborsDoesExist(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_, _ = g.AddEdge(1, 2)
 	_, err := g.Neighbors(1)
@@ -135,7 +135,7 @@ func TestShouldReturnNoErrorIfVertexForNeighborsDoesExist(t *testing.T) {
 }
 
 func TestShouldRemoveEdge(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
@@ -147,7 +147,7 @@ func TestShouldRemoveEdge(t *testing.T) {
 }
 
 func TestShouldReturnFalseWhenRemovingNonExistentEdge(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	result := g.RemoveEdge(1, 2)
@@ -155,7 +155,7 @@ func TestShouldReturnFalseWhenRemovingNonExistentEdge(t *testing.T) {
 }
 
 func TestShouldReturnTrueWhenRemovingExistentEdge(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	_ = g.AddVertex(2)
 	_, _ = g.AddEdge(1, 2)
@@ -164,7 +164,7 @@ func TestShouldReturnTrueWhenRemovingExistentEdge(t *testing.T) {
 }
 
 func TestShouldReturnFalseWhenRemovingEdgeWithNonExistentVertices(t *testing.T) {
-	g := NewGraph()
+	g := NewMapSetGraph()
 	result := g.RemoveEdge(1, 2)
 	assert.AssertFalse(result, t)
 }
