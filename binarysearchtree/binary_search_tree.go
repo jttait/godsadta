@@ -23,8 +23,12 @@ type BinarySearchTree[T cmp.Ordered] struct {
 }
 
 // NewBinarySearchTree instantiates a binary search tree and returns a pointer to it.
-func NewBinarySearchTree[T cmp.Ordered]() *BinarySearchTree[T] {
-	return &BinarySearchTree[T]{}
+func NewBinarySearchTree[T cmp.Ordered](values ...T) *BinarySearchTree[T] {
+	b := BinarySearchTree[T]{}
+	for _, v := range values {
+		_ = b.Insert(v)
+	}
+	return &b
 }
 
 // Insert inserts the given item into the binary search tree. It returns a Boolean that is true if

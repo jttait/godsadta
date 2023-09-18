@@ -7,6 +7,7 @@ type List[T any] interface {
 	Remove(index int) bool
 	Insert(index int, i T) bool
 	Get(index int) T
-	Map(func(T) T) List[T]
-	Filter(func(T) bool) List[T]
+	Equal(List[T]) bool
+	Map(func(T) T)
+	Filter(func(T) bool)
 }

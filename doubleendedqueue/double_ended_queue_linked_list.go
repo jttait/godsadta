@@ -10,9 +10,12 @@ type DoubleEndedQueueLinkedList[T any] struct {
 }
 
 // NewDoubleEndedQueue instantiates a new double-ended queue and returns a pointer to it.
-func NewDoubleEndedQueueLinkedList[T any]() *DoubleEndedQueueLinkedList[T] {
+func NewDoubleEndedQueueLinkedList[T any](values ...T) *DoubleEndedQueueLinkedList[T] {
 	q := DoubleEndedQueueLinkedList[T]{}
 	q.list = linkedlist.NewDoublyLinkedList[T]()
+	for _, v := range values {
+		q.list.InsertLast(v)
+	}
 	return &q
 }
 
