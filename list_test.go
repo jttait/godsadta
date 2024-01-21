@@ -25,8 +25,12 @@ func TestShouldAppendMultipleItemsToList(t *testing.T) {
 	l.Append(5)
 	l.Append(6)
 	l.Append(7)
-	want := NewLLList[int](5, 6, 7)
-	assert.AssertTrue(l.Equal(want), t)
+	firstElement, _ := l.Get(0)
+	secondElement, _ := l.Get(1)
+	thirdElement, _ := l.Get(2)
+	assert.AssertEqual(firstElement, 5, t)
+	assert.AssertEqual(secondElement, 6, t)
+	assert.AssertEqual(thirdElement, 7, t)
 }
 
 func TestShouldPrependMultipleItemsToList(t *testing.T) {
@@ -34,8 +38,12 @@ func TestShouldPrependMultipleItemsToList(t *testing.T) {
 	l.Prepend(5)
 	l.Prepend(6)
 	l.Prepend(7)
-	want := NewLLList[int](7, 6, 5)
-	assert.AssertTrue(l.Equal(want), t)
+	firstElement, _ := l.Get(0)
+	secondElement, _ := l.Get(1)
+	thirdElement, _ := l.Get(2)
+	assert.AssertEqual(firstElement, 7, t)
+	assert.AssertEqual(secondElement, 6, t)
+	assert.AssertEqual(thirdElement, 5, t)
 }
 
 func TestShouldBeFalseIfGetOnEmptyList(t *testing.T) {
@@ -116,27 +124,19 @@ func TestShouldBeFalseWhenInsertingIntoIndexOutsideList(t *testing.T) {
 func TestShouldApplyMapToList(t *testing.T) {
 	l := NewLLList[int](1, 2, 3)
 	l.Map(func(i int) int { return i * 2 })
-	want := NewLLList[int](2, 4, 6)
-	assert.AssertTrue(l.Equal(want), t)
+	firstElement, _ := l.Get(0)
+	secondElement, _ := l.Get(1)
+	thirdElement, _ := l.Get(2)
+	assert.AssertEqual(firstElement, 2, t)
+	assert.AssertEqual(secondElement, 4, t)
+	assert.AssertEqual(thirdElement, 6, t)
 }
 
 func TestShouldApplyFilterToList(t *testing.T) {
 	l := NewLLList[int](1, 2, 3, 4)
 	l.Filter(func(i int) bool { return i%2 == 0 })
-	want := NewLLList[int](2, 4)
-	assert.AssertTrue(l.Equal(want), t)
-}
-
-func TestShouldBeTrueForEqualOnTwoIdenticalLists(t *testing.T) {
-	a := NewLLList[int](1, 2, 3)
-	b := NewLLList[int](1, 2, 3)
-	result := a.Equal(b)
-	assert.AssertTrue(result, t)
-}
-
-func TestShouldBeFalseForEqualOnTwoDifferentLists(t *testing.T) {
-	a := NewLLList[int](1, 2, 3)
-	b := NewLLList[int](1, 2, 4)
-	result := a.Equal(b)
-	assert.AssertFalse(result, t)
+	firstElement, _ := l.Get(0)
+	secondElement, _ := l.Get(1)
+	assert.AssertEqual(firstElement, 2, t)
+	assert.AssertEqual(secondElement, 4, t)
 }

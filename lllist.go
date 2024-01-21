@@ -32,10 +32,6 @@ func (l *LLList[T]) Prepend(i T) {
 	l.list.InsertFront(i)
 }
 
-func (l *LLList[T]) Equal(m *List[T]) bool {
-	return l.list.Equal(m.list)
-}
-
 // Remove removes the item at the given index of the list. It also returns a Boolean that is true
 // if the index is within the bounds of the list.
 func (l *LLList[T]) Remove(index int) bool {
