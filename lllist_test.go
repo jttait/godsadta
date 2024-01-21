@@ -119,14 +119,14 @@ func TestShouldApplyFilterToLLList(t *testing.T) {
 	assert.AssertTrue(l.Equal(want), t)
 }
 
-func TestShouldBeTrueForEqualOnTwoIdenticalLists(t *testing.T) {
+func TestShouldBeTrueForEqualOnTwoIdenticalLLLists(t *testing.T) {
 	a := NewLLList[int](1, 2, 3)
 	b := NewLLList[int](1, 2, 3)
 	result := a.Equal(b)
 	assert.AssertTrue(result, t)
 }
 
-func TestShouldBeFalseForEqualOnTwoDifferentLists(t *testing.T) {
+func TestShouldBeFalseForEqualOnTwoDifferentLLLists(t *testing.T) {
 	a := NewLLList[int](1, 2, 3)
 	b := NewLLList[int](1, 2, 4)
 	result := a.Equal(b)
