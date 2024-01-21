@@ -1,6 +1,6 @@
-package doubleendedqueue
+package godsa
 
-type DoubleEndedQueue[T any] interface {
+type DEQueue[T any] interface {
 	Size()
 	InsertFront(i T)
 	InsertLast(i T)
