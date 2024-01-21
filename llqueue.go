@@ -1,5 +1,4 @@
-// Package queue provides the queue abstract data type and associated methods
-package queue
+package godsa
 
 import "github.com/jttait/godsa/linkedlist"
 
