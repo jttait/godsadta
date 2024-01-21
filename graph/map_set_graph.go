@@ -79,7 +79,7 @@ func (g *MapSetGraph) RemoveEdge(i, j int) bool {
 func (g *MapSetGraph) Neighbors(i int) (godsa.Set[int], error) {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		return set.NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
+		return godsa.NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
 	}
 	return g.adjacencyList[i], nil
 }
