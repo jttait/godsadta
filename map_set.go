@@ -1,4 +1,4 @@
-package set
+package godsa
 
 // Set is an abstract data type that stores unique values without ordering.
 type MapSet[T comparable] struct {
