@@ -1,5 +1,5 @@
 // Package stack provides the stack abstract data type and associated methods
-package stack
+package godsa
 
 import "github.com/jttait/godsa/linkedlist"
 

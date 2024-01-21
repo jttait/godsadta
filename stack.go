@@ -1,4 +1,4 @@
-package stack
+package godsa
 
 type Stack[T any] interface {
 	Size() int
