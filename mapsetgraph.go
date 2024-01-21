@@ -1,21 +1,19 @@
 // Package graph provides the graph data structure and associated methods
-package graph
+package godsa
 
 import (
 	"fmt"
-
-	"github.com/jttait/godsa"
 )
 
 // Graph is a data structure comprising vertices and edges connecting these vertices.
 type MapSetGraph struct {
-	adjacencyList map[int]godsa.Set[int]
+	adjacencyList map[int]Set[int]
 }
 
 // NewGraph instantiates a graph and returns a pointer to it.
 func NewMapSetGraph() *MapSetGraph {
 	g := MapSetGraph{}
-	g.adjacencyList = make(map[int]godsa.Set[int])
+	g.adjacencyList = make(map[int]Set[int])
 	return &g
 }
 
@@ -25,7 +23,7 @@ func NewMapSetGraph() *MapSetGraph {
 func (g *MapSetGraph) AddVertex(i int) bool {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		g.adjacencyList[i] = godsa.NewMapSet[int]()
+		g.adjacencyList[i] = NewMapSet[int]()
 		return true
 	}
 	return false
@@ -76,10 +74,10 @@ func (g *MapSetGraph) RemoveEdge(i, j int) bool {
 
 // Neighbors returns a set of nodes that are connected to the current node by an edge. It returns an
 // error if the vertex given does not exist in the graph.
-func (g *MapSetGraph) Neighbors(i int) (godsa.Set[int], error) {
+func (g *MapSetGraph) Neighbors(i int) (Set[int], error) {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		return godsa.NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
+		return NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
 	}
 	return g.adjacencyList[i], nil
 }
