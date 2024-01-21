@@ -114,7 +114,7 @@ Time:
 
 ## PriorityQueue[T cmp.Ordered]
 
-| Implementation | PriorityQueueMaxHeap |
+| Implementation | MaxHeapPriorityQueue |
 | -------------- | -------------------- |
 | Size           |
 | Add            |
