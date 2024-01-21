@@ -1,18 +1,18 @@
 // Package minheap provides the min heap data structure and associated methods
-package minheap
+package godsa
 
 import (
 	"cmp"
 )
 
-type MinHeapArray[T cmp.Ordered] struct {
+type ArrayMinHeap[T cmp.Ordered] struct {
 	array []T
 }
 
 // NewMinHeap instantiates a min heap and returns a pointer to it. The variadic argument can be used
 // to insert items into the heap after it is created.
-func NewMinHeapArray[T cmp.Ordered](i ...T) *MinHeapArray[T] {
-	m := MinHeapArray[T]{}
+func NewArrayMinHeap[T cmp.Ordered](i ...T) *ArrayMinHeap[T] {
+	m := ArrayMinHeap[T]{}
 	for _, j := range i {
 		m.Insert(j)
 	}
@@ -24,7 +24,7 @@ func findParentIndex(index int) int {
 }
 
 // Insert inserts the item into the min heap.
-func (m *MinHeapArray[T]) Insert(i T) {
+func (m *ArrayMinHeap[T]) Insert(i T) {
 	m.array = append(m.array, i)
 	index := len(m.array) - 1
 	parentIndex := findParentIndex(index)
@@ -37,7 +37,7 @@ func (m *MinHeapArray[T]) Insert(i T) {
 
 // Extract returns the minimum item from the min heap and swaps the elements as necessary to
 // restore the heap property in the data structure.
-func (m *MinHeapArray[T]) Extract() T {
+func (m *ArrayMinHeap[T]) Extract() T {
 	result := m.array[0]
 	m.array[0] = m.array[len(m.array)-1]
 	m.array = m.array[:len(m.array)-1]
@@ -66,10 +66,10 @@ func findChildIndices(index int) (int, int) {
 	return (index * 2) + 1, (index * 2) + 2
 }
 
-func (m *MinHeapArray[T]) Size() int {
+func (m *ArrayMinHeap[T]) Size() int {
 	return len(m.array)
 }
 
-func (m *MinHeapArray[T]) Peek() T {
+func (m *ArrayMinHeap[T]) Peek() T {
 	return m.array[0]
 }
