@@ -1,7 +1,5 @@
 package godsa
 
-import "reflect"
-
 // SliceList implements the List interface using a Go array.
 type SliceList[T any] struct {
 	slice []T
@@ -36,21 +34,6 @@ func (l *SliceList[T]) Get(index int) (T, bool) {
 		return zeroValue, false
 	}
 	return l.slice[index], true
-}
-
-// Equal returns true if both SliceLists are equal
-func (l *SliceList[T]) Equal(m *SliceList[T]) bool {
-	if l.Size() != m.Size() {
-		return false
-	}
-	for i := 0; i < l.Size(); i++ {
-		lValue, _ := l.Get(i)
-		mValue, _ := m.Get(i)
-		if !reflect.DeepEqual(lValue, mValue) {
-			return false
-		}
-	}
-	return true
 }
 
 // Remove removes the item at the given index of the SliceList. It returns a Boolean that is true
