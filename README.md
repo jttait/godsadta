@@ -1,6 +1,6 @@
 Data structures and algorithms implemented in Go.
 
-# Data structures
+# Data Structures
 
 ## LinkedList[T any]
 
@@ -52,7 +52,7 @@ Space:
 | Remove         | O(log n), O(n)   |
 | Contains       | O(log n), O(n)   |
 
-# Abstract data types
+# Abstract Data Types
 
 ## Set[T comparable]
 
@@ -140,3 +140,16 @@ Time:
 | Add            | O(1)        |
 | Size           | O(1)        |
 | Remove         | O(1)        |
+
+# Algorithms
+
+## Shortest Path
+
+| Implementation | Djikstras |
+| -------------- | --------- |
+| Calculate      |           |
+
+## Search
+
+| Implementation | LinearSearch | BinarySearch |
+| Find           |              |              |
