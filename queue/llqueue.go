@@ -8,7 +8,7 @@ type LLQueue[T any] struct {
 }
 
 // NewLLQueue instantiates a new linked list queue and returns a pointer to it.
-func NewLLQueue[T any]() *QueueLinkedList[T] {
+func NewLLQueue[T any]() *LLQueue[T] {
 	q := LLQueue[T]{}
 	q.list = linkedlist.NewDoublyLinkedList[T]()
 	return &q
