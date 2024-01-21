@@ -1,4 +1,4 @@
-package doubleendedqueue
+package dequeue
 
 import (
 	"testing"
