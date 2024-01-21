@@ -87,12 +87,12 @@ Time:
 
 ## Stack[T any]
 
-| Implementation | LinkedListStack |
-| -------------- | --------------- |
-| Size           | O(n)            |
-| Push           | O(1)            |
-| Pop            | O(1)            |
-| Peek           | O(1)            |
+| Implementation | LLStack |
+| -------------- | ------- |
+| Size           | O(n)    |
+| Push           | O(1)    |
+| Pop            | O(1)    |
+| Peek           | O(1)    |
 
 ## Queue[T any]
 

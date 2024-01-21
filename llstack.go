@@ -1,27 +1,27 @@
 // Package stack provides the stack abstract data type and associated methods
-package stack
+package godsa
 
 import "github.com/jttait/godsa/linkedlist"
 
 // Stack is a last-in, first-out data structure.
-type StackLinkedList[T any] struct {
+type LLStack[T any] struct {
 	list linkedlist.LinkedList[T]
 }
 
 // NewStack instantiates a new stack and returns a pointer to it.
-func NewStackLinkedList[T any]() *StackLinkedList[T] {
-	s := StackLinkedList[T]{}
+func NewLLStack[T any]() *LLStack[T] {
+	s := LLStack[T]{}
 	s.list = linkedlist.NewSinglyLinkedList[T]()
 	return &s
 }
 
 // Size returns the number of items in the stack.
-func (s *StackLinkedList[T]) Size() int {
+func (s *LLStack[T]) Size() int {
 	return s.list.Size()
 }
 
 // Push adds a new item to the top of the stack.
-func (s *StackLinkedList[T]) Push(i T) {
+func (s *LLStack[T]) Push(i T) {
 	s.list.InsertFront(i)
 }
 
@@ -29,7 +29,7 @@ func (s *StackLinkedList[T]) Push(i T) {
 // false if the stack is empty (and so it was not possible to pop an item). In
 // the case where the stack is empty, the zero value of the type in the stack will be returned but
 // this is meaningless.
-func (s *StackLinkedList[T]) Pop() (T, bool) {
+func (s *LLStack[T]) Pop() (T, bool) {
 	return s.list.RemoveFront()
 }
 
@@ -37,6 +37,6 @@ func (s *StackLinkedList[T]) Pop() (T, bool) {
 // returns a Boolean which is false if the stack is empty (and so it was not possible to peek an
 // item). In the case where the stack is empty, the zero value of the type in the
 // stack will be returned but this is meaningless.
-func (s *StackLinkedList[T]) Peek() (T, bool) {
+func (s *LLStack[T]) Peek() (T, bool) {
 	return s.list.PeekFront()
 }
