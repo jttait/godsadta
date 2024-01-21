@@ -74,16 +74,16 @@ Time:
 
 Time:
 
-| Implementation | ArrayList | LinkedListList |             
-| -------------- | --------- | -------------- |
-| Size           | O(1)      | O(n)           |
-| Prepend        | O(n)      | O(1)           |
-| Append         | O(1),O(n) | O(1)           |
-| Remove         | O(n)      | O(n)           |
-| Insert         | O(n)      | O(n)           |
-| Get            | O(1)      | O(n)           |
-| Map            | O(n)      | O(n)           |
-| Filter         | O(n)      | O(n)           |
+| Implementation | SliceList | LLList |             
+| -------------- | --------- | ------ |
+| Size           | O(1)      | O(n)   |
+| Prepend        | O(n)      | O(1)   |
+| Append         | O(1),O(n) | O(1)   |
+| Remove         | O(n)      | O(n)   |
+| Insert         | O(n)      | O(n)   |
+| Get            | O(1)      | O(n)   |
+| Map            | O(n)      | O(n)   |
+| Filter         | O(n)      | O(n)   |
 
 ## Stack[T any]
 
