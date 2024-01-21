@@ -1,4 +1,4 @@
-package linkedlist
+package godsa
 
 import (
 	"testing"
@@ -8,8 +8,8 @@ import (
 
 func getImplementations() []LinkedList[int] {
 	return []LinkedList[int]{
-		NewSinglyLinkedList[int](),
-		NewDoublyLinkedList[int](),
+		NewSLL[int](),
+		NewDLL[int](),
 	}
 }
 
