@@ -6,40 +6,46 @@ import (
 	"github.com/jttait/godsa/assert"
 )
 
-func TestShouldBeSizeZeroForNewlyInstantiatedLLQueue(t *testing.T) {
+func getQueueImplementations() []Queue[int] {
+	return []Queue[int]{
+		NewLLQueue[int](),
+	}
+}
+
+func TestShouldBeSizeZeroForNewlyInstantiatedQueue(t *testing.T) {
 	q := NewLLQueue[int]()
 	result := q.Size()
 	assert.AssertEqual(result, 0, t)
 }
 
-func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedLLQueue(t *testing.T) {
+func TestShouldBeSizeOneWhenItemAddedToNewlyInstantiatedQueue(t *testing.T) {
 	q := NewLLQueue[int]()
 	q.Insert(5)
 	result := q.Size()
 	assert.AssertEqual(result, 1, t)
 }
 
-func TestShouldRemoveItemFromLLQueueOfSizeOne(t *testing.T) {
+func TestShouldRemoveItemFromQueueOfSizeOne(t *testing.T) {
 	q := NewLLQueue[int]()
 	q.Insert(5)
 	result, _ := q.Remove()
 	assert.AssertEqual(result, 5, t)
 }
 
-func TestShouldBeFalseWhenRemovingFromEmptyLLQueue(t *testing.T) {
+func TestShouldBeFalseWhenRemovingFromEmptyQueue(t *testing.T) {
 	q := NewLLQueue[int]()
 	_, ok := q.Remove()
 	assert.AssertFalse(ok, t)
 }
 
-func TestShouldBeTrueWhenRemovingFromNonEmptyLLQueue(t *testing.T) {
+func TestShouldBeTrueWhenRemovingFromNonEmptyQueue(t *testing.T) {
 	q := NewLLQueue[int]()
 	q.Insert(5)
 	_, ok := q.Remove()
 	assert.AssertTrue(ok, t)
 }
 
-func TestShouldRemoveIntegerThatWasAddedEarliestFromLLQueue(t *testing.T) {
+func TestShouldRemoveIntegerThatWasAddedEarliestFromQueue(t *testing.T) {
 	q := NewLLQueue[int]()
 	q.Insert(5)
 	q.Insert(6)
@@ -47,7 +53,7 @@ func TestShouldRemoveIntegerThatWasAddedEarliestFromLLQueue(t *testing.T) {
 	assert.AssertEqual(result, 5, t)
 }
 
-func TestShouldRemoveStringThatWasAddedEarliestFromLLQueue(t *testing.T) {
+func TestShouldRemoveStringThatWasAddedEarliestFromQueue(t *testing.T) {
 	q := NewLLQueue[string]()
 	q.Insert("five")
 	q.Insert("six")
@@ -55,7 +61,7 @@ func TestShouldRemoveStringThatWasAddedEarliestFromLLQueue(t *testing.T) {
 	assert.AssertEqual(result, "five", t)
 }
 
-func TestShouldRemoveMultipleStringsFromLLQueue(t *testing.T) {
+func TestShouldRemoveMultipleStringsFromQueue(t *testing.T) {
 	q := NewLLQueue[string]()
 	q.Insert("five")
 	q.Insert("six")
