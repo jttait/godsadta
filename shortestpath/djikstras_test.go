@@ -3,11 +3,11 @@ package shortestpath
 import (
 	"testing"
 
-	"github.com/jttait/godsa/graph"
+	"github.com/jttait/godsa"
 )
 
 func TestShouldBeOneResultForTwoNodeGraph(t *testing.T) {
-	g := graph.NewMapSetGraph()
+	g := godsa.NewMapSetGraph()
 	g.AddVertex(1)
 	g.AddVertex(2)
 	g.AddEdge(1, 2)
@@ -25,7 +25,7 @@ func TestShouldBeOneResultForTwoNodeGraph(t *testing.T) {
 }
 
 func TestShouldBeTwoResultForThreeNodeGraph(t *testing.T) {
-	g := graph.NewMapSetGraph()
+	g := godsa.NewMapSetGraph()
 	g.AddVertex(1)
 	g.AddVertex(2)
 	g.AddVertex(3)
