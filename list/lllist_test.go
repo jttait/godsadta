@@ -13,7 +13,7 @@ func TestShouldInstantiateLLListOfSizeZero(t *testing.T) {
 }
 
 func TestShouldAppendMultipleItemsToLLList(t *testing.T) {
-	l := NewLinkedListList[int]()
+	l := NewLLList[int]()
 	l.Append(5)
 	l.Append(6)
 	l.Append(7)
