@@ -1,4 +1,4 @@
-package queue
+package godsa
 
 type Queue[T any] interface {
 	Size() int
