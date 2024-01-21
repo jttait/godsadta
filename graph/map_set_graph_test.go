@@ -99,7 +99,7 @@ func TestShouldReturnEmptySetIfNoNeighbors(t *testing.T) {
 	g := NewMapSetGraph()
 	_ = g.AddVertex(1)
 	result, _ := g.Neighbors(1)
-	result, _ = result.(*set.MapSet[int])
+	result, _ = result.(*godsa.MapSet[int])
 	want := godsa.NewMapSet[int]()
 	assert.AssertTrue(result.Equals(want), t)
 }
@@ -141,7 +141,7 @@ func TestShouldRemoveEdge(t *testing.T) {
 	_, _ = g.AddEdge(1, 2)
 	_ = g.RemoveEdge(1, 2)
 	result, _ := g.Neighbors(1)
-	result, _ = result.(*set.MapSet[int])
+	result, _ = result.(*godsa.MapSet[int])
 	want := godsa.NewMapSet[int]()
 	assert.AssertTrue(result.Equals(want), t)
 }
