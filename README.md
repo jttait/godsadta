@@ -6,21 +6,21 @@ Data structures and algorithms implemented in Go.
 
 Time:
 
-| Implementation | SinglyLinkedList | DoublyLinkedList |
-| -------------- | ---------------- | ---------------- |
-| InsertFront    | O(1)             | O(1)             |
-| InsertLast     | O(n)             | O(1)             |
-| RemoveFront    | O(1)             | O(1)             |
-| RemoveLast     | O(n)             | O(1)             |
-| PeekFront      | O(1)             | O(1)             |
-| PeekLast       | O(n)             | O(n)             |
-| Size           | O(n)             | O(n)             |
+| Implementation | SLL  | DLL  |
+| -------------- | -----| ---- |
+| InsertFront    | O(1) | O(1) |
+| InsertLast     | O(n) | O(1) |
+| RemoveFront    | O(1) | O(1) |
+| RemoveLast     | O(n) | O(1) |
+| PeekFront      | O(1) | O(1) |
+| PeekLast       | O(n) | O(n) |
+| Size           | O(n) | O(n) |
 
 Space:
 
 ## MinHeap[T cmp.Ordered]
 
-| Implementation | MinHeapArray |
+| Implementation | ArrayMinHeap |
 | -------------- | ------------ |
 | Insert         |
 | Extract        |
@@ -29,7 +29,7 @@ Space:
 
 ## MaxHeap[T cmp.Ordered]
 
-| Implementation | MaxHeapArray |
+| Implementation | ArrayMaxHeap |
 | -------------- | ------------ |
 | Insert         |
 | Extract        |
@@ -123,8 +123,8 @@ Time:
 
 ## Graph
 
-| Implementation | Graph |
-| -------------- | ----- |
+| Implementation | MapSetGraph |
+| -------------- | ----------- |
 | AddVertex      |
 | RemoveVertex   |
 | AddEdge        |
