@@ -102,15 +102,15 @@ Time:
 | Insert         | O(1)            |
 | Remove         | O(1)            |
 
-## DoubleEndedQueue[T any]
+## DEQueue[T any]
 
-| Implementation | DoubleEndedQueueLinkedList |
-| -------------- | -------------------------- |
-| Size           | O(n)                       |
-| InsertFront    | O(1)                       |
-| InsertLast     | O(1)                       |
-| RemoveFront    | O(1)                       |
-| RemoveLast     | O(1)                       |
+| Implementation | LLDEQueue |
+| -------------- | --------- |
+| Size           | O(n)      |
+| InsertFront    | O(1)      |
+| InsertLast     | O(1)      |
+| RemoveFront    | O(1)      |
+| RemoveLast     | O(1)      |
 
 ## PriorityQueue[T cmp.Ordered]
 
