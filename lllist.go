@@ -1,4 +1,4 @@
-package list
+package godsa
 
 import (
 	"github.com/jttait/godsa/linkedlist"

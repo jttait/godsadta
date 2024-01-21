@@ -1,4 +1,4 @@
-package list
+package godsa
 
 type List[T any] interface {
 	Size() int
