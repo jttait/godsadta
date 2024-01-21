@@ -96,11 +96,11 @@ Time:
 
 ## Queue[T any]
 
-| Implementation | QueueLinkedList |
-| -------------- | --------------- |
-| Size           | O(n)            |
-| Insert         | O(1)            |
-| Remove         | O(1)            |
+| Implementation | LLQueue |
+| -------------- | ------- |
+| Size           | O(n)    |
+| Insert         | O(1)    |
+| Remove         | O(1)    |
 
 ## DEQueue[T any]
 
