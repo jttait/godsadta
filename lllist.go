@@ -32,7 +32,7 @@ func (l *LLList[T]) Prepend(i T) {
 	l.list.InsertFront(i)
 }
 
-func (l *LLList[T]) Equal(m *LLList[T]) bool {
+func (l *LLList[T]) Equal(m *List[T]) bool {
 	return l.list.Equal(m.list)
 }
 

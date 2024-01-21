@@ -39,7 +39,7 @@ func (l *SliceList[T]) Get(index int) (T, bool) {
 }
 
 // Equal returns true if both SliceLists are equal
-func (l *SliceList[T]) Equal(m *SliceList[T]) bool {
+func (l *SliceList[T]) Equal(m *List[T]) bool {
 	if l.Size() != m.Size() {
 		return false
 	}
