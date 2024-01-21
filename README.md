@@ -132,3 +132,11 @@ Time:
 | Neighbors      |
 | ContainsVertex |
 
+## Multiset[T any]
+
+| Implementation | MapMultiset |
+| -------------- | ----------- |
+| Count          | O(1)        |
+| Add            | O(1)        |
+| Size           | O(1)        |
+| Remove         | O(1)        |
