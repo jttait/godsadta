@@ -1,4 +1,4 @@
-package linkedlist
+package godsa
 
 type LinkedList[T any] interface {
 	Size() int

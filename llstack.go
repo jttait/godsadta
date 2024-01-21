@@ -1,17 +1,15 @@
 // Package stack provides the stack abstract data type and associated methods
 package godsa
 
-import "github.com/jttait/godsa/linkedlist"
-
 // Stack is a last-in, first-out data structure.
 type LLStack[T any] struct {
-	list linkedlist.LinkedList[T]
+	list LinkedList[T]
 }
 
 // NewStack instantiates a new stack and returns a pointer to it.
 func NewLLStack[T any]() *LLStack[T] {
 	s := LLStack[T]{}
-	s.list = linkedlist.NewSinglyLinkedList[T]()
+	s.list = NewSLL[T]()
 	return &s
 }
 
