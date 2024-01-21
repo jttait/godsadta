@@ -1,4 +1,4 @@
-package multiset
+package godsa
 
 type Multiset[T any] interface {
 	Count(T) int

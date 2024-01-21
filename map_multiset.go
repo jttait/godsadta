@@ -1,4 +1,4 @@
-package multiset
+package godsa
 
 type MapMultiset[T comparable] struct {
 	m map[T]int

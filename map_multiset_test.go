@@ -1,4 +1,4 @@
-package multiset
+package godsa
 
 import (
 	"testing"
