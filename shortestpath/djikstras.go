@@ -4,13 +4,12 @@ import (
 	"fmt"
 
 	"github.com/jttait/godsa"
-	"github.com/jttait/godsa/minheap"
 )
 
 func djikstras(graph godsa.Graph, node int) (map[int]int, error) {
 	result := map[int]int{}
 	visited := godsa.NewMapSet[int]()
-	minHeap := minheap.NewMinHeapArray[int]()
+	minHeap := godsa.NewArrayMinHeap[int]()
 
 	visited.Insert(node)
 	minHeap.Insert(node)
