@@ -3,14 +3,14 @@ package shortestpath
 import (
 	"fmt"
 
+	"github.com/jttait/godsa"
 	"github.com/jttait/godsa/graph"
 	"github.com/jttait/godsa/minheap"
-	"github.com/jttait/godsa/set"
 )
 
 func djikstras(graph graph.Graph, node int) (map[int]int, error) {
 	result := map[int]int{}
-	visited := set.NewMapSet[int]()
+	visited := godsa.NewMapSet[int]()
 	minHeap := minheap.NewMinHeapArray[int]()
 
 	visited.Insert(node)
