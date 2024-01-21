@@ -1,4 +1,4 @@
-package dequeue
+package godsa
 
 type DEQueue[T any] interface {
 	Size()

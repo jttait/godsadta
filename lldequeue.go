@@ -1,6 +1,6 @@
 // Package dequeue provides the double-ended queue abstract data type and associated
 // methods
-package dequeue
+package godsa
 
 import "github.com/jttait/godsa/linkedlist"
 
