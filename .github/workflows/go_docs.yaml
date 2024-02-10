@@ -16,5 +16,6 @@ jobs:
         shell: bash
         run: |
           go version
+          go mod init godoctesting
           go install -v golang.org/x/tools/cmd/godoc@latest
           godoc
