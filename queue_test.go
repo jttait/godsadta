@@ -4,17 +4,18 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsa/llqueue"
 )
 
 func getQueueImplementationsInt() []Queue[int] {
 	return []Queue[int]{
-		NewLLQueue[int](),
+		llqueue.NewLLQueue[int](),
 	}
 }
 
 func getQueueImplementationsString() []Queue[string] {
 	return []Queue[string]{
-		NewLLQueue[string](),
+		llqueue.NewLLQueue[string](),
 	}
 }
 

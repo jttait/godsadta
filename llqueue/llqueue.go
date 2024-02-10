@@ -1,4 +1,4 @@
-package godsa
+package llqueue
 
 import (
 	"github.com/jttait/godsa/dll"
