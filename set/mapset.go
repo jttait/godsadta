@@ -1,6 +1,4 @@
-package mapset
-
-import "github.com/jttait/godsa/set"
+package set
 
 // Set is an abstract data type that stores unique values without ordering.
 type MapSet[T comparable] struct {
@@ -49,7 +47,7 @@ func (s *MapSet[T]) Contains(i T) bool {
 }
 
 // Equals compares two sets and returns true if they contain exactly the same items.
-func (s *MapSet[T]) Equals(t set.Set[T]) bool {
+func (s *MapSet[T]) Equals(t Set[T]) bool {
 	u := t.(*MapSet[T])
 	for key, _ := range s.m {
 		_, ok := u.m[key]
@@ -69,7 +67,7 @@ func (s *MapSet[T]) Iter() []T {
 }
 
 // Union returns a set containing items that are in either set
-func (s *MapSet[T]) Union(t set.Set[T]) set.Set[T] {
+func (s *MapSet[T]) Union(t Set[T]) Set[T] {
 	result := NewMapSet[T]()
 	for _, value := range s.Iter() {
 		_ = result.Insert(value)
@@ -81,7 +79,7 @@ func (s *MapSet[T]) Union(t set.Set[T]) set.Set[T] {
 }
 
 // Intersection returns a set containing only the items that are in both sets.
-func (s *MapSet[T]) Intersection(t set.Set[T]) set.Set[T] {
+func (s *MapSet[T]) Intersection(t Set[T]) Set[T] {
 	result := NewMapSet[T]()
 	for _, value := range s.Iter() {
 		if t.Contains(value) {
@@ -93,7 +91,7 @@ func (s *MapSet[T]) Intersection(t set.Set[T]) set.Set[T] {
 
 // Difference returns a set containing items that are in this set but are not in the set passed in
 // the argument.
-func (s *MapSet[T]) Difference(t set.Set[T]) set.Set[T] {
+func (s *MapSet[T]) Difference(t Set[T]) Set[T] {
 	result := NewMapSet[T]()
 	for _, value := range s.Iter() {
 		_ = result.Insert(value)

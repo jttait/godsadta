@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/jttait/godsa/graph"
-	"github.com/jttait/godsa/mapset"
 	"github.com/jttait/godsa/minheap"
+	"github.com/jttait/godsa/set"
 )
 
 type Djikstras struct {
@@ -19,7 +19,7 @@ func NewDjikstras(g graph.Graph) ShortestPath {
 
 func (d *Djikstras) Calculate(node int) (map[int]int, error) {
 	result := map[int]int{}
-	visited := mapset.NewMapSet[int]()
+	visited := set.NewMapSet[int]()
 	minHeap := minheap.NewArrayMinHeap[int]()
 
 	visited.Insert(node)

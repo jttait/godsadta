@@ -4,7 +4,6 @@ package mapsetgraph
 import (
 	"fmt"
 
-	"github.com/jttait/godsa/mapset"
 	"github.com/jttait/godsa/set"
 )
 
@@ -26,7 +25,7 @@ func NewMapSetGraph() *MapSetGraph {
 func (g *MapSetGraph) AddVertex(i int) bool {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		g.adjacencyList[i] = mapset.NewMapSet[int]()
+		g.adjacencyList[i] = set.NewMapSet[int]()
 		return true
 	}
 	return false
@@ -80,7 +79,7 @@ func (g *MapSetGraph) RemoveEdge(i, j int) bool {
 func (g *MapSetGraph) Neighbors(i int) (set.Set[int], error) {
 	_, ok := g.adjacencyList[i]
 	if !ok {
-		return mapset.NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
+		return set.NewMapSet[int](), fmt.Errorf("Vertex %v not in graph.", i)
 	}
 	return g.adjacencyList[i], nil
 }
