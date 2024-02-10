@@ -3,7 +3,6 @@ package shortestpath_test
 import (
 	"testing"
 
-	"github.com/jttait/godsa/djikstras"
 	"github.com/jttait/godsa/graph"
 	"github.com/jttait/godsa/mapsetgraph"
 	"github.com/jttait/godsa/shortestpath"
@@ -11,7 +10,7 @@ import (
 
 func getShortestPathImplementations() [](func(graph.Graph) shortestpath.ShortestPath) {
 	return [](func(graph.Graph) shortestpath.ShortestPath){
-		djikstras.NewDjikstras,
+		shortestpath.NewDjikstras,
 	}
 }
 
