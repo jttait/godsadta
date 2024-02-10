@@ -1,16 +1,14 @@
-package set_test
+package set
 
 import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/mapset"
-	"github.com/jttait/godsa/set"
 )
 
-func getSetImplementations(values1 []int, values2 []int) [][]set.Set[int] {
-	return [][]set.Set[int]{
-		[]set.Set[int]{mapset.NewMapSet[int](values1...), mapset.NewMapSet[int](values2...)},
+func getSetImplementations(values1 []int, values2 []int) [][]Set[int] {
+	return [][]Set[int]{
+		[]Set[int]{NewMapSet[int](values1...), NewMapSet[int](values2...)},
 	}
 }
 
@@ -122,7 +120,7 @@ func TestShouldBeNotEqualForTwoDifferentSets(t *testing.T) {
 func TestShouldContainAllItemsFromBothSetsAfterUnion(t *testing.T) {
 	for _, s := range getSetImplementations([]int{1, 2}, []int{3, 4}) {
 		result := s[0].Union(s[1])
-		want := mapset.NewMapSet[int](1, 2, 3, 4)
+		want := NewMapSet[int](1, 2, 3, 4)
 		if !result.Equals(want) {
 			t.Fatalf("Union does not contain all items.")
 		}
@@ -132,7 +130,7 @@ func TestShouldContainAllItemsFromBothSetsAfterUnion(t *testing.T) {
 func TestShouldContainOnlyItemsThatAreInBothSetsAfterIntersection(t *testing.T) {
 	for _, s := range getSetImplementations([]int{1, 2, 3, 4, 5}, []int{4, 5, 6, 7, 8}) {
 		result := s[0].Intersection(s[1])
-		want := mapset.NewMapSet[int](4, 5)
+		want := NewMapSet[int](4, 5)
 		if !result.Equals(want) {
 			t.Fatalf("Intersection does not only contain items in both sets.")
 		}
@@ -142,7 +140,7 @@ func TestShouldContainOnlyItemsThatAreInBothSetsAfterIntersection(t *testing.T) 
 func TestShouldContainOnlyItemsThatAreInFirstSetButNotSecondAfterDifference(t *testing.T) {
 	for _, s := range getSetImplementations([]int{1, 2, 3, 4, 5}, []int{4, 5, 6, 7, 8}) {
 		result := s[0].Difference(s[1])
-		want := mapset.NewMapSet[int](1, 2, 3)
+		want := NewMapSet[int](1, 2, 3)
 		if !result.Equals(want) {
 			t.Fatalf("Difference does not only contain items in first set but not second.")
 		}
