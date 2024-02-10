@@ -1,5 +1,5 @@
 // Package minheap provides the min heap data structure and associated methods
-package godsa
+package arrayminheap
 
 import (
 	"cmp"
