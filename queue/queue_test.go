@@ -1,4 +1,4 @@
-package godsa
+package queue
 
 import (
 	"testing"
