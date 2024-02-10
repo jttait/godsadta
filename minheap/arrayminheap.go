@@ -1,5 +1,4 @@
-// Package arrayminheap provides an implementation of minheap
-package arrayminheap
+package minheap
 
 import (
 	"cmp"

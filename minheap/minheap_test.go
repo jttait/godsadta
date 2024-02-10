@@ -3,13 +3,12 @@ package minheap
 import (
 	"testing"
 
-	"github.com/jttait/godsa/arrayminheap"
 	"github.com/jttait/godsa/assert"
 )
 
 func getMinHeapImplementations(values ...int) []MinHeap[int] {
 	return []MinHeap[int]{
-		arrayminheap.NewArrayMinHeap[int](values...),
+		NewArrayMinHeap[int](values...),
 	}
 }
 
