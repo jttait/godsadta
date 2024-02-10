@@ -1,5 +1,5 @@
 // Package set provides a set abstract data type and associated methods
-package godsa
+package set
 
 type Set[T comparable] interface {
 	Size() int

@@ -1,14 +1,16 @@
-package godsa
+package graph
 
 import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsa/mapset"
+	"github.com/jttait/godsa/mapsetgraph"
 )
 
 func getGraphImplementations() []Graph {
 	return []Graph{
-		NewMapSetGraph(),
+		mapsetgraph.NewMapSetGraph(),
 	}
 }
 
@@ -58,7 +60,7 @@ func TestShouldRemoveEdgeWhenRemovingVertexFromGraph(t *testing.T) {
 		_, _ = g.AddEdge(1, 2)
 		_ = g.RemoveVertex(1)
 		result, _ := g.Neighbors(2)
-		want := NewMapSet[int]()
+		want := mapset.NewMapSet[int]()
 		assert.AssertTrue(result.Equals(want), t)
 	}
 }
@@ -115,8 +117,8 @@ func TestShouldReturnEmptySetIfNoNeighbors(t *testing.T) {
 	for _, g := range getGraphImplementations() {
 		_ = g.AddVertex(1)
 		result, _ := g.Neighbors(1)
-		result, _ = result.(*MapSet[int])
-		want := NewMapSet[int]()
+		result, _ = result.(*mapset.MapSet[int])
+		want := mapset.NewMapSet[int]()
 		assert.AssertTrue(result.Equals(want), t)
 	}
 }
@@ -127,7 +129,7 @@ func TestShouldReturnSetIfNeighbors(t *testing.T) {
 		_ = g.AddVertex(2)
 		_, _ = g.AddEdge(1, 2)
 		result, _ := g.Neighbors(1)
-		want := NewMapSet[int](2)
+		want := mapset.NewMapSet[int](2)
 		assert.AssertTrue(result.Equals(want), t)
 	}
 }
@@ -161,8 +163,8 @@ func TestShouldRemoveEdge(t *testing.T) {
 		_, _ = g.AddEdge(1, 2)
 		_ = g.RemoveEdge(1, 2)
 		result, _ := g.Neighbors(1)
-		result, _ = result.(*MapSet[int])
-		want := NewMapSet[int]()
+		result, _ = result.(*mapset.MapSet[int])
+		want := mapset.NewMapSet[int]()
 		assert.AssertTrue(result.Equals(want), t)
 	}
 }

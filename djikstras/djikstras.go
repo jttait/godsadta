@@ -1,23 +1,26 @@
-package godsa
+package djikstras
 
 import (
 	"fmt"
 
 	"github.com/jttait/godsa/arrayminheap"
+	"github.com/jttait/godsa/graph"
+	"github.com/jttait/godsa/mapset"
+	"github.com/jttait/godsa/shortestpath"
 )
 
 type Djikstras struct {
-	graph Graph
+	graph graph.Graph
 }
 
-func NewDjikstras(g Graph) ShortestPath {
+func NewDjikstras(g graph.Graph) shortestpath.ShortestPath {
 	d := Djikstras{g}
 	return &d
 }
 
 func (d *Djikstras) Calculate(node int) (map[int]int, error) {
 	result := map[int]int{}
-	visited := NewMapSet[int]()
+	visited := mapset.NewMapSet[int]()
 	minHeap := arrayminheap.NewArrayMinHeap[int]()
 
 	visited.Insert(node)

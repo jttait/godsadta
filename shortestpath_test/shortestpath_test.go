@@ -1,18 +1,23 @@
-package godsa
+package shortestpath_test
 
 import (
 	"testing"
+
+	"github.com/jttait/godsa/djikstras"
+	"github.com/jttait/godsa/graph"
+	"github.com/jttait/godsa/mapsetgraph"
+	"github.com/jttait/godsa/shortestpath"
 )
 
-func getShortestPathImplementations() [](func(Graph) ShortestPath) {
-	return [](func(Graph) ShortestPath){
-		NewDjikstras,
+func getShortestPathImplementations() [](func(graph.Graph) shortestpath.ShortestPath) {
+	return [](func(graph.Graph) shortestpath.ShortestPath){
+		djikstras.NewDjikstras,
 	}
 }
 
 func TestShouldBeOneResultForTwoNodeGraph(t *testing.T) {
 	for _, s := range getShortestPathImplementations() {
-		g := NewMapSetGraph()
+		g := mapsetgraph.NewMapSetGraph()
 		g.AddVertex(1)
 		g.AddVertex(2)
 		g.AddEdge(1, 2)
@@ -33,7 +38,7 @@ func TestShouldBeOneResultForTwoNodeGraph(t *testing.T) {
 
 func TestShouldBeTwoResultForThreeNodeGraph(t *testing.T) {
 	for _, s := range getShortestPathImplementations() {
-		g := NewMapSetGraph()
+		g := mapsetgraph.NewMapSetGraph()
 		g.AddVertex(1)
 		g.AddVertex(2)
 		g.AddVertex(3)
