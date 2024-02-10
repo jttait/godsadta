@@ -1,28 +1,28 @@
-package doubleendedpriorityqueue
+package depriorityqueue
 
 import (
 	"cmp"
 	"sort"
 )
 
-type DoubleEndedPriorityQueueNaive[T cmp.Ordered] struct {
+type NaiveDEPriorityQueue[T cmp.Ordered] struct {
 	s []T
 }
 
-func NewDoubleEndedPriorityQueueNaive[T cmp.Ordered]() *DoubleEndedPriorityQueueNaive[T] {
-	q := DoubleEndedPriorityQueueNaive[T]{}
+func NewNaiveDEPriorityQueue[T cmp.Ordered]() *NaiveDEPriorityQueue[T] {
+	q := NaiveDEPriorityQueue[T]{}
 	return &q
 }
 
-func (q *DoubleEndedPriorityQueueNaive[T]) Insert(i T) {
+func (q *NaiveDEPriorityQueue[T]) Insert(i T) {
 	q.s = append(q.s, i)
 }
 
-func (q *DoubleEndedPriorityQueueNaive[T]) Size() int {
+func (q *NaiveDEPriorityQueue[T]) Size() int {
 	return len(q.s)
 }
 
-func (q *DoubleEndedPriorityQueueNaive[T]) ExtractMax() (T, bool) {
+func (q *NaiveDEPriorityQueue[T]) ExtractMax() (T, bool) {
 	if len(q.s) == 0 {
 		var zeroValue T
 		return zeroValue, false
@@ -33,7 +33,7 @@ func (q *DoubleEndedPriorityQueueNaive[T]) ExtractMax() (T, bool) {
 	return result, true
 }
 
-func (q *DoubleEndedPriorityQueueNaive[T]) ExtractMin() (T, bool) {
+func (q *NaiveDEPriorityQueue[T]) ExtractMin() (T, bool) {
 	if len(q.s) == 0 {
 		var zeroValue T
 		return zeroValue, false
@@ -44,7 +44,7 @@ func (q *DoubleEndedPriorityQueueNaive[T]) ExtractMin() (T, bool) {
 	return result, true
 }
 
-func (q *DoubleEndedPriorityQueueNaive[T]) PeekMax() (T, bool) {
+func (q *NaiveDEPriorityQueue[T]) PeekMax() (T, bool) {
 	if len(q.s) == 0 {
 		var zeroValue T
 		return zeroValue, false
@@ -54,7 +54,7 @@ func (q *DoubleEndedPriorityQueueNaive[T]) PeekMax() (T, bool) {
 	return result, true
 }
 
-func (q *DoubleEndedPriorityQueueNaive[T]) PeekMin() (T, bool) {
+func (q *NaiveDEPriorityQueue[T]) PeekMin() (T, bool) {
 	if len(q.s) == 0 {
 		var zeroValue T
 		return zeroValue, false
