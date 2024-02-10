@@ -1,4 +1,4 @@
-package lllist
+package list
 
 import (
 	"github.com/jttait/godsa/dll"
