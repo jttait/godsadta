@@ -1,6 +1,6 @@
 // Package dequeue provides the double-ended queue abstract data type and associated
 // methods
-package godsa
+package lldequeue
 
 import (
 	"github.com/jttait/godsa/dll"
