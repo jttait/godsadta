@@ -1,18 +1,18 @@
 package dequeue
 
 import (
-	"github.com/jttait/godsa/dll"
+	"github.com/jttait/godsa/linkedlist"
 )
 
 // Double-ended queue enables inserting and polling from either end
 type LLDEQueue[T any] struct {
-	list *dll.DLL[T]
+	list *linkedlist.DLL[T]
 }
 
 // NewDoubleEndedQueue instantiates a new double-ended queue and returns a pointer to it.
 func NewLLDEQueue[T any](values ...T) *LLDEQueue[T] {
 	q := LLDEQueue[T]{}
-	q.list = dll.NewDLL[T]()
+	q.list = linkedlist.NewDLL[T]()
 	for _, v := range values {
 		q.list.InsertLast(v)
 	}
