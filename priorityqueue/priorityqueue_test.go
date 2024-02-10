@@ -4,12 +4,11 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/maxheappriorityqueue"
 )
 
 func getPriorityQueueImplementations() []PriorityQueue[int] {
 	return []PriorityQueue[int]{
-		maxheappriorityqueue.NewMaxHeapPriorityQueue[int](),
+		NewMaxHeapPriorityQueue[int](),
 	}
 }
 
