@@ -4,6 +4,7 @@ package godsa
 import (
 	"cmp"
 
+	"github.com/jttait/godsa/arraymaxheap"
 	"github.com/jttait/godsa/maxheap"
 )
 
@@ -16,7 +17,7 @@ type MaxHeapPriorityQueue[T cmp.Ordered] struct {
 // NewPriorityQueue instantiates a priority queue and returns a pointer to it.
 func NewMaxHeapPriorityQueue[T cmp.Ordered]() *MaxHeapPriorityQueue[T] {
 	q := MaxHeapPriorityQueue[T]{}
-	q.maxheap = maxheap.NewMaxHeapArray[T]()
+	q.maxheap = arraymaxheap.NewMaxHeapArray[T]()
 	return &q
 }
 
