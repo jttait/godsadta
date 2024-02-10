@@ -1,4 +1,4 @@
-package godsa
+package dequeue
 
 import (
 	"testing"
