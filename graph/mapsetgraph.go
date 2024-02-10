@@ -6,12 +6,12 @@ import (
 	"github.com/jttait/godsa/set"
 )
 
-// Graph is a data structure comprising vertices and edges connecting these vertices.
+// MapSetGraph is a graph implemented using an adjacency list.
 type MapSetGraph struct {
 	adjacencyList map[int]set.Set[int]
 }
 
-// NewGraph instantiates a graph and returns a pointer to it.
+// NewMapSetGraph instantiates a graph and returns a pointer to it.
 func NewMapSetGraph() *MapSetGraph {
 	g := MapSetGraph{}
 	g.adjacencyList = make(map[int]set.Set[int])
