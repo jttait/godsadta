@@ -1,5 +1,5 @@
 // Package priorityqueue provides the priority queue abstract data type and associated methods
-package godsa
+package maxheappriorityqueue
 
 import (
 	"cmp"
