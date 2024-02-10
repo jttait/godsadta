@@ -1,4 +1,8 @@
-package godsa
+package sll
+
+import (
+	"github.com/jttait/godsa/linkedlist"
+)
 
 // SinglyLinkedListNode is a data structure that contains a value and a pointer to the next node in
 // the list.
@@ -124,7 +128,7 @@ func (l *SLL[T]) RemoveLast() (T, bool) {
 	return result, true
 }
 
-func (l *SLL[T]) Equal(m LinkedList[T]) bool {
+func (l *SLL[T]) Equal(m linkedlist.LinkedList[T]) bool {
 	for l != nil && m != nil {
 		if l != m {
 			return false
@@ -175,7 +179,7 @@ func (l *SLL[T]) Get(index int) (T, bool) {
 }
 
 // Map applies a given function to each item in the list.
-func (l *SLL[T]) Map(f func(T) T) LinkedList[T] {
+func (l *SLL[T]) Map(f func(T) T) linkedlist.LinkedList[T] {
 	result := NewSLL[T]()
 	current := l.dummyHead.Next
 	for current != nil {
@@ -187,7 +191,7 @@ func (l *SLL[T]) Map(f func(T) T) LinkedList[T] {
 
 // Filter applies a given predicate function to each item in the list and returns a linked list of
 // all items for which the predicate is true.
-func (l *SLL[T]) Filter(f func(T) bool) LinkedList[T] {
+func (l *SLL[T]) Filter(f func(T) bool) linkedlist.LinkedList[T] {
 	result := NewSLL[T]()
 	current := l.dummyHead.Next
 	for current != nil {

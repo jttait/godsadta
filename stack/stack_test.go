@@ -1,20 +1,21 @@
-package godsa
+package stack
 
 import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsa/llstack"
 )
 
 func getStackImplementationsInt() []Stack[int] {
 	return []Stack[int]{
-		NewLLStack[int](),
+		llstack.NewLLStack[int](),
 	}
 }
 
 func getStackImplementationsString() []Stack[string] {
 	return []Stack[string]{
-		NewLLStack[string](),
+		llstack.NewLLStack[string](),
 	}
 }
 
