@@ -1,3 +1,5 @@
+// Package priorityqueue provides an interface and implementations for the priority queue abstract
+// data type
 package priorityqueue
 
 import "cmp"

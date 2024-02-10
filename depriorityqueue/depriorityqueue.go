@@ -1,3 +1,5 @@
+// Package depriorityqueue provides interface and implementations for double-ended priority queue
+// abstract data type
 package depriorityqueue
 
 import "cmp"

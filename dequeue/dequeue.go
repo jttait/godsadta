@@ -1,4 +1,5 @@
-// Package dequeue defines an interface for double-ended queues
+// Package dequeue provides an interface and implementations for the double-ended queue abstract
+// data type
 package dequeue
 
 type DEQueue[T any] interface {
