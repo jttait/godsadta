@@ -1,4 +1,5 @@
-package godsa
+// Package dequeue defines an interface for double-ended queues
+package dequeue
 
 type DEQueue[T any] interface {
 	Size() int
