@@ -4,11 +4,12 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsa/mapmultiset"
 )
 
 func getMultisetImplementations() []Multiset[int] {
 	return []Multiset[int]{
-		NewMapMultiset[int](),
+		mapmultiset.NewMapMultiset[int](),
 	}
 }
 
