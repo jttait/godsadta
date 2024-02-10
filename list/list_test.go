@@ -4,14 +4,12 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/lllist"
-	"github.com/jttait/godsa/slicelist"
 )
 
 func getListImplementations(values ...int) []List[int] {
 	return []List[int]{
-		lllist.NewLLList[int](values...),
-		slicelist.NewSliceList[int](values...),
+		NewLLList[int](values...),
+		NewSliceList[int](values...),
 	}
 }
 
