@@ -1,4 +1,4 @@
-package doubleendedpriorityqueue
+package depriorityqueue
 
 import (
 	"testing"
@@ -7,14 +7,14 @@ import (
 )
 
 func TestShouldInsertIntoNaiveQueue(t *testing.T) {
-	q := NewDoubleEndedPriorityQueueNaive[int]()
+	q := NewNaiveDEPriorityQueue[int]()
 	q.Insert(5)
 	result := q.Size()
 	assert.AssertEqual(result, 1, t)
 }
 
 func TestShouldExtractMaxFromNaiveQueue(t *testing.T) {
-	q := NewDoubleEndedPriorityQueueNaive[int]()
+	q := NewNaiveDEPriorityQueue[int]()
 	q.Insert(5)
 	q.Insert(7)
 	q.Insert(3)
@@ -29,7 +29,7 @@ func TestShouldExtractMaxFromNaiveQueue(t *testing.T) {
 }
 
 func TestShouldExtractMinFromNaiveQueue(t *testing.T) {
-	q := NewDoubleEndedPriorityQueueNaive[int]()
+	q := NewNaiveDEPriorityQueue[int]()
 	q.Insert(5)
 	q.Insert(7)
 	q.Insert(3)
@@ -44,7 +44,7 @@ func TestShouldExtractMinFromNaiveQueue(t *testing.T) {
 }
 
 func TestShouldPeekMaxFromNaiveQueue(t *testing.T) {
-	q := NewDoubleEndedPriorityQueueNaive[int]()
+	q := NewNaiveDEPriorityQueue[int]()
 	q.Insert(5)
 	q.Insert(7)
 	q.Insert(3)
@@ -55,7 +55,7 @@ func TestShouldPeekMaxFromNaiveQueue(t *testing.T) {
 }
 
 func TestShouldPeekMinFromNaiveQueue(t *testing.T) {
-	q := NewDoubleEndedPriorityQueueNaive[int]()
+	q := NewNaiveDEPriorityQueue[int]()
 	q.Insert(5)
 	q.Insert(7)
 	q.Insert(3)

@@ -1,8 +1,8 @@
-package doubleendedpriorityqueue
+package depriorityqueue
 
 import "cmp"
 
-type DoubleEndedPriorityQueue[T cmp.Ordered] interface {
+type DEPriorityQueue[T cmp.Ordered] interface {
 	Size() int
 	Insert(T)
 	ExtractMax() (T, bool)
