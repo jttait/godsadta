@@ -1,4 +1,4 @@
-package mapmultiset
+package multiset
 
 type MapMultiset[T comparable] struct {
 	m map[T]int
