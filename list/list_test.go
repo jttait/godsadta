@@ -1,15 +1,17 @@
-package godsa
+package list
 
 import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsa/lllist"
+	"github.com/jttait/godsa/slicelist"
 )
 
 func getListImplementations(values ...int) []List[int] {
 	return []List[int]{
-		NewLLList[int](values...),
-		NewSliceList[int](values...),
+		lllist.NewLLList[int](values...),
+		slicelist.NewSliceList[int](values...),
 	}
 }
 

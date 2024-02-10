@@ -1,4 +1,4 @@
-package godsa
+package slicelist
 
 // SliceList implements the List interface using a Go array.
 type SliceList[T any] struct {
