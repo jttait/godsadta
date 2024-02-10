@@ -1,4 +1,4 @@
-package godsa
+package minheap
 
 import "cmp"
 
