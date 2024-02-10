@@ -4,13 +4,12 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/mapsetgraph"
 	"github.com/jttait/godsa/set"
 )
 
 func getGraphImplementations() []Graph {
 	return []Graph{
-		mapsetgraph.NewMapSetGraph(),
+		NewMapSetGraph(),
 	}
 }
 

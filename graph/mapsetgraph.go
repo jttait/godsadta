@@ -1,5 +1,4 @@
-// Package graph provides the graph data structure and associated methods
-package mapsetgraph
+package graph
 
 import (
 	"fmt"
