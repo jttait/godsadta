@@ -1,12 +1,17 @@
 package godsa
 
+import (
+	"github.com/jttait/godsa/dll"
+	"github.com/jttait/godsa/linkedlist"
+)
+
 type LLList[T any] struct {
-	list LinkedList[T]
+	list linkedlist.LinkedList[T]
 }
 
 func NewLLList[T any](values ...T) *LLList[T] {
 	l := LLList[T]{}
-	l.list = NewDLL[T]()
+	l.list = dll.NewDLL[T]()
 	for _, v := range values {
 		l.Append(v)
 	}

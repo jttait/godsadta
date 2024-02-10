@@ -2,15 +2,19 @@
 // methods
 package godsa
 
+import (
+	"github.com/jttait/godsa/dll"
+)
+
 // Double-ended queue enables inserting and polling from either end
 type LLDEQueue[T any] struct {
-	list *DLL[T]
+	list *dll.DLL[T]
 }
 
 // NewDoubleEndedQueue instantiates a new double-ended queue and returns a pointer to it.
 func NewLLDEQueue[T any](values ...T) *LLDEQueue[T] {
 	q := LLDEQueue[T]{}
-	q.list = NewDLL[T]()
+	q.list = dll.NewDLL[T]()
 	for _, v := range values {
 		q.list.InsertLast(v)
 	}

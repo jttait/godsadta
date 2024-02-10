@@ -1,13 +1,17 @@
 package godsa
 
+import (
+	"github.com/jttait/godsa/dll"
+)
+
 type LLQueue[T any] struct {
-	list *DLL[T]
+	list *dll.DLL[T]
 }
 
 // NewLLQueue instantiates a new linked list queue and returns a pointer to it.
 func NewLLQueue[T any]() *LLQueue[T] {
 	q := LLQueue[T]{}
-	q.list = NewDLL[T]()
+	q.list = dll.NewDLL[T]()
 	return &q
 }
 

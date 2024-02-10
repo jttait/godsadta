@@ -1,7 +1,11 @@
 // Package doublylinkedlist provides the doubly-linked list data structure and associated methods
-package godsa
+package dll
 
-import "reflect"
+import (
+	"reflect"
+
+	"github.com/jttait/godsa/linkedlist"
+)
 
 // DoublyLinkedListNode is a data structure that contains a value and pointers to the previous and
 // next nodes in the list.
@@ -170,7 +174,7 @@ func (d *DLL[T]) Get(index int) (T, bool) {
 	return current.Val, true
 }
 
-func (d *DLL[T]) Equal(f LinkedList[T]) bool {
+func (d *DLL[T]) Equal(f linkedlist.LinkedList[T]) bool {
 	e := f.(*DLL[T])
 	dCurrent := d.dummyHead.Next
 	eCurrent := e.dummyHead.Next
@@ -184,7 +188,7 @@ func (d *DLL[T]) Equal(f LinkedList[T]) bool {
 	return reflect.DeepEqual(dCurrent.Val, eCurrent.Val)
 }
 
-func (d *DLL[T]) Map(f func(T) T) LinkedList[T] {
+func (d *DLL[T]) Map(f func(T) T) linkedlist.LinkedList[T] {
 	result := NewDLL[T]()
 	current := d.dummyHead.Next
 	for current != nil {
@@ -194,7 +198,7 @@ func (d *DLL[T]) Map(f func(T) T) LinkedList[T] {
 	return result
 }
 
-func (d *DLL[T]) Filter(f func(T) bool) LinkedList[T] {
+func (d *DLL[T]) Filter(f func(T) bool) linkedlist.LinkedList[T] {
 	result := NewDLL[T]()
 	current := d.dummyHead.Next
 	for current != nil {
