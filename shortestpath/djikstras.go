@@ -1,5 +1,4 @@
-// Package djikstras implements shortestpath
-package djikstras
+package shortestpath
 
 import (
 	"fmt"
@@ -7,14 +6,13 @@ import (
 	"github.com/jttait/godsa/graph"
 	"github.com/jttait/godsa/mapset"
 	"github.com/jttait/godsa/minheap"
-	"github.com/jttait/godsa/shortestpath"
 )
 
 type Djikstras struct {
 	graph graph.Graph
 }
 
-func NewDjikstras(g graph.Graph) shortestpath.ShortestPath {
+func NewDjikstras(g graph.Graph) ShortestPath {
 	d := Djikstras{g}
 	return &d
 }
