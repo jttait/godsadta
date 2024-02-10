@@ -1,3 +1,4 @@
+// Package djikstras implements shortestpath
 package djikstras
 
 import (
