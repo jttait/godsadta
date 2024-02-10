@@ -16,4 +16,5 @@ jobs:
         shell: bash
         run: |
           go install -v golang.org/x/tools/cmd/godoc@latest
+          cat go.mod
           godoc
