@@ -1,4 +1,4 @@
-package godsa
+package priorityqueue
 
 import "cmp"
 
