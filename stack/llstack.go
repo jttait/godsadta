@@ -2,7 +2,6 @@ package stack
 
 import (
 	"github.com/jttait/godsa/linkedlist"
-	"github.com/jttait/godsa/sll"
 )
 
 // Stack is a last-in, first-out data structure.
@@ -13,7 +12,7 @@ type LLStack[T any] struct {
 // NewStack instantiates a new stack and returns a pointer to it.
 func NewLLStack[T any]() *LLStack[T] {
 	s := LLStack[T]{}
-	s.list = sll.NewSLL[T]()
+	s.list = linkedlist.NewSLL[T]()
 	return &s
 }
 

@@ -1,18 +1,15 @@
-package linkedlist_test
+package linkedlist
 
 import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/dll"
-	"github.com/jttait/godsa/linkedlist"
-	"github.com/jttait/godsa/sll"
 )
 
-func getImplementations() []linkedlist.LinkedList[int] {
-	return []linkedlist.LinkedList[int]{
-		sll.NewSLL[int](),
-		dll.NewDLL[int](),
+func getImplementations() []LinkedList[int] {
+	return []LinkedList[int]{
+		NewSLL[int](),
+		NewDLL[int](),
 	}
 }
 
