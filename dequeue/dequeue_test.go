@@ -4,18 +4,17 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/lldequeue"
 )
 
 func getDEQueueImplementationsInt(values ...int) []DEQueue[int] {
 	return []DEQueue[int]{
-		lldequeue.NewLLDEQueue[int](values...),
+		NewLLDEQueue[int](values...),
 	}
 }
 
 func getDEQueueImplementationsString(values ...string) []DEQueue[string] {
 	return []DEQueue[string]{
-		lldequeue.NewLLDEQueue[string](values...),
+		NewLLDEQueue[string](values...),
 	}
 }
 
