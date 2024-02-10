@@ -1,4 +1,4 @@
-// Package minheap provides the min heap data structure and associated methods
+// Package arrayminheap provides an implementation of minheap
 package arrayminheap
 
 import (

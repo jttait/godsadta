@@ -1,3 +1,4 @@
+// Package arraymaxheap is an implementation of maxheap
 package arraymaxheap
 
 import "cmp"
