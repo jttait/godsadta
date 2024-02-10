@@ -1,5 +1,4 @@
-// Package priorityqueue provides the priority queue abstract data type and associated methods
-package maxheappriorityqueue
+package priorityqueue
 
 import (
 	"cmp"
