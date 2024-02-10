@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/jttait/godsa/graph"
-	"github.com/jttait/godsa/mapsetgraph"
 	"github.com/jttait/godsa/shortestpath"
 )
 
@@ -16,7 +15,7 @@ func getShortestPathImplementations() [](func(graph.Graph) shortestpath.Shortest
 
 func TestShouldBeOneResultForTwoNodeGraph(t *testing.T) {
 	for _, s := range getShortestPathImplementations() {
-		g := mapsetgraph.NewMapSetGraph()
+		g := graph.NewMapSetGraph()
 		g.AddVertex(1)
 		g.AddVertex(2)
 		g.AddEdge(1, 2)
@@ -37,7 +36,7 @@ func TestShouldBeOneResultForTwoNodeGraph(t *testing.T) {
 
 func TestShouldBeTwoResultForThreeNodeGraph(t *testing.T) {
 	for _, s := range getShortestPathImplementations() {
-		g := mapsetgraph.NewMapSetGraph()
+		g := graph.NewMapSetGraph()
 		g.AddVertex(1)
 		g.AddVertex(2)
 		g.AddVertex(3)
