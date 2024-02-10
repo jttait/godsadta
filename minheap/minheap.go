@@ -1,3 +1,4 @@
+// Package minheap provides an interface and implementations for the min heap data structure
 package minheap
 
 import "cmp"

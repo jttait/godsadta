@@ -1,4 +1,4 @@
-// Package maxheap provides the max heap data structure and associated methods
+// Package maxheap provides an interface and implementations for the max heap data structure
 package maxheap
 
 import "cmp"

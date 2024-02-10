@@ -1,4 +1,5 @@
-// Package immutable list contains an immutable list abstract data type and associated methods.
+// Package immutable list provides an interface and implementations for the immutable list abstract
+// data type
 package immutablelist
 
 type ImmutableList[T any] interface {

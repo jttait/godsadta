@@ -1,3 +1,4 @@
+// Package graph provides interface and implementations for the graph data structure
 package graph
 
 import (

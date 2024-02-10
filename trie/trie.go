@@ -1,4 +1,4 @@
-// Package trie provides the trie data structure and associated methods
+// Package trie provides an interface and implementations for the trie data structure
 package trie
 
 // Trie is a data structure for locating keys within a set but the key is broken into individual

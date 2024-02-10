@@ -1,4 +1,4 @@
-// Package set provides a set abstract data type and associated methods
+// Package set provides an interface and implementations for the set abstract data type
 package set
 
 type Set[T comparable] interface {

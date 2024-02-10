@@ -1,3 +1,4 @@
+// Package linkedlist provides an interface and implementations for the linked list data structure
 package linkedlist
 
 type LinkedList[T any] interface {

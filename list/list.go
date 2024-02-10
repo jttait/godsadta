@@ -1,3 +1,4 @@
+// Package list provides an interface and implementations for the list abstract data type
 package list
 
 type List[T any] interface {
