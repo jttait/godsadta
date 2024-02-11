@@ -58,3 +58,13 @@ func TestShouldReturnFalseWhenPuttingIntoZeroSizeLRUCache(t *testing.T) {
 	_, got := c.Get(1)
 	assert.AssertFalse(got, t)
 }
+
+func TestShouldUpdateLeastRecentlyUsedOnGet(t *testing.T) {
+	c := NewLLMapLRUCache[int, int](2)
+	c.Put(1, 2)
+	c.Put(3, 4)
+	c.Get(1)
+	c.Put(5, 6)
+	_, got := c.Get(1)
+	assert.AssertTrue(got, t)
+}
