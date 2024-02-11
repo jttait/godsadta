@@ -61,6 +61,14 @@ func (q *DLL[T]) InsertFront(i T) {
 	q.dummyHead.Next = insertedNode
 }
 
+func (q *DLL[T]) InsertNodeFront(insertedNode *DLLNode[T]) {
+	currentHead := q.dummyHead.Next
+	insertedNode.Prev = q.dummyHead
+	insertedNode.Next = currentHead
+	currentHead.Prev = insertedNode
+	q.dummyHead.Next = insertedNode
+}
+
 // InsertLast inserts a new item at the end of the list.
 func (q *DLL[T]) InsertLast(i T) {
 	insertedNode := NewDLLNode[T](i)
@@ -151,6 +159,10 @@ func (l *DLL[T]) Remove(index int) bool {
 		current = current.Next
 	}
 	return false
+}
+
+func (l *DLL[T]) RemoveNode(ptr *DLLNode[T]) {
+	ptr.Prev.Next = ptr.Next
 }
 
 func (d *DLL[T]) Get(index int) (T, bool) {
