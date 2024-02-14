@@ -3,7 +3,7 @@ package immutablelist
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldInstantiateArrayListOfSizeZero(t *testing.T) {

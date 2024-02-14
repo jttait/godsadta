@@ -3,7 +3,7 @@ package maxheap
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldInstantiateMaxHeap(t *testing.T) {

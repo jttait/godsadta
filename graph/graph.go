@@ -2,7 +2,7 @@
 package graph
 
 import (
-	"github.com/jttait/godsa/set"
+	"github.com/jttait/godsadta/set"
 )
 
 type Graph interface {

@@ -3,7 +3,7 @@ package queue
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getQueueImplementationsInt() []Queue[int] {

@@ -3,7 +3,7 @@ package priorityqueue
 import (
 	"cmp"
 
-	"github.com/jttait/godsa/maxheap"
+	"github.com/jttait/godsadta/maxheap"
 )
 
 // PriorityQueue is a list of elements which each have a priority. When polling the queue, the

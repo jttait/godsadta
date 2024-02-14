@@ -3,7 +3,7 @@ package binarysearchtree
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldInstantiateBinarySearchTreeWithNilRootNode(t *testing.T) {

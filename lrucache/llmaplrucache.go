@@ -1,7 +1,7 @@
 package lrucache
 
 import (
-	"github.com/jttait/godsa/linkedlist"
+	"github.com/jttait/godsadta/linkedlist"
 )
 
 type CacheElement[S comparable, T comparable] struct {

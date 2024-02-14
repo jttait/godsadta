@@ -3,7 +3,7 @@ package slice
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldBeTrueWhenSlicesAreSame(t *testing.T) {

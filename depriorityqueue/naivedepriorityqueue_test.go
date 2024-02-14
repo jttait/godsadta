@@ -3,7 +3,7 @@ package depriorityqueue
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldInsertIntoNaiveQueue(t *testing.T) {

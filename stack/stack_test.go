@@ -3,7 +3,7 @@ package stack
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getStackImplementationsInt() []Stack[int] {

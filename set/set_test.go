@@ -3,7 +3,7 @@ package set
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getSetImplementations(values1 []int, values2 []int) [][]Set[int] {

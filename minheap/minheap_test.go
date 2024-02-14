@@ -3,7 +3,7 @@ package minheap
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getMinHeapImplementations(values ...int) []MinHeap[int] {

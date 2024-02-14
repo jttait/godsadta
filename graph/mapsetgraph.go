@@ -3,7 +3,7 @@ package graph
 import (
 	"fmt"
 
-	"github.com/jttait/godsa/set"
+	"github.com/jttait/godsadta/set"
 )
 
 // MapSetGraph is a graph implemented using an adjacency list.
