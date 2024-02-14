@@ -3,8 +3,8 @@ package graph
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
-	"github.com/jttait/godsa/set"
+	"github.com/jttait/godsadta/assert"
+	"github.com/jttait/godsadta/set"
 )
 
 func getGraphImplementations() []Graph {

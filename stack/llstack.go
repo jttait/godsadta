@@ -1,7 +1,7 @@
 package stack
 
 import (
-	"github.com/jttait/godsa/linkedlist"
+	"github.com/jttait/godsadta/linkedlist"
 )
 
 // Stack is a last-in, first-out data structure.

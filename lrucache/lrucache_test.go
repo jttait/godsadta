@@ -3,7 +3,7 @@ package lrucache
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldPutAndGet(t *testing.T) {

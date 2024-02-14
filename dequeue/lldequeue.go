@@ -1,7 +1,7 @@
 package dequeue
 
 import (
-	"github.com/jttait/godsa/linkedlist"
+	"github.com/jttait/godsadta/linkedlist"
 )
 
 // LLDEQueue is a double-ended queue implemented using a doubly-linked list.

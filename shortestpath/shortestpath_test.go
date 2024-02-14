@@ -3,8 +3,8 @@ package shortestpath_test
 import (
 	"testing"
 
-	"github.com/jttait/godsa/graph"
-	"github.com/jttait/godsa/shortestpath"
+	"github.com/jttait/godsadta/graph"
+	"github.com/jttait/godsadta/shortestpath"
 )
 
 func getShortestPathImplementations() [](func(graph.Graph) shortestpath.ShortestPath) {

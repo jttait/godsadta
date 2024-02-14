@@ -1,7 +1,7 @@
 package queue
 
 import (
-	"github.com/jttait/godsa/linkedlist"
+	"github.com/jttait/godsadta/linkedlist"
 )
 
 type LLQueue[T any] struct {

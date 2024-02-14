@@ -3,7 +3,7 @@ package priorityqueue
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getPriorityQueueImplementations() []PriorityQueue[int] {

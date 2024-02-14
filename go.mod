@@ -1,3 +1,3 @@
-module github.com/jttait/godsa
+module github.com/jttait/godsadta
 
 go 1.21.0

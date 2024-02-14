@@ -3,7 +3,7 @@ package trie
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func TestShouldReturnTrueIfTrieContainsItem(t *testing.T) {

@@ -3,7 +3,7 @@ package dequeue
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getDEQueueImplementationsInt(values ...int) []DEQueue[int] {

@@ -1,7 +1,7 @@
 package list
 
 import (
-	"github.com/jttait/godsa/linkedlist"
+	"github.com/jttait/godsadta/linkedlist"
 )
 
 type LLList[T any] struct {

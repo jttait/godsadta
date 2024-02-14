@@ -3,9 +3,9 @@ package shortestpath
 import (
 	"fmt"
 
-	"github.com/jttait/godsa/graph"
-	"github.com/jttait/godsa/minheap"
-	"github.com/jttait/godsa/set"
+	"github.com/jttait/godsadta/graph"
+	"github.com/jttait/godsadta/minheap"
+	"github.com/jttait/godsadta/set"
 )
 
 type Djikstras struct {

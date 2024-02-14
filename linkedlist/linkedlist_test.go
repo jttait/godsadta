@@ -3,7 +3,7 @@ package linkedlist
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getImplementations() []LinkedList[int] {

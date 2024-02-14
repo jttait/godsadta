@@ -3,7 +3,7 @@ package list
 import (
 	"testing"
 
-	"github.com/jttait/godsa/assert"
+	"github.com/jttait/godsadta/assert"
 )
 
 func getListImplementations(values ...int) []List[int] {
