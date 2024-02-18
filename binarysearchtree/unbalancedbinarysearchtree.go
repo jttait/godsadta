@@ -1,5 +1,3 @@
-// Package binarysearchtree provides interface and implementations for binary search tree data
-// structure
 package binarysearchtree
 
 import "cmp"
