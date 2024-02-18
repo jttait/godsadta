@@ -4,20 +4,6 @@ package binarysearchtree
 
 import "cmp"
 
-// BinaryTreeNode contains a value, a pointer to the left child node, and a pointer to the right
-// child node.
-type BinaryTreeNode[T cmp.Ordered] struct {
-	Val   T
-	Left  *BinaryTreeNode[T]
-	Right *BinaryTreeNode[T]
-}
-
-func NewBinaryTreeNode[T cmp.Ordered](i T) *BinaryTreeNode[T] {
-	b := BinaryTreeNode[T]{}
-	b.Val = i
-	return &b
-}
-
 // BinarySearchTree contains a pointer to the root node.
 type UnbalancedBinarySearchTree[T cmp.Ordered] struct {
 	Root *BinaryTreeNode[T]
